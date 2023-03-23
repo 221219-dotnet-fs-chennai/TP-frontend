@@ -67,6 +67,7 @@ import { BookingAlertComponent } from './components/patient/booking-alert/bookin
 import { SnackbarBookingComponent } from './components/patient/show-doctors/snackbar-booking/snackbar-booking.component';
 import { BookAppointmentComponent } from './components/book-appointment/book-appointment.component';
 import { DatePipe } from '@angular/common';
+import { ConfirmAppointmentDialogComponent } from './components/doctor/appointment-requests/confirm-appointment-dialog/confirm-appointment-dialog.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { DatePipe } from '@angular/common';
     BookingAlertComponent,
     SnackbarBookingComponent,
     BookAppointmentComponent,
+    ConfirmAppointmentDialogComponent,
   ],
   imports: [
     BrowserModule,
