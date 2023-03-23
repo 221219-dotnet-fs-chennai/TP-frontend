@@ -1,0 +1,53 @@
+<p >
+  <mat-toolbar color="primary">
+  <button mat-icon-button matTooltip="go back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <span style="font-size: 1rem;">Patient history</span>
+  </mat-toolbar>
+</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <div class="card-head">
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>Patient 1 <p style="font-size: 0.875rem;">Mat</p> </mat-card-title>
+        <mat-card-subtitle>13-MAR-2023</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="card">
+      <h3>Basic Details</h3>
+      <div class="card-desp">
+        <span>BP</span>
+        <p>120/80</p>
+      </div>
+      <div class="card-desp">
+        <span>SpO2</span>
+        <p>120/80</p>
+      </div>
+      <div class="card-desp">
+        <span>Heart Rate</span>
+        <p>72</p>
+      </div>
+      <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
+      <h3>Tests</h3>
+      <ol>
+        <div class="card-desp">
+          <li>Blood Test</li>
+          <p>Normal</p>
+        </div>
+        <div class="card-desp">
+          <li>ECG</li>
+          <p>Normal</p>
+        </div>
+      </ol>
+      <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
+      <h3>Drugs</h3>
+      <ol>
+        <li>Med1</li>
+        <li>Med2</li>
+      </ol>
+    </mat-card-content>
+  </mat-card>
+

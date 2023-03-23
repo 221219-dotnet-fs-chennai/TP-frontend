@@ -1,0 +1,62 @@
+.card-grp{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.example-header-image {
+  background-image: url('https://cdn.pixabay.com/photo/2016/09/28/02/35/doctor-1699656__340.jpg');
+  background-size: cover;
+}
+
+mat-grid-tile {
+  background: white;
+  gap: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+}
+
+.grid-grp{
+  padding: 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+
+.container{
+  width: fit-content;
+  margin: auto;
+}
+mat-form-field{
+  width: 350px;
+}
+
+button{
+  width: 350px;
+  margin: auto;
+  /* color: tomato; */
+}
+
+h1{
+  text-align: center;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  box-shadow: 10px 10px 56px -22px rgba(0,0,0,0.4);
+}

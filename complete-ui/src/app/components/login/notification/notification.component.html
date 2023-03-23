@@ -1,0 +1,173 @@
+
+<p>
+  <mat-toolbar class="nav-bar">
+    <button mat-icon-button class="example-icon" color="warn" matTooltip="Menu" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span></span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button color="warn" matTooltip="Home" aria-label="Example icon button with a home icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <span class="example-spacer1"></span>
+    <button mat-icon-button color="warn" class="example-icon" matTooltip="view notifications"
+      (click)="enableSidebar()" aria-label="Example icon-button with share icon">
+      <mat-icon [matBadge]="notificationBadge > 0? notificationBadge : null"
+        matBadgeColor="primary">notifications</mat-icon>
+    </button>
+    <span class="example-spacer1"></span>
+    <button mat-icon-button color="warn" class="example-icon" matTooltip="Logout"
+      aria-label="Example icon-button with share icon">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+
+
+
+<div class="outer">
+  <div class="inner1" *ngIf="totalPatients > 0; else noContent">
+    <h2>Patients for today - {{date | date : 'EEEE'}}</h2>
+    <!-- <router-outlet></router-outlet>
+    <nav>
+    <a routerLink="/appointments" routerLinkActive="active"> route </a>
+  </nav> -->
+    <h3 id="total-patients">Total : {{totalPatients}}</h3>
+    <br>
+    <mat-accordion class="patient-container" multi="false">
+      <mat-expansion-panel *ngFor="let patient of patients" hideToggle class="expansions">
+        <mat-expansion-panel-header (click)="hideAll()">
+          <mat-panel-title>
+            <button #x [value]="patient.id" style="display: none;" ></button>
+            {{x.value}} - {{patient.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{patient.gender}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br>
+
+        <!-- Patient expansion buttons -->
+
+        <div class="example-button-row">
+          <button class="btn-bottom-border" extended mat-button color="accent" matTooltip="View basic health details" (click)="toggleBasicDetails()">
+            <mat-icon>visibility</mat-icon>Basic details
+          </button>
+          <button class="btn-bottom-border" extended mat-button color="accent"
+            matTooltip="View patient's health history" (click)="toggleHistory()">
+            <mat-icon>visibility</mat-icon>Health history
+          </button>
+          <button class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record" (click)="toggleHealthRecord()">
+            <mat-icon>add</mat-icon>Add record
+          </button>
+        </div>
+        <br>
+
+        <!-- Basic details patient -->
+
+        <mat-card class="class-container" *ngIf="basicDetails">
+          <br>
+          <h2 style="text-align: center; color: green;"> {{patient.name}}'s basic health record</h2>
+          <div class="card-container">
+            <app-basic-details></app-basic-details>
+          </div>
+          <br>
+          <br>
+        </mat-card>
+
+        <!-- Add patient health record -->
+
+        <mat-card class="class-container" *ngIf="healthRecord">
+          <br>
+          <h2 style="text-align: center; color: green;"> Add {{patient.name}}'s health record</h2>
+          <div class="card-container">
+            <app-add-helath></app-add-helath>
+          </div>
+          <br>
+          <br>
+        </mat-card>
+
+        <!-- Patient's history page -->
+
+        <mat-card class="class-container" *ngIf="history">
+          <br>
+          <h2 style="text-align: center; color: green;">{{patient.name}}'s health history</h2>
+          <div class="card-container">
+            <app-patient-history ></app-patient-history>
+          </div>
+          <br>
+          <mat-card-actions  class="btn-close">
+            <button mat-stroked-button color="accent" style="border: none; font-size: medium;" (click)="history = false"><b>Close history</b></button>
+          </mat-card-actions>
+          <br>
+        </mat-card>
+
+        <!-- ---------------------- -->
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <ng-template #noContent>
+    No patients for today
+  </ng-template>
+
+
+  <!-- <div class="inner2" [hidden]="viewSidebar">
+    <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <br>
+        <mat-card>
+          <mat-card-content>
+            <div class="appointment-card">
+              <mat-icon class="assignment-icon">assignment</mat-icon>
+              <h2 style="color: rgb(237, 97, 97);"><b>Appointment requests</b></h2>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-accordion class="patient-container patient-container-2" multi="false">
+          <mat-expansion-panel *ngFor="let appointment of appointments" hideToggle class="expansions">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="gender-icon-gap">
+                <div [ngSwitch]="appointment.gender">
+                  <mat-icon *ngSwitchCase="'male'">male</mat-icon>
+                  <mat-icon *ngSwitchCase="'female'">female</mat-icon>
+                  <mat-icon *ngSwitchDefault>account_circle</mat-icon>
+                </div>
+                <button #x [value]="appointment.id" style="display: none;"></button>
+                {{x.value}} - {{appointment.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{appointment.date}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="example-button-row">
+              <br>
+              <p></p>
+              <button class="btn-bottom-border first-btn" extended mat-button color="accent" style="color: green;"
+                disabled="true">
+                Booked appointment for <br>{{appointment.date}}
+              </button>
+              <span class="example-spacer2"></span>
+              <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;"
+                matTooltip="accept request">
+                <mat-icon>done</mat-icon>Accept
+              </button>
+              <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;"
+                matTooltip="reject request">
+                <mat-icon>clear</mat-icon>Reject
+              </button>
+              <br>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+
+      </mat-drawer>
+    </mat-drawer-container>
+
+    
+
+  </div> -->
+</div>

@@ -1,0 +1,13 @@
+<h2>-------------------------------------------------------UPDATE SCEDULE------------------------------------------------------------------</h2>
+<br>
+<button (click)="awakeSchedule()">Update Schedule</button>
+<br>
+<div *ngIf="updateBox">
+    <h3>{{weekDate | date : 'fullDate'}}</h3>
+    <input type="checkbox" id="vehicle2" name="day" (click)="UpdateDay()">
+    <label for="day"> Available</label><br>
+    <input type="submit" value="Submit" (click)="UpdateSchedule()">
+</div>
+<h2>-------------------------------------------------------------------------------------------------------------------------</h2>
+<br>
+

@@ -1,0 +1,28 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.container{
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+
+mat-accordion{
+  padding: 2rem;
+  width: 600px;
+  margin: auto;
+}

@@ -1,0 +1,53 @@
+<p class="nav">
+  <mat-toolbar color="primary">
+    <span>Patient Dashboard</span>
+    <span class="example-spacer"></span>
+    <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+    <!-- <a routerLink="/dashboard" style="text-decoration: none; color: white;"><button mat-button>DashBoard</button></a>
+    <a routerLink="/healthinfo" style="text-decoration: none; color: white;"><button mat-button>Health Info</button></a>
+     -->
+    <button (click)="navToPatientProfile()" matTooltip="View profile" mat-icon-button class="example-icon">
+      <mat-icon title="Profile" style="color: white;">person</mat-icon>
+    </button>
+    <button (click)="logout()" matTooltip="View profile" mat-icon-button class="example-icon">
+      <mat-icon title="Profile" style="color: white;">logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+
+<h1 style="padding-left: 2rem;">Hi! (PatientName)</h1>
+
+<div style="padding-left: 2rem;">
+  <button mat-raised-button color="warn" class="example-full-width" style="float: left;" 
+  (click)="openDialog('20ms', '20ms')" >Book new appointment
+  </button>
+</div>
+
+
+<div style="width: fit-content; margin: auto;">
+  <span style="padding: 2rem; text-align: center;">Previous appointments</span>
+</div>
+<div class="container">
+  <mat-accordion class="example-headers-align" multi="false">
+    <mat-expansion-panel style="margin-bottom: 1rem;" *ngFor="let app of appointments">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Appointment {{app.appointmentNo}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="display: flex; justify-content: space-between;">
+        <span style="color: gray; font-weight: 500; ">Doctor Name </span>
+        <p style="font-weight: 500;">{{app.doctorName}}</p>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <span style="color: gray; font-weight: 500;">Visit data </span>
+        <p style="font-weight: 500;">{{app.date | date : 'dd-MMM-yy'}}</p>
+      </div>
+      <div style="display: flex; justify-content: flex-end;">
+        <button (click)="viewMoreDetails()" matTooltip="view more details about the appointment" mat-stroked-button>View more</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<!-- <app-show-doctors *ngIf="show"></app-show-doctors> -->

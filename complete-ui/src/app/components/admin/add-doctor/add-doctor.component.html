@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button matTooltip="go back" (click)="navToAdminDash()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div style="width: fit-content; margin: auto;">
+    <span style="cursor: pointer;" matTooltip="Add new doctor details">Add doctor</span>
+  </div>
+  <span class="example-spacer"></span>
+</mat-toolbar><br>
+
+<form [formGroup]="doctorForm" (ngSubmit)="addDoctor()">
+  <div class="container">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" placeholder="Ex. Mike" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. mat@gmail.com" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <input type="text" matInput formControlName="gender" placeholder="Select" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Specialization</mat-label>
+        <input type="text" matInput formControlName="specialization" placeholder="Ex. Cardio" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Photo url</mat-label>
+        <input type="text" matInput formControlName="imgUrl" placeholder="Ex. https://doctor.pgn"/>
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input type="number" matInput formControlName="phoneNo" placeholder="Ex. 8679457965" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Experience in years</mat-label>
+        <input type="number" matInput formControlName="experience" placeholder="Ex. 10" />
+      </mat-form-field>
+    </div>
+      
+  </div>
+  <div style="display: flex;flex-direction: column; gap: 1rem; justify-content: center; align-items: center; ">  
+    <button style="padding: 1rem 7rem;" mat-raised-button color="primary" [disabled]="!doctorForm.valid">Add</button>
+    <button style="padding: 1rem 4.6rem;" mat-stroked-button color="primary" (click)="openAddDialog('20ms', '20ms')" [disabled]="!doctorForm.valid">Add schedule</button>
+  </div>
+</form>
+
+<div *ngIf="show">
+  <app-add-schedule style="display: flex; justify-content: center;"></app-add-schedule>
+</div>

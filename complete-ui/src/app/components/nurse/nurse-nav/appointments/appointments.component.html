@@ -1,0 +1,26 @@
+<body class="container">
+    <app-nurse-nav></app-nurse-nav><br><br><br>
+    <div style="width: fit-content; margin: auto;">
+      <h1>Hi {{nurseName}}! hope your doing good! <br> Appointments for today</h1>
+      <p style="text-align: center; font-weight: 500; color:#0288d1;">{{today | date :'d-MMM-y'}}</p>
+    </div>
+
+    <mat-accordion class="example-headers-align" multi=false>
+      <mat-expansion-panel style="margin-bottom: 1rem;" *ngFor="let app of appointmentdoctor">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Patient Name
+          </mat-panel-title>
+          <mat-panel-description>
+            {{app.appointmentId}}
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <button matTooltip="Update basic details for the patient" (click)="navigateToUpdate()" (click)="getAppointmentId(app.appointmentId)" mat-button color="primary">Update</button>
+            <button matTooltip="View patient history" (click)="navigateToViewHistory()" mat-button color="primary">History</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+</body>

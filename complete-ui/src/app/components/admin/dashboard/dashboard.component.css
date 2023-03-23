@@ -1,0 +1,43 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.mat-expansion-panel-spacing{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.mat-expansion-panel{
+    width: 50%;
+    margin: auto;
+    gap: 1rem;
+}
+
+/* .example-action-buttons {
+    padding-bottom: 20px;
+  } */
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+
+  
+
+/* mat-expansion-panel{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+  .doctorhead{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }

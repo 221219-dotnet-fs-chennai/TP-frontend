@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <div style="width: fit-content; margin: auto;">
+    <span style="cursor: pointer;" matTooltip="Registration">Patient Sign Up</span>
+  </div>
+  <span class="example-spacer"></span>
+  <button (click)="NavigateToMain()" matTooltip="Go back to main page" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</mat-toolbar><br>
+<h1>Hello! Please complete the registration</h1>
+<form [formGroup]="registerForm" (ngSubmit)="registration()">
+  <div class="container">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" placeholder="Ex. Mike" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. mat@gmail.com" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Ex. Gtyki@98!" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input type="text" matInput formControlName="phone" placeholder="Ex. 8679457965" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <input type="text" matInput formControlName="gender" placeholder="Select" />
+      </mat-form-field>
+    </div>  
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input type="text" matInput formControlName="age" placeholder="Ex. 22"/>
+      </mat-form-field>
+    </div>
+    <div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="address" placeholder="Ex. 100 Main St"></textarea>
+        </mat-form-field>
+      </div>  
+      <button (click)="navToLogin()" mat-raised-button color="primary" [disabled]="!registerForm.valid">Sign Up</button><br><br>
+      <span>Signed Up Already? <a matTooltip="go to login page" (click)="navToLogin()" style="cursor: pointer; text-decoration: underline; color: blue;">Login</a> </span>
+    </div>  
+  </div>
+</form>

@@ -1,0 +1,69 @@
+
+<!-- <mat-spinner></mat-spinner> -->
+<p>
+  <mat-toolbar color="primary">
+    <span style="cursor: pointer;" matTooltip="home">Hospital Management System</span>
+    <span class="example-spacer"></span>
+      <span *ngIf="(auth.isAuthenticated$ | async) === true">
+      <button (click)="logout()" matTooltip="logout" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </span>
+    <span *ngIf="(auth.isAuthenticated$ | async) === false">
+      <button (click)="loginWithRedirect()" matTooltip="Management login" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>manage_accounts</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar>
+</p>
+
+<div style="display: flex; flex-direction: column; gap: 1rem;">
+  <h1 style="text-align: center;">Welcome back!</h1>
+  <button mat-raised-button color="primary" (click)="NavigateToLogin()" matTooltip="Login to continue" class="example-icon">
+    Already have an account?
+  </button>
+  <button mat-stroked-button color="accent" (click)="NavigateToSignUp()" matTooltip="Register now" class="example-icon">
+    Get started!
+  </button>
+  <!-- <button mat-stroked-button color="primary">Primary</button> -->
+</div>
+<h2 style="text-align: center; margin-top: 1rem;">Some of our doctors</h2>
+<div class="card-grp">
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Mike</mat-card-title>
+      <mat-card-subtitle>12yrs of experience</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Mike</mat-card-title>
+      <mat-card-subtitle>12yrs of experience</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Mike</mat-card-title>
+      <mat-card-subtitle>12yrs of experience</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content></mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div class="grid-grp" >
+  <mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="'10px'">
+    <mat-grid-tile>1</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list>
+</div> -->
+
+
+
+

@@ -1,0 +1,125 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button matTooltip="go back" (click)="navToDashboard()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <span>Add patient's diagnostic report</span>
+  </mat-toolbar>
+</p>
+
+<!-- <mat-card class="example-card health"> -->
+<div class="card-grp">
+
+  <mat-card-content class="health-cards">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Tests
+          </mat-panel-title>
+          <mat-panel-description>
+            Add patient's test-results below
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br>
+        <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the test to add new one </b></mat-hint>
+        <br><br><br>
+        <div class="test-fields">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Test</mat-label>
+            <input matInput placeholder="Enter test name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Result</mat-label>
+            <input matInput placeholder="Enter test result">
+            <mat-icon matSuffix>create</mat-icon>
+          </mat-form-field>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="warn" class="test-btn">Add test</button>
+        </div>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Add medications
+          </mat-panel-title>
+          <mat-panel-description>
+            Enter all prescribed medications
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <br>
+        <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the medication to add new one </b></mat-hint>
+        <br><br><br>
+        <div class="test-fields">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Medicine</mat-label>
+            <input matInput placeholder="Enter medicine name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity</mat-label>
+            <input matInput placeholder="Enter the medicine quantity">
+            <mat-icon matSuffix>assignment</mat-icon>
+          </mat-form-field>
+          <!-- <button mat-raised-button class="hide-btn"></button> -->
+          <div style="display: flex; justify-content: flex-end;">
+            <button color="warn" mat-raised-button>Add medicine</button>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Conclusion
+          </mat-panel-title>
+          <mat-panel-description>
+            Enter suggesttions Eg: Diet restrictions
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <br>
+        <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the medication to add new one </b></mat-hint>
+        <br><br><br>
+        <div class="test-fields">
+
+          <mat-form-field appearance="outline">
+            <mat-label>suggestions</mat-label>
+            <input matInput placeholder="Enter suggestion">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+
+          
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <button mat-raised-button color="warn" class="test-btn">Add suggestion</button>
+        </div>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">End</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </mat-card-content>
+</div>
+
+<!-- </mat-card> -->

@@ -1,0 +1,20 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .btns{
+    display : flex;
+    justify-content: flex-end;
+    right : 50px;
+  }
+
+  .mat-mdc-dialog-content{
+    margin-bottom: -3rem;
+  }

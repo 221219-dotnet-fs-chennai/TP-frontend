@@ -1,0 +1,44 @@
+<mat-card class="table-card">
+  <br>
+  <mat-card-title class="update-title">
+    <span><b>Update doctor schedule</b></span>
+    <span>
+    <span style="color: slategrey; font-size: 0.865rem;">Today's date</span> {{currentDate | date :'dd-MMM-yyyy'}}
+    </span>
+  </mat-card-title>
+  <br><br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z14">
+
+    
+    <ng-container matColumnDef="position" >
+        <th mat-header-cell *matHeaderCellDef class="position-head"> No. </th>
+        <td mat-cell *matCellDef="let element" class="position-data"> {{element.position}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="position-head"> Doctor name </th>
+        <td mat-cell *matCellDef="let element" class="position-data"> {{element.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="specialisation">
+      <th mat-header-cell *matHeaderCellDef class="position-head"> Specialisation </th>
+      <td mat-cell *matCellDef="let element" class="position-data"> {{element.specialisation}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="select"> 
+      <th mat-header-cell *matHeaderCellDef class="position-head-check"> {{weekDate | date : 'dd - MMM - yyyy'}}
+      </th>
+      <td mat-cell *matCellDef="let element" class="position-data">
+        <mat-checkbox (change)="element.day == 0? element.day = 1 : element.day = 0">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+  </table>
+  <br><br>
+  <button mat-raised-button color="accent" class="update-btn" (click)="updateSchedule()" >Schedule</button>
+</mat-card>

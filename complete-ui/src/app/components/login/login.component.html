@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <div style="width: fit-content; margin: auto;">
+    <span style="cursor: pointer;" matTooltip="Login">Patient Login</span>
+  </div>
+  <span class="example-spacer"></span>
+  <button (click)="NavigateToMain()" matTooltip="Go back to main page" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</mat-toolbar><br>
+<h1>Hello! Please login to view your dashboard</h1>
+
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="container">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. mat@gmail.com" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Ex. Gtyki@98!" />
+      </mat-form-field>
+      
+    </div>  
+    <button (click)="patientLogin()" mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
+    <span>Don't have an account? <a matTooltip="go to registration page" (click)="NavigateToSignUp()" style="cursor: pointer; text-decoration: underline; color: blue;">SignUp</a>    </span>
+  </div>
+</form>

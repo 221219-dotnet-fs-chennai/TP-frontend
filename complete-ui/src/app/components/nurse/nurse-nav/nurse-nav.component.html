@@ -1,0 +1,29 @@
+<div class="nav">
+  <p>
+    <mat-toolbar color="primary">
+      <span>Nurse</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div mat-dialog-content>
+          <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
+            <h3 style="margin-bottom: -0.5rem;">Profile</h3>
+            <mat-divider style="margin-top: 1rem;"></mat-divider>
+            <p style="font-weight: 200;">Name: <span style="font-weight: 500;">{{nurseName}}</span>
+              <mat-divider style="margin-top: 1rem;"></mat-divider>
+              <span style="font-weight: 200;">Email: <span style="font-weight: 500;">{{nurseEmail}}</span></span>
+            </p>
+          </div>
+        </div>
+      </mat-menu>
+      <!-- <span *ngIf="(auth.isAuthenticated$ | async) === true"> -->
+        <button (click)="logout()" matTooltip="logout" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon>logout</mat-icon>
+        </button>
+      <!-- </span> -->
+    </mat-toolbar>
+  </p>
+</div>
+

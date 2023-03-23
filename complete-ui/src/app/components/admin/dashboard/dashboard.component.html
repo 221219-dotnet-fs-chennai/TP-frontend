@@ -1,0 +1,48 @@
+<div>
+  <mat-toolbar color="primary">
+    <span class="space" style="font-size: x-large; margin-left: 15px;">Admin</span>
+    <span class="example-spacer"></span>
+    <mat-menu #appMenu="matMenu">
+      <ng-template matMenuContent>
+        <button (click)="navToAddDoctor()" mat-menu-item>Add Doctor</button>
+        <button (click)="navToAddNurse()" mat-menu-item routerLink="/add-nurse">Add Nurse</button>
+        <button mat-menu-item routerLink="/view-patient-basic-info">View Patients</button>
+      </ng-template>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" matTooltip="Menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- <span *ngIf="checkLoginStatus() === true"> -->
+      <button (click)="logout()" matTooltip="logout" mat-icon-button class="example-icon">
+        <mat-icon>logout</mat-icon>
+      </button>
+    <!-- </span> -->
+  </mat-toolbar>
+<!-- <body class="container">
+  <div style="width: fit-content; margin: auto; font-size: 0.957rem;">
+    <h1 style="font-size: 0.957rem;" >Hi {{adminName}}! hope your doing good! <br> Schedule doctors for today</h1>
+    <p style="text-align: center; font-weight: 500; color:#0288d1;">{{currentdate | date :'d-MMM-y'}}</p>
+  </div>
+  <mat-accordion class="example-headers-align" multi=false>
+    <mat-expansion-panel style="margin-bottom: 1rem;" *ngFor="let app of doctors">
+      <mat-expansion-panel-header class="header">
+        <mat-panel-title>
+          Doctor Name
+        </mat-panel-title>
+        <mat-panel-description>
+          {{app.name}} ({{app.specialization}}, {{app.email}})
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+        <div class="doctorhead">
+          <span>{{content}} </span>
+          <span style="font-weight: 500; color: gray;">{{datenextweek | date : 'mediumDate'}}</span>
+          <button mat-raised-button color="primary">Schedule</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</body> -->
+
+<app-update-schedule></app-update-schedule>

@@ -1,0 +1,46 @@
+<p >
+  <mat-toolbar color="primary">
+    <button color="primary" mat-icon-button matTooltip="go back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  <span class="example-spacer"></span>
+  <span style="font-size: 1rem;">Your profile</span>
+  </mat-toolbar>
+</p>
+
+
+<body style="max-width: fit-content; margin: auto; display: flex; flex-direction: column;">
+    <div *ngFor="let p of patients">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div class="card-head">
+            <mat-icon style="width: fit-content; margin: auto;">face</mat-icon><br>
+            <mat-card-title style="text-align: center; font-size: 1rem;">{{p.name}}</mat-card-title>
+            <span style="text-align:center">{{p.gender}} ({{p.age}})</span>
+            <mat-card-subtitle style="text-align: center;">{{p.city}} ({{p.state}})</mat-card-subtitle>
+          </div>
+        </mat-card-header>
+        <mat-card-content class="card">
+          <mat-divider style="margin-bottom: 1rem;"></mat-divider>
+          <div class="card-head">
+            <mat-icon style="text-align: center; width: fit-content; margin: auto;" class="icon">contacts</mat-icon>
+            <div style="display: grid; grid-template-rows: 1fr 1fr; justify-content: center;">
+              <span style="text-align: center;">{{p.email}}</span>
+              <span style="text-align: center;">{{p.phone}}</span>
+            </div>
+          </div><br>
+          <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
+          <div class="card-head">
+            <mat-icon style="text-align: center; width: fit-content; margin: auto;" class="icon">map</mat-icon>
+            <span>{{p.address}}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- update todo -->
+    <!-- <div style="width: fit-content; margin-left: 2rem; display: flex; justify-content: center; align-items: center;">
+      <button  style="width: 500px;" mat-stroked-button>Update</button>
+    </div> -->
+</body>
+
+

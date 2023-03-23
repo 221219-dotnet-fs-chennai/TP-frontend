@@ -1,0 +1,28 @@
+
+<mat-card>
+    <mat-card-content>
+        <div class="appointment-card">
+            <h2 style="color: rgb(237, 97, 97);"><b>Available doctors</b></h2>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="card-container">
+<mat-card class="example-card" *ngFor="let schedule of schedules">
+    <!-- <mat-card class="doctor-image"> -->
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Doctor image" class="doctor-image">
+    <!-- </mat-card> -->
+    <br>
+    <h3><b>{{schedule.doctorId | slice : 0 : 16}}</b></h3>
+    <mat-card-content>
+        <!-- <h3><label>Doctor name : </label> {{schedule.doctorId}} </h3> -->
+        <h3>Cardiology </h3>
+        <h3>10 years </h3>
+    </mat-card-content>
+    <br>
+    <mat-card-actions class="book-btn">
+        <button mat-raised-button color="primary" (click)="openDialog('20ms', '20ms')" >Book appointment</button>
+    </mat-card-actions>
+    <br>
+</mat-card>
+</div>

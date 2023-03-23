@@ -1,0 +1,25 @@
+
+
+.mainpage
+{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitbutton{
+  width: 400px;
+  
+}
+
+
+.example-form {
+  
+}
+
+.example-full-width {
+  width:400px;
+  margin: auto;
+}

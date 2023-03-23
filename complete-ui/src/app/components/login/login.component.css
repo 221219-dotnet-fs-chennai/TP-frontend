@@ -1,0 +1,34 @@
+.container{
+    width: fit-content;
+    margin: auto;
+}
+mat-form-field{
+    width: 350px;
+}
+
+button{
+    width: 350px;
+    margin: auto;
+    /* color: tomato; */
+}
+
+h1{
+    text-align: center;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    gap: 1rem;
+    box-shadow: 10px 10px 56px -22px rgba(0,0,0,0.4);
+}

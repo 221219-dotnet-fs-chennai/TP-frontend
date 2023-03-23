@@ -1,0 +1,41 @@
+table {
+  width: 100%;
+}
+
+.table-card{
+  position : relative;
+  width : 50%;
+  margin-left: 25%;
+  margin-top: 5%;
+  border: none;
+}
+
+.update-title{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color : #ec3b79;
+}
+
+.positions{
+  position: relative;
+  margin-left: 40px;
+}
+
+.position-head{
+  padding-left: 5%;
+}
+
+.position-data{
+  padding-left: 5%;
+}
+
+.position-head-check{
+  padding-left: 2%;
+}
+
+/* .update-btn{
+
+} */

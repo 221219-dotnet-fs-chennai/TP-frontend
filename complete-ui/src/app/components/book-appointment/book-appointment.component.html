@@ -1,0 +1,20 @@
+<mat-card>
+    <br>
+    <h1 mat-dialog-title>Book your appointment</h1>
+    <div mat-dialog-content>
+      <label id="example-radio-group-label">Select a date</label>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectedDay">
+        <div *ngFor="let date of dates">
+          <mat-radio-button class="example-radio-button" [value]="date" (change)="valChange($event)">
+            {{date | date : 'dd-MMM-yyyy'}}
+          </mat-radio-button>
+        </div>
+      </mat-radio-group>
+    </div>
+    <div mat-dialog-actions class="btns">
+      <button mat-button mat-dialog-close style="color: red">No</button>
+      <button [disabled]="boolDay" mat-button mat-dialog-close (click)="fetch()" (click)="passDoctorIds()"  style="color:green">Proceed to
+        booking</button>
+      <br><br><br><br><br>
+    </div>
+  </mat-card>

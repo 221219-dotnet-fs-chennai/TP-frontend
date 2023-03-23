@@ -1,0 +1,39 @@
+<!-- <mat-card class="example-card">
+    <mat-card-header>
+
+    </mat-card-header>
+    <mat-card-content>
+        <div><label>Blood pressure : </label>{{basicDetails.bp}}</div>
+        <br>
+        <div><label>Heart rate : </label>{{basicDetails.heartRate}}</div>
+        <br>
+        <div><label>spO2 : </label>{{basicDetails.spO2}}</div>
+    </mat-card-content>
+</mat-card> -->
+
+<mat-card class="example-card">
+    <mat-card-header>
+      <div class="card-head">
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>Appointment 1</mat-card-title>
+        <mat-card-subtitle>13-MAR-2023</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="card">
+      <h3>Basic Details</h3>
+      <div class="card-desp">
+        <span>BP</span>
+        <p>{{basicDetails.bp}}</p>
+      </div>
+      <div class="card-desp">
+        <span>SpO2</span>
+        <p>{{basicDetails.spO2}}</p>
+      </div>
+      <div class="card-desp">
+        <span>Heart Rate</span>
+        <p>{{basicDetails.heartRate}}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+

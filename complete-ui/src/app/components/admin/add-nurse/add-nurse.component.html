@@ -1,0 +1,118 @@
+<div>
+  <mat-toolbar color="primary">
+    <button mat-icon-button matTooltip="go back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span style="margin-left: 41%; font-size: x-large" class="space"
+      >Add Nurse</span
+    >
+    <span class="example-spacer"></span>
+
+  </mat-toolbar>
+</div>
+
+
+<form class="example-form mainpage">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput [formControl]="emailFormControl" placeholder="Enter your name">
+    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Phone</mat-label>
+    <input type="text" matInput  placeholder="Enter your phone number">
+    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+
+    <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error> -->
+  </mat-form-field>
+  <button type="submit" class="submitbutton" mat-raised-button color="primary" [disabled]="!emailFormControl.valid">Submit</button>
+</form>
+
+
+<!-- <form [formGroup]="doctorForm" (ngSubmit)="addDoctor()" class="example-form">
+
+
+
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" placeholder="Ex. Mike" />
+      </mat-form-field>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. mat@gmail.com" />
+      </mat-form-field>
+    </div>
+
+
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input type="number" matInput formControlName="phoneNo" placeholder="Ex. 8679457965" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-raised-button color="primary">Add</button>
+    </div>
+
+</form> -->
+
+
+
+
+<!-- <div class="mainpage">
+<form>
+  <div class="form-group">
+    <input type="email" name="email" class="form-control" placeholder="email" />
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      name="password"
+      class="form-control"
+      placeholder="password"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      type="number"
+      name="phone"
+      class="form-control"
+      placeholder="phonenumber"
+    />
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" type="submit">
+
+      Submit
+
+    </button>
+  </div>
+</form>
+</div> -->
+
+
+<!-- <p>add-nurse works!</p> -->
