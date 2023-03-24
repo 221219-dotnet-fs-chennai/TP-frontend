@@ -103,10 +103,11 @@ export class AddScheduleComponent implements OnInit{
     this.sunday = 0     
   }
 
-  UpdateSchedule() {
+  AddSchedule() {
+    let Id : any = window.localStorage.getItem("doctorid")
     let i : string = Guid.create().toString();
     let sch  : Schedule = {
-      doctorId : i,
+      doctorId : window.localStorage.getItem("doctorId")?.toString().replace(/["']/g, ""),
       Monday: this.monday,
       Tuesday: this.tuesday,
       Wednesday: this.wednesday,
@@ -116,7 +117,7 @@ export class AddScheduleComponent implements OnInit{
       Sunday : this.sunday
     }
     console.log(sch);
-    this.available.AddSchedule(sch).subscribe(data => console.log(data));
+    this.available.AddSchedule(sch).subscribe(data => console.log(data));    
   }
 
   openSnackBar() {
@@ -128,7 +129,7 @@ export class AddScheduleComponent implements OnInit{
 }
 
 export interface Schedule {
-  doctorId : string,
+  doctorId : string |undefined,
   Monday: number;
   Tuesday: number;
   Wednesday: number;

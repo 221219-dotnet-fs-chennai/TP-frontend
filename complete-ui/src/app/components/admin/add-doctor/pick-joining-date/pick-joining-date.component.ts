@@ -10,6 +10,7 @@ import { AddScheduleComponent } from '../../add-schedule/add-schedule.component'
 })
 export class PickJoiningDateComponent {
   date !: Date
+  
 
   constructor(
     public dialogRef: MatDialogRef<PickJoiningDateComponent>,
