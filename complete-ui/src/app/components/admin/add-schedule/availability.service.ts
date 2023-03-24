@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, scheduled } from 'rxjs';
+import { Doctor } from '../add-doctor/doctor';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AvailabilityService {
   }
 }
 export interface Schedule {
-  doctorId : string,
+  doctorId : string | undefined,
   Monday: number;
   Tuesday: number;
   Wednesday: number;
