@@ -1,0 +1,10 @@
+.example-section{
+  overflow: hidden;
+  margin-left: 2rem;
+}
+.btns{
+  margin-bottom: 0.8rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -53,7 +53,6 @@ import { AddHealthComponent } from './components/doctor/add-helath/add-health.co
 import { BasicDetailsComponent } from './components/doctor/basic-details/basic-details.component';
 import { PatientCompleteHistoryDocComponent } from './components/doctor/patient-complete-history/patient-complete-history.component';
 import { PatientProfileComponent } from './components/patient/patient-profile/patient-profile.component';
-import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
 import { SnackbarComponent } from './components/admin/add-schedule/snackbar/snackbar.component';
 import { ScheduleComponent } from './components/admin/add-schedule/schedule/schedule.component';
 
@@ -69,6 +68,10 @@ import { BookAppointmentComponent } from './components/book-appointment/book-app
 import { DatePipe } from '@angular/common';
 import { ConfirmAppointmentDialogComponent } from './components/doctor/appointment-requests/confirm-appointment-dialog/confirm-appointment-dialog.component';
 
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { PickJoiningDateComponent } from './components/admin/add-doctor/pick-joining-date/pick-joining-date.component';
+import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,6 @@ import { ConfirmAppointmentDialogComponent } from './components/doctor/appointme
     BasicDetailsComponent,
     PatientCompleteHistoryDocComponent,
     PatientProfileComponent,
-    AddScheduleComponent,
     SnackbarComponent,
     ScheduleComponent,
     UpdateScheduleComponent,
@@ -101,6 +103,8 @@ import { ConfirmAppointmentDialogComponent } from './components/doctor/appointme
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
+    PickJoiningDateComponent,
+    AddScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -141,6 +145,8 @@ import { ConfirmAppointmentDialogComponent } from './components/doctor/appointme
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [
     DatePipe,
