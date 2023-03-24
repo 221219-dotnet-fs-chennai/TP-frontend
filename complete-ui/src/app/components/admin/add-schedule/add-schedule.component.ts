@@ -6,6 +6,7 @@ import { Guid } from 'guid-typescript';
 import { ScheduleComponent } from './schedule/schedule.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarComponent } from './snackbar/snackbar.component';
+import { AddScheduleService } from '../add-doctor/services/add-schedule.service';
 
 @Component({
   selector: 'app-add-schedule',
@@ -15,13 +16,14 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 export class AddScheduleComponent implements OnInit{
 
   constructor(public dialogRef: MatDialogRef<AddScheduleComponent>, private _formBuilder: FormBuilder,
-    private available : AvailabilityService, private _snackBar: MatSnackBar) {}
+    private available : AvailabilityService, private _snackBar: MatSnackBar, private service : AddScheduleService) {}
 
     show = true
     toggle(){
       this.show = !this.show
     }
-  selectedDate = new Date();
+  selectedDate : Date = this.service.selectedDate;
+  
   readonly selectedDates : Date[] = [];
   monday : number = 0
   tuesday : number = 0
@@ -34,7 +36,8 @@ export class AddScheduleComponent implements OnInit{
 
   ngOnInit(): void {
     let i = 0;
-    for (i = 0; i <= 6; i++) {
+    this.selectedDates.push(this.selectedDate);
+    for (i = 0; i <= 5; i++) {
       this.selectedDate = new Date(this.selectedDate.getTime() + 86400000)
       this.selectedDates.push(this.selectedDate);
     }
@@ -90,6 +93,15 @@ export class AddScheduleComponent implements OnInit{
     }
   }
 
+  cancel(){
+    this.monday = 0
+    this.tuesday = 0
+    this.wednesday = 0
+    this.thursday = 0
+    this.friday = 0
+    this.saturday = 0
+    this.sunday = 0     
+  }
 
   UpdateSchedule() {
     let i : string = Guid.create().toString();

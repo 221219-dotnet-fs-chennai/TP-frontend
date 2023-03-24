@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <h2 style="text-align: center;">Select a joining date for this doctor</h2>
+  <mat-form-field style="display: flex; justify-content: center;" appearance="outline">
+    <mat-label>Choose a joining date</mat-label>
+    <input matInput [matDatepicker]="picker" [min]="today" [(ngModel)]="date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>  
+</div>
+<div style="display: flex; justify-content: flex-end;" mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button  [disabled]="!date" (click)="getDate()" (click)="openAddDialog('20ms', '20ms')"  mat-button [mat-dialog-close]="date" cdkFocusInitial>Ok</button>
+  <!-- open the radio box here -->
+</div>
