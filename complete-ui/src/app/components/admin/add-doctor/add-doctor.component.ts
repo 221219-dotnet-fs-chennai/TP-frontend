@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DoctorServiceService } from './services/doctor-service.service';
+import { DoctorSeviceService } from './services/doctor-sevice.service';
 import { Router } from '@angular/router';
-import { AddScheduleComponent } from '../add-schedule/add-schedule.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PickJoiningDateComponent } from './pick-joining-date/pick-joining-date.component';
 
 @Component({
   selector: 'app-add-doctor',
@@ -11,8 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./add-doctor.component.css'],
 })
 export class AddDoctorComponent implements OnInit {
-
-  constructor(private service : DoctorServiceService, private fb: FormBuilder, private router: Router,
+  todayDay : Date = new Date()
+  constructor(private service : DoctorSeviceService, private fb: FormBuilder, private router: Router,
     public dialog: MatDialog) {}
   ngOnInit(): void {
     this.doctorForm = this.fb.group({
@@ -40,11 +40,18 @@ export class AddDoctorComponent implements OnInit {
     this.show = !this.show
   } 
 
-  openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(AddScheduleComponent, {
-      width: '600px',
+  openPickDialog(enterAnimationDuration: string, exitAnimationDuration: string) :void{
+    this.dialog.open(PickJoiningDateComponent, {
+      width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
-    });
+    })
   }
+  // openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  //   this.dialog.open(AddScheduleComponent, {
+  //     width: '600px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //   });
+  // }
 }

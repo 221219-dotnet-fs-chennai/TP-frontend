@@ -1,19 +1,19 @@
 <div>
-  <br>
+  <!-- <br> -->
   <h3 mat-dialog-title style="text-align: center;">Check the dates to mark availability</h3>
   <div mat-dialog-content>
     <section class="example-section" *ngFor="let selected of selectedDates">
-      <p><mat-checkbox (change)="updateDay(selected)">{{selected | date : 'd - MMM - yyy'}}</mat-checkbox></p>
+      <p><mat-checkbox (change)="updateDay(selected)">{{selected | date : 'd - MMM - yyy (EEEE)' }}</mat-checkbox></p>
     </section>
 <!-- 
     <section class="example-section">
       <h4>You chose:</h4>
     </section> -->
 
-    <div mat-dialog-actions class="btns">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button mat-dialog-close cdkFocusInitial (click)="UpdateSchedule()" color="primary" (click)="openSnackBar()" [disabled]="x == 0">Add schedule</button>
-      <br><br><br>
-    </div>
+  </div>
+  <div mat-dialog-actions class="btns">
+    <button (click)="cancel()" mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="UpdateSchedule()" color="primary" (click)="openSnackBar()" [disabled]="x == 0">Add schedule</button>
+    <br><br><br>
   </div>
 </div>
