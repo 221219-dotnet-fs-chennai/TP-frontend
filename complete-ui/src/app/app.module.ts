@@ -27,7 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { NurseNavComponent } from './components/nurse/nurse-nav/nurse-nav.component';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -103,14 +103,19 @@ import { AddScheduleComponent } from './components/admin/add-schedule/add-schedu
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
+<<<<<<< HEAD
+    
+=======
     PickJoiningDateComponent,
     AddScheduleComponent
+>>>>>>> 671be08eb50dce95b069cec8888396fc6010c31e
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    
     AuthModule.forRoot({
       domain: 'dev-hsr0056cw3v05nmk.us.auth0.com',
       clientId: 'wov5rSwD3cVkOAfuSPAc9T1lD8LS88zM',

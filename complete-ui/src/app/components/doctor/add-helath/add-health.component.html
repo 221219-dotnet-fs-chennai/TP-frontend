@@ -11,7 +11,7 @@
 <!-- <mat-card class="example-card health"> -->
 <div class="card-grp">
 
-  <mat-card-content class="health-cards">
+  <mat-card-content class="health-cards" [formGroup]="healthform">
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
@@ -29,17 +29,17 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Test</mat-label>
-            <input matInput placeholder="Enter test name">
+            <input matInput formControlName="test" placeholder="Enter test name" >
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Result</mat-label>
-            <input matInput placeholder="Enter test result">
+            <input matInput formControlName="result" placeholder="Enter test result">
             <mat-icon matSuffix>create</mat-icon>
           </mat-form-field>
         </div>
         <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="warn" class="test-btn">Add test</button>
+          <button mat-raised-button color="warn" class="test-btn" >Add test</button>
         </div>
 
         <mat-action-row>
@@ -64,7 +64,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Medicine</mat-label>
-            <input matInput placeholder="Enter medicine name">
+            <input matInput formControlName="drugs" placeholder="Enter medicine name">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -74,7 +74,7 @@
           </mat-form-field>
           <!-- <button mat-raised-button class="hide-btn"></button> -->
           <div style="display: flex; justify-content: flex-end;">
-            <button color="warn" mat-raised-button>Add medicine</button>
+            <button color="warn" mat-raised-button >Add medicine</button>
           </div>
         </div>
 
@@ -101,14 +101,14 @@
 
           <mat-form-field appearance="outline">
             <mat-label>suggestions</mat-label>
-            <input matInput placeholder="Enter suggestion">
+            <input matInput formControlName="conclusion" placeholder="Enter suggestion">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           </mat-form-field>
 
           
         </div>
         <div style="display: flex; justify-content: center;">
-            <button mat-raised-button color="warn" class="test-btn">Add suggestion</button>
+            <button mat-raised-button color="warn" class="test-btn" (click)="AddHealth()">Add suggestion</button>
         </div>
 
         <mat-action-row>

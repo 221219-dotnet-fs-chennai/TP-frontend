@@ -16,11 +16,11 @@ export interface details{
     temperature: string
 }
 
-// export interface allergyex{
-//   health_Id: string,
-//   appointment_Id: string,
-//   allergy: string
-// }
+export interface allergyex{
+  health_Id: string,
+  appointment_Id: string,
+  allergy: string
+}
 
 @Injectable({
   providedIn:'root'
@@ -29,10 +29,17 @@ export class UpdatebasicrecordService {
 
   constructor(private http:HttpClient) {}
   saveUser(data:details){
-    return this.http.post<details>('https://localhost:49165/api/PBRecord/AddPBRecords',data)
+    return this.http.post<details>('https://localhost:7203/api/PBRecord/AddPBRecords',data)
   }
-  // savealergy(data:allergyex){
-  //   return this.http.post<allergyex>('https://localhost:49165/api/Allergy/AddAllergyRecords',data)
+  savealergy(data:allergyex){
+    return this.http.post<allergyex>('https://localhost:7203/api/PatientAllergy/AddAllergyRecords',data)
+  }
+
+  // public updatePost(postData: details) {
+  //   let endPoints = "123abc"
+  //   this.http.put('https://localhost:49165/api/PBRecord/modify/' + endPoints, postData).subscribe(postData => {
+  //     console.log(postData);
+  //   });
   // }
 }
 
