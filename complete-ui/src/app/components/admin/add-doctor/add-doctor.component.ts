@@ -4,6 +4,7 @@ import { DoctorSeviceService } from './services/doctor-sevice.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PickJoiningDateComponent } from './pick-joining-date/pick-joining-date.component';
+import { AddScheduleService } from './services/add-schedule.service';
 
 @Component({
   selector: 'app-add-doctor',
@@ -13,7 +14,7 @@ import { PickJoiningDateComponent } from './pick-joining-date/pick-joining-date.
 export class AddDoctorComponent implements OnInit {
   todayDay : Date = new Date()
   constructor(private service : DoctorSeviceService, private fb: FormBuilder, private router: Router,
-    public dialog: MatDialog) {}
+    public dialog: MatDialog, private addScheduleService : AddScheduleService) {}
   ngOnInit(): void {
     this.doctorForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -22,14 +23,16 @@ export class AddDoctorComponent implements OnInit {
       specialization: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       imgUrl:['', Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/)],
       experience: ['', [Validators.required, Validators.pattern("^[1-6][0-9]$")]],
-      phoneNo: ['', Validators.pattern("^([6-9]\d{9})$")]
+      phoneNo: ['']
     })
   }
   doctorForm!: FormGroup;
+  
   addDoctor(){
     console.log(this.doctorForm.getRawValue())
-    this.service.addDoctor(this.doctorForm.getRawValue()).subscribe((data) => {
-      console.log(data)
+    this.service.addDoctor(this.doctorForm.getRawValue()).subscribe((data)=>{
+      // console.log(JSON.stringify(data));
+      window.localStorage.setItem("doctorId", JSON.stringify(data.id))
     })
   }
   navToAdminDash(){
