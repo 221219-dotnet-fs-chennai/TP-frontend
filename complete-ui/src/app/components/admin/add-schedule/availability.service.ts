@@ -24,11 +24,11 @@ export class AvailabilityService {
 }
 export interface Schedule {
   doctorId : string | undefined,
-  Monday: number;
-  Tuesday: number;
-  Wednesday: number;
-  Thursday: number;
-  Friday: number;
-  Saturday: number;
-  Sunday : number;
+  monday: number;
+  tuesday: number;
+  wednesday: number;
+  thursday: number;
+  friday: number;
+  saturday: number;
+  sunday : number;
 }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, scheduled } from 'rxjs';
-import { Schedule } from '../../schedule';
+// import { Schedule } from '../../schedule';
+import { Schedule } from '../admin/add-schedule/availability.service';
 
 @Injectable({
   providedIn: 'root'

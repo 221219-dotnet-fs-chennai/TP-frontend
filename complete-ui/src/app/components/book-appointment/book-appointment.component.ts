@@ -3,7 +3,8 @@
 import { Component, Input, OnInit, Output, EventEmitter, Inject, LOCALE_ID } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AvailabilityService } from '../patient/availability.service';
-import { Schedule } from 'src/app/schedule';
+// import { Schedule } from 'src/app/schedule';
+import { Schedule } from '../admin/add-schedule/availability.service';
 import { Router } from '@angular/router';
 import { localStorageToken } from '../patient/show-doctors/localstorage.token';
 import { DatePipe, formatDate } from '@angular/common';
@@ -103,4 +104,3 @@ export class BookAppointmentComponent implements OnInit {
 
 
   }
-

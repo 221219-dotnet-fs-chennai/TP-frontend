@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Schedule } from '../../../schedule';
+// import { Schedule } from '../../../schedule';
+import { Schedule } from '../../admin/add-schedule/availability.service';
 import { AvailabilityService } from '../availability.service';
 import { localStorageToken } from './localstorage.token';
 import { BookingAlertComponent } from '../booking-alert/booking-alert.component';
@@ -28,58 +29,58 @@ export class ShowDoctorsComponent implements OnInit {
 
     this.schedules = [{
       doctorId : 'doctor-1',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     },{
       doctorId : 'doctor-2',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     },{
       doctorId : 'doctor-3',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     },{
       doctorId : 'doctor-4',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     },{
       doctorId : 'doctor-5',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     },{
       doctorId : 'doctor-6',
-      Monday : 1,
-      Tuesday: 0,
-      Wednesday : 1,
-      Thursday : 0,
-      Friday: 0,
-      Saturday : 0,
-      Sunday : 1
+      monday : 1,
+      tuesday: 0,
+      wednesday : 1,
+      thursday : 0,
+      friday: 0,
+      saturday : 0,
+      sunday : 1
     }]
   }
 

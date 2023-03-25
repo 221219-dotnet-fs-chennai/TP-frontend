@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { AvailabilityService } from './availability.service'
 import { Guid } from 'guid-typescript';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { Schedule } from './availability.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { AddScheduleService } from '../add-doctor/services/add-schedule.service';
@@ -108,13 +109,13 @@ export class AddScheduleComponent implements OnInit{
     let i : string = Guid.create().toString();
     let sch  : Schedule = {
       doctorId : window.localStorage.getItem("doctorId")?.toString().replace(/["']/g, ""),
-      Monday: this.monday,
-      Tuesday: this.tuesday,
-      Wednesday: this.wednesday,
-      Thursday: this.thursday,
-      Friday: this.friday,
-      Saturday: this.saturday,
-      Sunday : this.sunday
+      monday: this.monday,
+      tuesday: this.tuesday,
+      wednesday: this.wednesday,
+      thursday: this.thursday,
+      friday: this.friday,
+      saturday: this.saturday,
+      sunday : this.sunday
     }
     console.log(sch);
     this.available.AddSchedule(sch).subscribe(data => console.log(data));    
@@ -128,13 +129,13 @@ export class AddScheduleComponent implements OnInit{
 
 }
 
-export interface Schedule {
-  doctorId : string |undefined,
-  Monday: number;
-  Tuesday: number;
-  Wednesday: number;
-  Thursday: number;
-  Friday: number;
-  Saturday: number;
-  Sunday : number;
-}
+// export interface Schedule {
+//   doctorId : string |undefined,
+//   Monday: number;
+//   Tuesday: number;
+//   Wednesday: number;
+//   Thursday: number;
+//   Friday: number;
+//   Saturday: number;
+//   Sunday : number;
+// }

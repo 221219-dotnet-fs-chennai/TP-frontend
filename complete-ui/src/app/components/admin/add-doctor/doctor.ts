@@ -1,6 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface Doctor {
+  id ?: Guid;
   name: string | null;
   email: string | null;
   gender: string | null;
