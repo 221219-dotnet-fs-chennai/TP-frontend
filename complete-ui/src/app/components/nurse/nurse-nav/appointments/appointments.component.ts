@@ -19,7 +19,11 @@ export class AppointmentsComponent implements OnInit {
   longText='string'
   step = 0;
 
-  appointmentdoctor : AppointmentDoctor[] = [];
+  appointmentdoctor : AppointmentDoctor[] = [
+   
+  ];
+
+  
 
   getAppointmentId(app_id : Guid|undefined){
 

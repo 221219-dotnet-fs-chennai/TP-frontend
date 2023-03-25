@@ -27,7 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { NurseNavComponent } from './components/nurse/nurse-nav/nurse-nav.component';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -101,12 +101,14 @@ import { ConfirmAppointmentDialogComponent } from './components/doctor/appointme
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    
     AuthModule.forRoot({
       domain: 'dev-hsr0056cw3v05nmk.us.auth0.com',
       clientId: 'wov5rSwD3cVkOAfuSPAc9T1lD8LS88zM',
