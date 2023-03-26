@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface patientHistory{
+  getBasicRecord(): unknown;
+  getHealthRecord(): unknown;
   drugs : string,
   test : string,
   result: string,

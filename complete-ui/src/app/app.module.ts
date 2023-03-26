@@ -103,12 +103,9 @@ import { AddScheduleComponent } from './components/admin/add-schedule/add-schedu
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
-<<<<<<< HEAD
     
-=======
     PickJoiningDateComponent,
     AddScheduleComponent
->>>>>>> 671be08eb50dce95b069cec8888396fc6010c31e
   ],
   imports: [
     BrowserModule,
