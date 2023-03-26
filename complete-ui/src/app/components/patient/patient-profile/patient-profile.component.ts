@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Patient } from '../../admin/view-patients/view-patients.component';
+// import { Patient } from '../../admin/view-patients/view-patients.component';
+import { Patient } from '../../admin/view-patients/get-patients.service';
 
 @Component({
   selector: 'app-patient-profile',
@@ -15,13 +16,15 @@ export class PatientProfileComponent {
   patients  : Patient[] = [
     {
       email: 'max@gmail.com',
-      name: 'Max',
+      fullname: 'Max',
       gender: 'male',
       age: 33,
       phone: 8956747589,
-      address: '100 avenue road',
+      adressLine: '100 avenue road',
       city: 'bangalore',
-      state: 'karnataka'
+      state: 'karnataka',
+      created: "",
+      pasword: ""
     },
   ]
 }

@@ -72,6 +72,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PickJoiningDateComponent } from './components/admin/add-doctor/pick-joining-date/pick-joining-date.component';
 import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
+import { TableViewComponent } from './components/admin/view-patients/table-view/table-view.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -103,19 +105,16 @@ import { AddScheduleComponent } from './components/admin/add-schedule/add-schedu
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
-<<<<<<< HEAD
-    
-=======
     PickJoiningDateComponent,
-    AddScheduleComponent
->>>>>>> 671be08eb50dce95b069cec8888396fc6010c31e
+    AddScheduleComponent,
+    TableViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    
+    NgxPaginationModule,
     AuthModule.forRoot({
       domain: 'dev-hsr0056cw3v05nmk.us.auth0.com',
       clientId: 'wov5rSwD3cVkOAfuSPAc9T1lD8LS88zM',
