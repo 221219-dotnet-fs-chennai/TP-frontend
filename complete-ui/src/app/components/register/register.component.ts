@@ -1,34 +1,65 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegisterLoginService } from './register-login.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 export class RegisterComponent implements OnInit{
-  service: any;
-  constructor(private router : Router, private fb : FormBuilder){}
+  constructor(private router : Router, private fb : FormBuilder, private service : RegisterLoginService){}
   isLoggedIn = true // TO-DO for hidding logout button
   registerForm !: FormGroup
+  LoginForm !: FormGroup
+  // created !: Date
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email : ['', [Validators.required, Validators.email]],
-      password:['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]],
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      email : window.localStorage.getItem("pEmail"),
+      pasword: window.localStorage.getItem("pPassword"),
+      fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       phone: ['',[Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")]],
-      address:['',[Validators.required,Validators.pattern("^.{5,}$")]],
-      //city:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-      //state:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
+      adressLine:['',[Validators.required,Validators.pattern("^.{5,}$")]],
+      city:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
+      state:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
       age:['',[Validators.required,Validators.pattern("^[0-9]+$")]],
-      gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]]
+      gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]],
+      created : new Date().toString()
     })
+    this.LoginForm = this.fb.group({
+      loginId : Guid.create().toString(),
+      email : ['', [Validators.required, Validators.email]],
+      password:['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]]
+    })
+  }
+  login(){
+    console.log(this.LoginForm.getRawValue());
+    this.service.addNewLogin(this.LoginForm.getRawValue()).subscribe(data => {
+      if(data.status != 200 || data.status != 201){
+        window.alert("bad req")
+      }
+    }).unsubscribe()
+    // window.localStorage.setItem("pEmail", data.email)
+    // window.localStorage.setItem("pPassword", data.password)
   }
   registration(){
     console.log(this.registerForm.getRawValue())
-    this.service.registration(this.registerForm.getRawValue()).subscribe((data : any) =>{
-      console.log(data)
+    this.service.addNewUser(this.registerForm.getRawValue()).subscribe((data : any) =>{
+      if(data.status == 400) {
+        window.alert("Something went wrong")
+      }
+      else{
+        window.alert("added!")
+      }
     })
   }
   hide = true;

@@ -74,6 +74,8 @@ import { PickJoiningDateComponent } from './components/admin/add-doctor/pick-joi
 import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
 import { TableViewComponent } from './components/admin/view-patients/table-view/table-view.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatStepperModule} from '@angular/material/stepper'; 
+
 
 @NgModule({
   declarations: [
@@ -150,7 +152,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatStepperModule
   ],
   providers: [
     DatePipe,

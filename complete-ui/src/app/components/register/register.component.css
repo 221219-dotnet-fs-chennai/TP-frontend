@@ -1,3 +1,16 @@
+
+.step-container{
+  margin: auto;
+  margin-top: 1rem;
+  max-width: 1000px;
+}
+
+.first-step-form{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
 .container{
   width: fit-content;
   margin: auto;
