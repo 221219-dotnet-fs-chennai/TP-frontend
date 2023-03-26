@@ -72,6 +72,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PickJoiningDateComponent } from './components/admin/add-doctor/pick-joining-date/pick-joining-date.component';
 import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
+import { TableViewComponent } from './components/admin/view-patients/table-view/table-view.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatStepperModule} from '@angular/material/stepper'; 
+
 
 @NgModule({
   declarations: [
@@ -103,16 +107,16 @@ import { AddScheduleComponent } from './components/admin/add-schedule/add-schedu
     SnackbarBookingComponent,
     BookAppointmentComponent,
     ConfirmAppointmentDialogComponent,
-    
     PickJoiningDateComponent,
-    AddScheduleComponent
+    AddScheduleComponent,
+    TableViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    
+    NgxPaginationModule,
     AuthModule.forRoot({
       domain: 'dev-hsr0056cw3v05nmk.us.auth0.com',
       clientId: 'wov5rSwD3cVkOAfuSPAc9T1lD8LS88zM',
@@ -148,7 +152,8 @@ import { AddScheduleComponent } from './components/admin/add-schedule/add-schedu
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatStepperModule
   ],
   providers: [
     DatePipe,

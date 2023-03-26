@@ -1,0 +1,121 @@
+<!-- <mat-spinner *ngIf="isLoaded" ></mat-spinner> -->
+<!-- <mat-spinner></mat-spinner> -->
+<!-- <div class="example-loading-shade"
+      *ngIf="isLoaded">
+    <mat-spinner *ngIf="isLoaded"></mat-spinner>
+    </div>
+<div class="container">
+  
+  <div class="filter-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by name</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. cibi" #input>
+    </mat-form-field>
+  </div>
+  <div class="table-content">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let element"> {{element.created}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="fullname">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="adressLine">
+        <th mat-header-cell *matHeaderCellDef> Address Line </th>
+        <td mat-cell *matCellDef="let element"> {{element.adressLine}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> City </th>
+        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+       Row shown when there is no matching data. -->
+      <!-- <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  </div> -->
+<!-- </div> -->
+
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoaded">
+    <mat-spinner color="accent" *ngIf="isLoaded"></mat-spinner>
+  </div>
+  <div class="filter-input">
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by name</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. cibi" #input>
+    </mat-form-field>
+  </div>
+  <div class="example-table-container">
+
+    <table mat-table [dataSource]="dataSource" class="example-table"
+           matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+
+     <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let element"> {{element.created}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="fullname">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="adressLine">
+        <th mat-header-cell *matHeaderCellDef> Address Line </th>
+        <td mat-cell *matCellDef="let element"> {{element.adressLine}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> City </th>
+        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <!-- <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator> -->
+</div>
+

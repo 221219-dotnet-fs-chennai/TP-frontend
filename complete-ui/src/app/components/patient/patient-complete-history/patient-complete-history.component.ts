@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Patient } from '../../admin/view-patients/view-patients.component';
-
+// import { Patient } from '../../admin/view-patients/view-patients.component';
+import { Patient } from '../../admin/view-patients/get-patients.service';
 @Component({
   selector: 'app-patient-complete-history',
   templateUrl: './patient-complete-history.component.html',
@@ -16,13 +16,26 @@ export class PatientCompleteHistoryComponent {
   patients  : Patient[] = [
     {
       email: 'max@gmail.com',
-      name: 'Max',
+      fullname: 'Max',
       gender: 'male',
       age: 33,
       phone: 8956747589,
-      address: '100 avenue road',
+      adressLine: '100 avenue road',
       city: 'bangalore',
-      state: 'karnataka'
+      state: 'karnataka',
+      created: "",
+      pasword: ""
     }
   ]
 }
+// fullname : string | undefined,
+// age : number | undefined,
+// gender: string | undefined,
+// email: string | undefined,
+// pasword: string | undefined,
+// phone: number | undefined,
+// adressLine: string | undefined,
+// city: string | undefined,
+// state: string | undefined,
+// created: string | undefined
+
