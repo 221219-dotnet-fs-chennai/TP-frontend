@@ -66,13 +66,14 @@ export class UpdateScheduleComponent implements OnInit {
   dataSource = new MatTableDataSource<UpdateDoctor>();
   displayedColumns!: string[];
   selection = new SelectionModel<UpdateDoctor>();
-
+  isLoading = true
   ngOnInit() {
     this.weekDate = new Date(this.currentDate.getTime() + 604800000);
     this.allNotSelected = false;
     this.checked = [];
     this.getAllService.getAll().subscribe((data) => {
       this.doctors = data;
+      this.isLoading = false
       console.log(this.doctors);
       this.doctors.forEach((doctor) => {
         this.ELEMENT_DATA.push({
@@ -90,6 +91,7 @@ export class UpdateScheduleComponent implements OnInit {
         this.ELEMENT_DATA
       );
       this.selection = new SelectionModel<UpdateDoctor>(true, []);
+      
     });
   }
 
