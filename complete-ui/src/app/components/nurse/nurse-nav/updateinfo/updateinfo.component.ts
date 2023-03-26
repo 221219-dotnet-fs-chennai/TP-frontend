@@ -13,19 +13,19 @@ import { AppointmentServiceService } from 'src/app/services/appointment-service/
   styleUrls: ['./updateinfo.component.css']
 })
 
-export class UpdateinfoComponent implements OnInit{
+export class UpdateinfoComponent implements OnInit {
   date: string;
   localStorage: any;
-  constructor(private router: Router, private Updatebasicrecord:UpdatebasicrecordService, private fb: FormBuilder, private appoint:AppointmentServiceService){
+  constructor(private router: Router, private Updatebasicrecord: UpdatebasicrecordService, private fb: FormBuilder, private appoint: AppointmentServiceService) {
     this.date = new Date().toISOString().slice(0, 16);
   }
-  
+
   // toppings = new FormControl('');
   // toppingList: string[] = ['Eyes', 'Nose', 'Skin', 'Ear', 'Mouth', 'Legs'];
 
   updateform !: FormGroup
- 
-  
+
+
   // updateform = this.fb.group({
   //   bp: new FormControl('', [Validators.required,Validators.pattern('^[1-9][0-9]{1,2}\\/[1-9][0-9]{1,2}$')]),
   //   heart_Rate: new FormControl('', [Validators.required,Validators.pattern('^(6[0-9]|[7-9][0-9]|1[01][0-9]|120)$')]),
@@ -36,48 +36,48 @@ export class UpdateinfoComponent implements OnInit{
   //   bloodGroup: new FormControl('',[Validators.required])
   // });
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.updateform = this.fb.group({
       patient_Id: "p67435",
-      nurse_Id : "n34765",
-      appointment_Id : "app15",
+      nurse_Id: "n34765",
+      appointment_Id: "app15",
       date_Time: this.date,
-      bp: ['', [Validators.required,Validators.pattern('^[1-9][0-9]{1,2}\\/[1-9][0-9]{1,2}$')]],
-      heart_Rate: ['', [Validators.required,Validators.pattern('^(6[0-9]|[7-9][0-9]|1[01][0-9]|120)$')]],
-      spO2: ['', [Validators.required,Validators.pattern('^(9[0-9]|100)%$')]],
-      height: ['',[Validators.required,Validators.pattern('^(6[0-9]|[7-9][0-9]|1[01][0-9]|250)$')]],
-      weight: ['', [Validators.required, Validators.pattern('^(6[0-9]|[7-9][0-9]|1[01][0-9]|350)$')]],
+      bp: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{1,2}\\/[1-9][0-9]{1,2}$')]],
+      heart_Rate: ['', [Validators.required, Validators.pattern('^(6[0-9]|[7-9][0-9]|1[01][0-9]|120)$')]],
+      spO2: ['', [Validators.required, Validators.pattern('^([0-9][0-9]|100)$')]],
+      height: ['', [Validators.required, Validators.pattern('^([1-5]?[0-9][0-9])$')]],
+      weight: ['', [Validators.required, Validators.pattern('^([1-5]?[0-9][0-9])$')]],
       temperature: ['', [Validators.required, Validators.pattern('^([3-9][0-9]|[1-9][0-9]{2})\.?[0-9]?$')]],
-      bloodGroup: ['',[Validators.required]],
+      bloodGroup: ['', [Validators.required]],
       health_Id: "p67435",
-      allergy: ['',[Validators.required]]
+      allergy: ['', [Validators.required]]
     });
-    
+
   }
 
-  
 
 
-  update(){
+
+  update() {
     if (this.updateform.valid) {
-      this.Updatebasicrecord.saveUser(this.updateform.getRawValue()).subscribe((result)=>{
+      this.Updatebasicrecord.saveUser(this.updateform.getRawValue()).subscribe((result) => {
         console.warn(result);
       })
-    }if (this.updateform.valid) {
+    } if (this.updateform.valid) {
 
-      this.Updatebasicrecord.savealergy(this.updateform.getRawValue()).subscribe((data) =>{
+      this.Updatebasicrecord.savealergy(this.updateform.getRawValue()).subscribe((data) => {
         console.warn(data);
       })
-      
-    }else {
+
+    } else {
       // show error message
       console.log(this.updateform);
       console.log('Invalid form');
     }
     console.log(this.updateform.getRawValue())
   }
- 
-  goBack(){
+
+  goBack() {
     this.router.navigate(['nurse-dashboard'])
   }
 
@@ -101,7 +101,7 @@ export class UpdateinfoComponent implements OnInit{
     return this.updateform.get('weight');
   }
 
-  get allergy(){
+  get allergy() {
     return this.updateform.get('allergy');
   }
 
@@ -109,7 +109,7 @@ export class UpdateinfoComponent implements OnInit{
     return this.updateform.get('temperature');
   }
 
-  get bloodGroup(){
+  get bloodGroup() {
     return this.updateform.get('bloodGroup');
   }
 
@@ -125,14 +125,14 @@ export class UpdateinfoComponent implements OnInit{
         return 'Please enter a valid SpO2 reading between 90% and 100%';
       } else if (formControlName === 'height') {
         return 'Please enter a valid height reading like 126.8';
-      } else if (formControlName === 'weight'){
+      } else if (formControlName === 'weight') {
         return 'Please enter a valid height reading like 90';
-      }else if (formControlName === 'temperature'){
+      } else if (formControlName === 'temperature') {
         return 'Please enter a valid height reading like 37.1';
       }
-      else if(formControlName === 'allergy'){
+      else if (formControlName === 'allergy') {
         return 'Please select allergy';
-      }else{
+      } else {
         return 'Invalid input';
       }
     }
