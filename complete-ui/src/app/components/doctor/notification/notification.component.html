@@ -45,7 +45,7 @@
             matTooltip="View patient's health history" (click)="navToViewHistory()">
             <mat-icon>visibility</mat-icon>Health history
           </button>
-          <button (click)="navToAddRecord()" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
+          <button (click)="navToAddRecord(patient.name)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
             <mat-icon>add</mat-icon>Add record
           </button>
         </div>
@@ -98,65 +98,5 @@
   <ng-template #noContent>
     No patients for today
   </ng-template>
-
-
-  <!-- <div class="inner2" [hidden]="viewSidebar">
-    <mat-drawer-container class="example-container" autosize>
-      <mat-drawer #drawer class="example-sidenav" mode="side">
-        <br>
-        <mat-card>
-          <mat-card-content>
-            <div class="appointment-card">
-              <mat-icon class="assignment-icon">assignment</mat-icon>
-              <h2 style="color: rgb(237, 97, 97);"><b>Appointment requests</b></h2>
-            </div>
-          </mat-card-content>
-        </mat-card>
-        <br>
-        <mat-accordion class="patient-container patient-container-2" multi="false">
-          <mat-expansion-panel *ngFor="let appointment of appointments" hideToggle class="expansions">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="gender-icon-gap">
-                <div [ngSwitch]="appointment.gender">
-                  <mat-icon *ngSwitchCase="'male'">male</mat-icon>
-                  <mat-icon *ngSwitchCase="'female'">female</mat-icon>
-                  <mat-icon *ngSwitchDefault>account_circle</mat-icon>
-                </div>
-                <button #x [value]="appointment.id" style="display: none;"></button>
-                {{x.value}} - {{appointment.name}}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{appointment.date}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="example-button-row">
-              <br>
-              <p></p>
-              <button class="btn-bottom-border first-btn" extended mat-button color="accent" style="color: green;"
-                disabled="true">
-                Booked appointment for <br>{{appointment.date}}
-              </button>
-              <span class="example-spacer2"></span>
-              <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;"
-                matTooltip="accept request">
-                <mat-icon>done</mat-icon>Accept
-              </button>
-              <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;"
-                matTooltip="reject request">
-                <mat-icon>clear</mat-icon>Reject
-              </button>
-              <br>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <br>
-
-      </mat-drawer>
-    </mat-drawer-container>
-
-    
-
-  </div> -->
 </div>
 

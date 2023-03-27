@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 
 @Component({
   selector: 'app-notification',
@@ -11,7 +12,8 @@ import { AuthService } from '@auth0/auth0-angular';
 
 export class NotificationComponent implements OnInit{
   
-  constructor(private route: Router, public auth : AuthService, @Inject(DOCUMENT) private doc: Document) {}
+  constructor(private route: Router, public auth : AuthService, @Inject(DOCUMENT) private doc: Document,
+  private appointmentService : AppointmentServiceService) {}
 
 
   title = "Notification component"
@@ -46,13 +48,14 @@ export class NotificationComponent implements OnInit{
   navToViewHistory(){
     this.route.navigate(['view-complete-history-doc'])
   }
-  navToAddRecord(){
-    this.route.navigate(['add-patient-health'])
+  navToAddRecord(name : string){
+    this.route.navigate(['add-patient-health', name])
   }
 
   ngOnInit() {
     this.totalPatients = this.patients.length;
-    this.notificationBadge = this.appointments.length;
+    // this.notificationBadge = this.appointments.length;
+    this.appointmentService.getAppointmentsByStatus(0).subscribe((data) => this.notificationBadge = data.length)
     this.auth.user$.subscribe((data) => {
       this.doctorName = data?.email?.split("@")[0]
       this.doctorEmail = data?.email
@@ -100,30 +103,16 @@ export class NotificationComponent implements OnInit{
     id : "1",
     name : "Patient 1",
     gender : "Male",
-    History : `this is patient 1's history<br>
-    this is patient 1's history<br>
-    this is patient 1's history<br>
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
   },
   {
     id : "2",
     name : "Patient 2",
     gender : "Male",
-    History : `this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
   },
   {
     id : "3",
     name : "Patient 3",
     gender : "Male",
-    History : `this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
   }]
 
 
@@ -164,8 +153,7 @@ export class NotificationComponent implements OnInit{
 export interface Patient{
   id : string
   name  : string,
-  gender : string,
-  History : string
+  gender : string
 }
 
 export interface Appointment{

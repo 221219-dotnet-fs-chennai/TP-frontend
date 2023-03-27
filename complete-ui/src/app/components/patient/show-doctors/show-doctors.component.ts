@@ -5,6 +5,7 @@ import { AvailabilityService } from '../availability.service';
 import { localStorageToken } from './localstorage.token';
 import { BookingAlertComponent } from '../booking-alert/booking-alert.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show-doctors',
@@ -14,81 +15,28 @@ import { MatDialog } from '@angular/material/dialog';
 export class ShowDoctorsComponent implements OnInit {
 
   constructor(private schedule: AvailabilityService, @Inject(localStorageToken) private localStorage : any,
-   public dialog: MatDialog) {}
+   public dialog: MatDialog, private activatedRoute: ActivatedRoute) {}
   schedules : Schedule[] = [] 
   getDoctorIds(event : Schedule[]) {
     event.forEach(ele => this.schedules.push(ele));
   }
 
   ngOnInit(): void {
-    // service call to get all doctors
-    // this.schedule.GetDaySchedule(this.localStorage.getItem('selectedDay')).subscribe((data) => {
-    //   this.schedules = data.sort();
-    //   console.log(this.schedules);
-    // })
+    let day
+    this.activatedRoute.params.subscribe((data) => day = data['day'])
 
-    this.schedules = [{
-      doctorId : 'doctor-1',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    },{
-      doctorId : 'doctor-2',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    },{
-      doctorId : 'doctor-3',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    },{
-      doctorId : 'doctor-4',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    },{
-      doctorId : 'doctor-5',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    },{
-      doctorId : 'doctor-6',
-      monday : 1,
-      tuesday: 0,
-      wednesday : 1,
-      thursday : 0,
-      friday: 0,
-      saturday : 0,
-      sunday : 1
-    }]
+    this.schedule.GetDaySchedule(window.localStorage.getItem('selectedDay')).subscribe((data) => {
+      this.schedules = data;
+      console.log(this.schedules);
+    })
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, doctor_Id : string | undefined): void {
     this.dialog.open(BookingAlertComponent, {
       width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
+    window.localStorage.setItem('doctorId', `${doctor_Id}`);
   }
 }

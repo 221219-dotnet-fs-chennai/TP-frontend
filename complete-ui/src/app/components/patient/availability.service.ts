@@ -19,7 +19,7 @@ export class AvailabilityService {
     return this.http.put<Schedule[]>(`https://localhost:44337/api/PhysicianAvailability/UpdateAllSchedules?day=${day}`, sch);
   }
 
-  GetDaySchedule(day: string) {
-    return this.http.get<Schedule[]>(`https://localhost:44337/api/PhysicianAvailability/GetSchedule?day=${day}`);
+  GetDaySchedule(day: string | null) {
+    return this.http.get<Schedule[]>(`http://localhost:5103/apigateway/GetScheduleByDay/${day}`);
   }
 }

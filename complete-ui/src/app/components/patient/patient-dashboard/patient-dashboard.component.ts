@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { BookAppointmentComponent } from '../../book-appointment/book-appointment.component';
+import { PatientInfo } from '../../login.service';
+import { LoginService } from '../../login.service';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -10,13 +13,22 @@ import { BookAppointmentComponent } from '../../book-appointment/book-appointmen
 })
 export class PatientDashboardComponent implements OnInit{
   panelOpenState = false;
-  constructor (private dialog:MatDialog, private router:Router) {}
+  constructor (private dialog:MatDialog, private router:Router,
+    private patService : LoginService) {}
   // openPopup(){
     //   // this.dialog.open(BookappointmentComponent)
     // }
+  patientInfo !: PatientInfo
+  patientId !: Guid
+
     P_name !: string | undefined
     ngOnInit(): void {
      this.P_name = window.localStorage.getItem("pEmail")?.split("@")[0];
+     let email = window.localStorage.getItem("pEmail")
+     this.patService.getPatientByEmail(email).subscribe((data) => {
+        window.localStorage.setItem('patientId',data[0].patId.toString())
+        // console.log(this.patientId)
+     });
     }
 
   show = false
@@ -45,7 +57,7 @@ export class PatientDashboardComponent implements OnInit{
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(BookAppointmentComponent, {
-      width: '400px',
+      width: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
