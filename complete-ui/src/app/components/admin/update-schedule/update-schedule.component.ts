@@ -86,7 +86,7 @@ export class UpdateScheduleComponent implements OnInit {
       });
       console.log(this.schedules);
 
-      this.displayedColumns = ['position', 'name', 'specialisation', 'select'];
+      this.displayedColumns = ['name', 'specialisation', 'select'];
       this.dataSource = new MatTableDataSource<UpdateDoctor>(
         this.ELEMENT_DATA
       );
