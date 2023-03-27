@@ -9,8 +9,8 @@
                 <mat-label>Email</mat-label>
                 <input type="email" matInput formControlName="email"  (click)="emailErrorMsg = false" placeholder="Ex. mat@gmail.com" />
             </mat-form-field>
+            <span *ngIf="emailErrorMsg" style="color: red;">Email doesn't exist</span>
         </div>
-        <span *ngIf="emailErrorMsg" style="color: red;">Email doesn't exist</span>
     </form>
     <br>
     <label><span class="email-label">Select the joining date : </span></label> <br>
