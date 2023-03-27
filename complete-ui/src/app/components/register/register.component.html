@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary">
   <div style="width: fit-content; margin: auto;">
     <span style="cursor: pointer;" matTooltip="Registration">Patient Sign Up</span>
@@ -7,12 +8,14 @@
     aria-label="Example icon-button with share icon">
     <mat-icon>home</mat-icon>
   </button>
-</mat-toolbar><br><br>
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<br><br>
 <h1>Hello! Please complete the registration</h1>
 <div class="step-container">
   <mat-stepper #stepper>
-    <mat-step [stepControl]="registerForm" [stepControl]="LoginForm" errorMessage="These fields is required.">
-      <form [formGroup]="registerForm" [formGroup]="LoginForm">
+    <mat-step [stepControl]="registerForm">
+      <form [formGroup]="registerForm">
         <ng-template matStepLabel>Fill out your details</ng-template>
         <div class="first-step-form">
           <div>
@@ -24,17 +27,20 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input type="password" matInput formControlName="pasword" formControlName="password" placeholder="Ex. Gtyki@98!" />
+              <input [type]="hide ? 'password' : 'text'" matInput formControlName="pasword" formControlName="pasword" placeholder="Ex. Gtyki@98!" />
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
           </div>
           <div>
-            <button mat-button matStepperNext (click)="login()">Next</button>
+            <button mat-button matStepperNext (click)="checkUser()">Next</button>
           </div>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="registerForm" errorMessage="These fields is required.">
+    <mat-step [stepControl]="registerForm">
       <form [formGroup]="registerForm">
         <ng-template matStepLabel>Fill out some personal details</ng-template>
         <div class="first-step-form">
@@ -47,7 +53,7 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Phone</mat-label>
-              <input type="text" matInput formControlName="phone" placeholder="Ex. 8679457965" />
+              <input type="number" matInput formControlName="phone" placeholder="Ex. 8679457965" />
             </mat-form-field>
           </div>
           <div>
@@ -59,7 +65,7 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Age</mat-label>
-              <input type="text" matInput formControlName="age" placeholder="Ex. 22" />
+              <input type="number" matInput formControlName="age" placeholder="Ex. 22" />
             </mat-form-field>
           </div>
           <div>
@@ -72,7 +78,7 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="registerForm" errorMessage="These fields is required.">
+    <mat-step [stepControl]="registerForm" >
       <form [formGroup]="registerForm">
         <ng-template matStepLabel>Fill out your address</ng-template>
         <div class="first-step-form">
@@ -101,7 +107,7 @@
             <button mat-button (click)="stepper.reset()">Reset</button>
           </div>
           <div style="margin-top: 0.2rem;">
-            <button (click)="registration()" mat-raised-button color="primary">Sign
+            <button [disabled]="!registerForm.valid" (click)="registration()" (click)="login()"  mat-raised-button color="primary">Sign
               Up</button><br><br>
             <span>Signed Up Already? <a matTooltip="go to login page" (click)="navToLogin()"
                 style="cursor: pointer; text-decoration: underline; color: blue;">Login</a> </span>

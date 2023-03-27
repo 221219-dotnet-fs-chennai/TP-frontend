@@ -6,11 +6,12 @@
   <button (click)="NavigateToMain()" matTooltip="Go back to main page" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>home</mat-icon>
   </button>
-</mat-toolbar><br>
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar><br><br>
 <h1>Hello! Please login to view your dashboard</h1>
 
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+<form [formGroup]="loginForm" (ngSubmit)="patientLogin()">
   <div class="container">
     <div>
       <mat-form-field appearance="outline">
@@ -21,9 +22,11 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="Ex. Gtyki@98!" />
+        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" placeholder="Ex. Gtyki@98!" />
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
       </mat-form-field>
-      
     </div>  
     <button (click)="patientLogin()" mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
     <span>Don't have an account? <a matTooltip="go to registration page" (click)="NavigateToSignUp()" style="cursor: pointer; text-decoration: underline; color: blue;">SignUp</a>    </span>

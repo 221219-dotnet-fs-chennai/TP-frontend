@@ -2,7 +2,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterLoginService } from './register-login.service';
+import { RegisterLoginService, UserLogin } from './register-login.service';
 import { Guid } from 'guid-typescript';
 
 @Component({
@@ -20,45 +20,90 @@ export class RegisterComponent implements OnInit{
   constructor(private router : Router, private fb : FormBuilder, private service : RegisterLoginService){}
   isLoggedIn = true // TO-DO for hidding logout button
   registerForm !: FormGroup
-  LoginForm !: FormGroup
+  // LoginForm !: FormGroup
+  isLoading = false
   // created !: Date
+  
   ngOnInit(): void {
+    window.localStorage.clear()
     this.registerForm = this.fb.group({
-      email : window.localStorage.getItem("pEmail"),
-      pasword: window.localStorage.getItem("pPassword"),
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      age:['',[Validators.required,Validators.pattern("^[0-9]+$")]],
+      gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]],
+      email : ['', [Validators.required, Validators.email]],
+      pasword: ['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]],  
       phone: ['',[Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")]],
       adressLine:['',[Validators.required,Validators.pattern("^.{5,}$")]],
       city:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
       state:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-      age:['',[Validators.required,Validators.pattern("^[0-9]+$")]],
-      gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]],
-      created : new Date().toString()
+      created : new Date().toLocaleDateString('en-US').toString()
     })
-    this.LoginForm = this.fb.group({
-      loginId : Guid.create().toString(),
-      email : ['', [Validators.required, Validators.email]],
-      password:['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]]
-    })
+    // this.LoginForm = this.fb.group({
+    //   loginId : Guid.create().toString(),
+    //   email : ['', [Validators.required, Validators.email]],
+    //   password:['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]]
+    // })
+  }
+  
+  checkUser(){
+    this.isLoading = true
+    this.service.getUser(this.registerForm.getRawValue().email, this.registerForm.getRawValue().pasword)
+      .subscribe((data) => {
+        console.log(data)
+        if(data.status == 400){
+          window.localStorage.setItem("pEmail", this.registerForm.getRawValue().email)
+          window.localStorage.setItem("pPassword", this.registerForm.getRawValue().pasword)
+          window.alert("click ok continue")
+          this.isLoading = false
+        }
+        else if(data == 1){
+          window.alert("Account with this email already exists, please Login!")
+          this.router.navigate(['/login'])
+          console.log(data)
+          this.isLoading = false
+        }
+      })
   }
   login(){
-    console.log(this.LoginForm.getRawValue());
-    this.service.addNewLogin(this.LoginForm.getRawValue()).subscribe(data => {
-      if(data.status != 200 || data.status != 201){
-        window.alert("bad req")
+    let loginUser : UserLogin = {
+      email : this.registerForm.getRawValue().email,
+      password: this.registerForm.getRawValue().pasword
+    }
+    this.isLoading = true
+    console.log(this.registerForm.getRawValue());
+    this.service.addNewLogin(loginUser).subscribe(data => {
+      // if(data.status == 400 || data.status == 502) {
+      //   this.isLoading = false
+      //   window.alert("something went wrong, try again")
+      // }
+      // if(data == 302){
+      //   window.alert("Account with this email already exists, please Login!")
+      //   this.router.navigate(['/login'])
+      //   console.log(data)
+      //   this.isLoading = false
+        
+      // }
+      if(data != 302){
+        window.alert("Click ok to continue")
+        // window.localStorage.setItem("pEmail", data.email)
+        // window.localStorage.setItem("pPassword", data.password)
+        this.isLoading = false
       }
-    }).unsubscribe()
-    // window.localStorage.setItem("pEmail", data.email)
-    // window.localStorage.setItem("pPassword", data.password)
+    }) 
   }
+
   registration(){
+    this.isLoading = true
     console.log(this.registerForm.getRawValue())
     this.service.addNewUser(this.registerForm.getRawValue()).subscribe((data : any) =>{
       if(data.status == 400) {
+        this.isLoading = false
         window.alert("Something went wrong")
       }
-      else{
+      else if(data.status != 400){
+        this.isLoading = false
         window.alert("added!")
+        this.router.navigate(['/login'])
       }
     })
   }
