@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { LoginService } from '../login.service';
 import { DOCUMENT } from '@angular/common';
+import { RegisterLoginService } from '../register/register-login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class LoginComponent implements OnInit{
   service: any;
-  constructor(private router : Router, private fb:FormBuilder, public auth : AuthService,
+  constructor(private router : Router, private fb:FormBuilder, public auth : AuthService, private PatientloginService : RegisterLoginService,
     private loginService : LoginService, private route : Router, @Inject(DOCUMENT) private doc: Document){}
   loginForm !: FormGroup
   flag = false
@@ -44,12 +45,12 @@ export class LoginComponent implements OnInit{
       }
     });
   }
-  login(){
-    console.log(this.loginForm.getRawValue())
-    this.service.login(this.loginForm.getRawValue()).subscribe((data: any)=>{
-      console.log(data)
-    })
-  }
+  // login(){
+  //   console.log(this.loginForm.getRawValue())
+  //   this.service.login(this.loginForm.getRawValue()).subscribe((data: any)=>{
+  //     console.log(data)
+  //   })
+  // }
 
     
   
@@ -71,7 +72,26 @@ export class LoginComponent implements OnInit{
   NavigateToMain(){
     this.router.navigate([''])
   }
+  isLoading = false
+  hide = true
   patientLogin(){
-    this.router.navigate(['/patient-dashboard'])
+    this.isLoading = true
+    this.PatientloginService.getUser(this.loginForm.getRawValue().email, this.loginForm.getRawValue().password)
+      .subscribe((data) => {
+        // console.log(data)
+        if(data.status == 400){
+          window.alert("Email and Password doesnt match, tryagain")
+          this.isLoading = false
+        }
+        else if(data == 1){
+          //window.alert("Account with this email already exists, please Login!")
+          window.localStorage.setItem("pEmail", this.loginForm.getRawValue().email.toString())
+          window.localStorage.setItem("pPassword", this.loginForm.getRawValue().password.toString())
+          this.router.navigate(['/patient-dashboard'])
+          console.log(data)
+          this.isLoading = false
+        }
+      })
   }
+
 }

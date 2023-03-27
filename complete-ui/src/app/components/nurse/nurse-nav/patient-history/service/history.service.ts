@@ -36,11 +36,11 @@ export class HistoryService {
 
   public getData():Observable<any>
   {
-    return this.http.get("https://localhost:7203/api/PBRecord/GetPRBy/mmmm",{headers:this.httpOptions.headers});
+    return this.http.get("http://localhost:5103/apigateway/GetPatientRecord/mmmm",{headers:this.httpOptions.headers});
   }
   public getTestDetails():Observable<any>
   {
-    return this.http.get("https://localhost:7203/api/PHRecord/GetHR/mmmm",{headers:this.httpOptions.headers});
+    return this.http.get("http://localhost:5103/apigateway/GetPatientHealthRecord/mmmm",{headers:this.httpOptions.headers});
   }
 }
 
