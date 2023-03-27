@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
+import { Doctor } from './admin/add-doctor/doctor';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,9 @@ export class LoginService {
 
   getPatientByEmail(email : string | null) {
     return this.http.get<PatientInfo[]>(`http://localhost:5103/apigateway/PatientByEmail/${email}`)
+  }
+  getDoctorByEmail(email:string){
+    return this.http.get<Doctor>(`http://localhost:5103/apigateway/DoctorByEmail/${email}`)
   }
 }
 

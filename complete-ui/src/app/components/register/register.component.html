@@ -1,4 +1,3 @@
-
 <mat-toolbar color="primary">
   <div style="width: fit-content; margin: auto;">
     <span style="cursor: pointer;" matTooltip="Registration">Patient Sign Up</span>
@@ -12,36 +11,37 @@
 <mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
 <br><br>
 <h1>Hello! Please complete the registration</h1>
+
 <div class="step-container">
-  <mat-stepper #stepper>
-    <mat-step [stepControl]="registerForm">
-      <form [formGroup]="registerForm">
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="registerForm1" [editable]="true">
+      <form [formGroup]="registerForm1">
         <ng-template matStepLabel>Fill out your details</ng-template>
         <div class="first-step-form">
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
-              <input type="email" matInput formControlName="email" formControlName="email" placeholder="Ex. mat@gmail.com" />
+              <input matInput formControlName="email" placeholder="Ex. mat@gmail.com" required/>
             </mat-form-field>
           </div>
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input [type]="hide ? 'password' : 'text'" matInput formControlName="pasword" formControlName="pasword" placeholder="Ex. Gtyki@98!" />
+              <input [type]="hide ? 'password' : 'text'" matInput formControlName="pasword" placeholder="Ex. Gtyki@98!" required/>
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
           </div>
           <div>
-            <button mat-button matStepperNext (click)="checkUser()">Next</button>
+            <button matStepperNext mat-button (click)="checkUser()">Next</button>
           </div>
         </div>
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="registerForm">
-      <form [formGroup]="registerForm">
+    <mat-step [stepControl]="registerForm2" [editable]="true">
+      <form [formGroup]="registerForm2">
         <ng-template matStepLabel>Fill out some personal details</ng-template>
         <div class="first-step-form">
           <div>
@@ -78,14 +78,14 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="registerForm" >
-      <form [formGroup]="registerForm">
+    <mat-step [stepControl]="registerForm3" [editable]="true">
+      <form [formGroup]="registerForm3">
         <ng-template matStepLabel>Fill out your address</ng-template>
         <div class="first-step-form">
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Address</mat-label>
-              <textarea matInput formControlName="adressLine" placeholder="Ex. 100 Main St"></textarea>
+              <input type="text" matInput formControlName="adressLine" placeholder="Ex. 100 Main St"/>
             </mat-form-field>
           </div>
           <div>
@@ -107,7 +107,7 @@
             <button mat-button (click)="stepper.reset()">Reset</button>
           </div>
           <div style="margin-top: 0.2rem;">
-            <button [disabled]="!registerForm.valid" (click)="registration()" (click)="login()"  mat-raised-button color="primary">Sign
+            <button [disabled]="!registerForm1.valid" (click)="registration()"  mat-raised-button color="primary">Sign
               Up</button><br><br>
             <span>Signed Up Already? <a matTooltip="go to login page" (click)="navToLogin()"
                 style="cursor: pointer; text-decoration: underline; color: blue;">Login</a> </span>
@@ -117,69 +117,3 @@
     </mat-step>
   </mat-stepper>
 </div>
-
-<!-- 
-<form [formGroup]="registerForm" (ngSubmit)="registration()">
-  <div class="container">
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input type="text" matInput formControlName="fullname" placeholder="Ex. Mike" />
-      </mat-form-field>
-    </div>  
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" placeholder="Ex. mat@gmail.com" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="pasword" placeholder="Ex. Gtyki@98!" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Phone</mat-label>
-        <input type="text" matInput formControlName="phone" placeholder="Ex. 8679457965" />
-      </mat-form-field>
-    </div>  
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Gender</mat-label>
-        <input type="text" matInput formControlName="gender" placeholder="Select" />
-      </mat-form-field>
-    </div>  
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Age</mat-label>
-        <input type="text" matInput formControlName="age" placeholder="Ex. 22"/>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Address</mat-label>
-        <textarea matInput formControlName="adressLine" placeholder="Ex. 100 Main St"></textarea>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input type="text" matInput formControlName="city" placeholder="Bangalore"/>
-      </mat-form-field>
-    </div>
-    <div style="display: flex; flex-direction: column;">
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>State</mat-label>
-          <input type="text" matInput formControlName="state" placeholder="karnataka"/>
-        </mat-form-field>
-      </div>
-      <div>
-        <button (click)="navToLogin()" mat-raised-button color="primary" [disabled]="!registerForm.valid">Sign Up</button><br><br>
-        <span>Signed Up Already? <a matTooltip="go to login page" (click)="navToLogin()" style="cursor: pointer; text-decoration: underline; color: blue;">Login</a> </span>
-      </div>  
-    </div>
-  </div>
-</form> -->
