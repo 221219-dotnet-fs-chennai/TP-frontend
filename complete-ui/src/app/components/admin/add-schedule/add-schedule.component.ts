@@ -8,6 +8,8 @@ import { Schedule } from './availability.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { AddScheduleService } from '../add-doctor/services/add-schedule.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FirstScheduleComponent } from '../add-doctor/first-schedule/first-schedule.component';
 
 @Component({
   selector: 'app-add-schedule',
@@ -17,7 +19,8 @@ import { AddScheduleService } from '../add-doctor/services/add-schedule.service'
 export class AddScheduleComponent implements OnInit{
 
   constructor(public dialogRef: MatDialogRef<AddScheduleComponent>, private _formBuilder: FormBuilder,
-    private available : AvailabilityService, private _snackBar: MatSnackBar, private service : AddScheduleService) {}
+    private available : AvailabilityService, private _snackBar: MatSnackBar, private service : AddScheduleService,
+    public dialog: MatDialog) {}
 
     show = true
     toggle(){
@@ -94,6 +97,14 @@ export class AddScheduleComponent implements OnInit{
     }
   }
 
+  openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(FirstScheduleComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
   cancel(){
     this.monday = 0
     this.tuesday = 0
@@ -101,7 +112,7 @@ export class AddScheduleComponent implements OnInit{
     this.thursday = 0
     this.friday = 0
     this.saturday = 0
-    this.sunday = 0     
+    this.sunday = 0  
   }
 
   AddSchedule() {

@@ -74,7 +74,8 @@ import { PickJoiningDateComponent } from './components/admin/add-doctor/pick-joi
 import { AddScheduleComponent } from './components/admin/add-schedule/add-schedule.component';
 import { TableViewComponent } from './components/admin/view-patients/table-view/table-view.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatStepperModule} from '@angular/material/stepper';
+import { FirstScheduleComponent } from './components/admin/add-doctor/first-schedule/first-schedule.component'; 
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     ConfirmAppointmentDialogComponent,
     PickJoiningDateComponent,
     AddScheduleComponent,
-    TableViewComponent
+    TableViewComponent,
+    FirstScheduleComponent
   ],
   imports: [
     BrowserModule,
