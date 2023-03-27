@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PickJoiningDateComponent } from './pick-joining-date/pick-joining-date.component';
 import { AddScheduleService } from './services/add-schedule.service';
+import { FirstScheduleComponent } from './first-schedule/first-schedule.component';
 
 @Component({
   selector: 'app-add-doctor',
@@ -13,6 +14,8 @@ import { AddScheduleService } from './services/add-schedule.service';
 })
 export class AddDoctorComponent implements OnInit {
   todayDay : Date = new Date()
+  selectedSpecialization !: string
+
   constructor(private service : DoctorSeviceService, private fb: FormBuilder, private router: Router,
     public dialog: MatDialog, private addScheduleService : AddScheduleService) {}
   ngOnInit(): void {
@@ -45,16 +48,17 @@ export class AddDoctorComponent implements OnInit {
 
   openPickDialog(enterAnimationDuration: string, exitAnimationDuration: string) :void{
     this.dialog.open(PickJoiningDateComponent, {
-      width: '400px',
+      width: '450px',
       enterAnimationDuration,
       exitAnimationDuration,
     })
   }
-  // openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-  //   this.dialog.open(AddScheduleComponent, {
-  //     width: '600px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //   });
-  // }
+
+  openAddDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(FirstScheduleComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 }

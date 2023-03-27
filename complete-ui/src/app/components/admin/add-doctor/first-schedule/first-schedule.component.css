@@ -1,0 +1,14 @@
+.email-field{
+    position: relative;
+    width : 100%;
+}
+.email-label{
+    font-weight: bold;
+}
+
+.btns{
+    display: flex; 
+    justify-content: flex-end;
+    position: relative;
+    margin-bottom: 1rem;
+}
