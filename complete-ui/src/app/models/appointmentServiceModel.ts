@@ -7,6 +7,4 @@ export interface AppointmentDoctor
   nurseId? : string | null,
   status? : number
   date? : string
-
-
 }

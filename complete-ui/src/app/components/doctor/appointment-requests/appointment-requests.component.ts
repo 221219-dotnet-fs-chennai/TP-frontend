@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
 import { Guid } from 'guid-typescript';
+import { PatientInfoService } from 'src/app/services/patient-info.service';
+import { PatientInfo } from '../../login.service';
+import { PatientAppointmentInfo } from 'src/app/services/patient-info.service';
+import { elementAt } from 'rxjs';
+
 @Component({
   selector: 'app-appointment-requests',
   templateUrl: './appointment-requests.component.html',
@@ -11,31 +16,56 @@ import { Guid } from 'guid-typescript';
 })
 export class AppointmentRequestsComponent implements OnInit {
 
-  constructor(private router : Router, private appointmentService : AppointmentServiceService){}
+  constructor(private router : Router, private appointmentService : AppointmentServiceService,
+    private patientInfoService : PatientInfoService){}
 
 
   appointmentdoctor : AppointmentDoctor[] = [];
+
+  doctorId : string | null = window.localStorage.getItem('Doctor');
   
-  appointments : AppointmentDoctor[] = []
+  appointments !: AppointmentDoctor[]
+
+  patientInfos !: PatientInfo[]
+
+  patientAppointmentInfo : PatientAppointmentInfo[] = []
 
 
   ngOnInit(): void {
-    this.appointmentService.getAppointmentsByStatus(0).subscribe((data) => this.appointments = data)
-    console.log(this.appointments)
-    this.appointmentService.getAppointmentsByDoctorId('0245b75e-2398-4a8d-8617-44fa42f534c1')
-    .subscribe({
-      next:(appointments) =>{
-      this.appointmentdoctor = appointments;
-      console.log(this.appointmentdoctor)
-      },
-      error : (response) => {
-        console.log(response);
-      }
-
-
+    this.appointmentService.getAppointmentsByStatus(0).subscribe((data) => {
+      this.appointmentdoctor = data
+      this.patientInfoService.getAllPatientInfos().subscribe((response) => {
+        console.log(response)
+        data.forEach(appo => {
+          response.forEach(pati => {
+            console.log(pati.patId)
+            if(appo.patientId == pati.patId.toString()) {
+              this.patientAppointmentInfo.push({
+                appointment : appo,
+                patient : pati
+              })
+              console.log("pushed");
+            }
+          })
+        })
+      });
+      console.log(this.patientAppointmentInfo)
+      console.log(data);
     });
-
   }
+
+
+    // this.appointmentService.getAppointmentsByDoctorId('0245b75e-2398-4a8d-8617-44fa42f534c1')
+    // .subscribe({
+    //   next:(appointments) =>{
+    //   this.appointmentdoctor = appointments;
+    //   console.log(this.appointmentdoctor)
+    //   },
+    //   error : (response) => {
+    //     console.log(response);
+    //   }
+    // });
+
 
   updateStatusByDoctor(appointment_id : Guid|undefined, _status : number){
     this.appointmentService.updateStatusByDoctor(appointment_id,_status)
@@ -48,39 +78,8 @@ export class AppointmentRequestsComponent implements OnInit {
       }
     });
   }
-  // viewSidebar = true;
 
   navToDashboard(){
     this,this.router.navigate(['doctor-dashboard'])
   }
-  // appointments : Appointment[] = [{
-  //   id : "AP-1",
-  //   name : "Hannah",
-  //   gender : "female",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-3",
-  //   name : "Justin",
-  //   gender : "others",
-  //   date : "23/02/2000"
-  // }]
 }
