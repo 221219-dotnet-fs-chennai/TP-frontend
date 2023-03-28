@@ -15,11 +15,15 @@ export class NurseNavComponent implements OnInit{
       this.nurseEmail = data?.email
     })
   }
+  notificationBadge !: number
   nurseName !: string | undefined
   nurseEmail !: string | undefined
   nname = 'Robin'
   nemail = 'robin@nurse.com'
   
+  enableSidebar(){
+    
+  }
   logout() {
     this.auth.logout({
       logoutParams: {
