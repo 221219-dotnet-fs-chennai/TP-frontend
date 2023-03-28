@@ -79,7 +79,7 @@ export class NotificationComponent implements OnInit {
       this.doctorEmail = data?.email;
     });
     this.appointmentService
-      .getAppointmentsByDoctorId('0245b75e-2398-4a8d-8617-44fa42f534c1')
+      .getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
       .subscribe({
         next: (appointments) => {
           this.appointmentdoctor = appointments;
