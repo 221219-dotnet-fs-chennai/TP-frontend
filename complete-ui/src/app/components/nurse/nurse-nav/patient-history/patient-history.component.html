@@ -17,7 +17,6 @@
 </mat-toolbar>
 
 
-
 <li *ngFor="let i of phistory">
 <mat-card class="example-card">
     <mat-card-header>
@@ -59,8 +58,8 @@
     
       
       <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
-    <div *ngFor="let j of ptest">
-      <h3>Tests</h3>
+    <li *ngFor="let j of ptest">
+      <h3>Tests {{i}}</h3>
       <ol>
         <div class="card-desp">
           <li>Blood Test</li>
