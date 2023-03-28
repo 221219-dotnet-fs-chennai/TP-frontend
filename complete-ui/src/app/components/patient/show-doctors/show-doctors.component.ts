@@ -51,5 +51,6 @@ export class ShowDoctorsComponent implements OnInit {
       exitAnimationDuration,
     });
     window.localStorage.setItem('doctorId', `${doctor_Id}`);
+    console.log(doctor_Id)
   }
 }
