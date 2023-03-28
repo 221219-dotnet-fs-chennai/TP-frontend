@@ -36,14 +36,14 @@ getAppointmentsByDoctorId(doctor_id : string) : Observable<AppointmentDoctor[]>{
 
 updateStatusByDoctor(appointment_id : Guid|undefined , status : number | undefined) : Observable<AppointmentDoctor> {
   // return this.http.put<AppointmentDoctor>(this.baseapiurl + '/api' + '/Appointment' + '/UpdateStatusByDoctor?appointment_id=' + appointment_id + '&status=' + status , {});
-  return this.http.put<AppointmentDoctor>(`${this.baseapiurl}/api/Appointment/UpdateStatusByDoctor?appointment_id=${appointment_id}&status=${status}`,{});
+  return this.http.put<AppointmentDoctor>(`${this.baseapiurl}/apigateway/UpdateAppointmentStatusByDoctor/${appointment_id}/${status}`,{});
 
 }
 
 updateNurseIdByNurse(appointment_id : Guid|undefined , nurse_id : string|undefined) : Observable<AppointmentDoctor>{
 
 
-  return this.http.put<AppointmentDoctor>(`${this.baseapiurl}/api/Appointment/UpdateNurseIdByNurse?appointment_id=${appointment_id}&nurse_id=${nurse_id}`,{});
+  return this.http.put<AppointmentDoctor>(`${this.baseapiurl}/apigateway/UpdateAppointmentNurseId/${appointment_id}/${nurse_id}`,{});
 
 }
 }

@@ -1,7 +1,7 @@
 
 <p >
     <mat-toolbar color="primary">
-    <button mat-icon-button matTooltip="go back" (click)="navToDashboard()">
+    <button mat-icon-button matTooltip="go back">
         <mat-icon>arrow_back</mat-icon>
       </button>
     <span class="example-spacer"></span>
@@ -20,8 +20,13 @@
             </div>
         </mat-card-content>
     </mat-card>
+
+
+    <mat-card>
+        <mat-card-content>Simple card</mat-card-content>
+      </mat-card>
     
-    <div *ngFor="let pa of patientAppointmentInfo">
+    <!-- <div *ngFor="let pa of patientAppointmentInfo">
       <mat-accordion class="patient-container patient-container-2" multi="false">
         <mat-expansion-panel style="margin-bottom: 0.1rem; display: flex; justify-content: center; flex-direction: column;"  class="expansions" *ngIf="pa.appointment.status==0">
             <mat-expansion-panel-header>
@@ -34,7 +39,7 @@
                         <mat-icon *ngSwitchDefault>account_circle</mat-icon>
                     </div>
                     <button #x [value]="pa.appointment.appointmentId" style="display: none;"></button>
-                    <!-- {{x.value}} - {{appointment.name}} -->
+                     {{x.value}} - {{appointment.name}}
                     {{pa.patient.fullname}}    {{pa.appointment.status}}
                 </mat-panel-title>
                 <mat-panel-description>
@@ -62,7 +67,7 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-  </div>
+  </div> -->
     <br>
     </div>
 </div>
