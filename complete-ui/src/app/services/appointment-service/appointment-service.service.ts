@@ -28,8 +28,9 @@ getAppointmentsByStatus(status : number) : Observable<AppointmentDoctor[]>{
   return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByStatus/${status}`)
 }
 
-getAppointmentsByDoctorId(doctor_id : string | null) : Observable<AppointmentDoctor[]>{
-  return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/api/Appointment/GetAppointmentsByDoctorId?doctor_id=${doctor_id}`)
+
+getAppointmentsByDoctorId(doctor_id : string) : Observable<AppointmentDoctor[]>{
+  return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByDocId/${doctor_id}`)
 }
 
 

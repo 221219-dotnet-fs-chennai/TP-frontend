@@ -20,6 +20,7 @@ import { AddHealthComponent } from './components/doctor/add-helath/add-health.co
 import { PatientCompleteHistoryDocComponent } from './components/doctor/patient-complete-history/patient-complete-history.component';
 import { PatientProfileComponent } from './components/patient/patient-profile/patient-profile.component';
 import { ShowDoctorsComponent } from './components/patient/show-doctors/show-doctors.component';
+import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component';
 
 
 const routes: Routes = [
@@ -41,11 +42,11 @@ const routes: Routes = [
   {
     path: 'nurse-dashboard', component: AppointmentsComponent
   },
+  // {
+  //   path: 'view-patient-history', component: PatientHistoryComponent
+  // },
   {
-    path: 'view-patient-history', component: PatientHistoryComponent
-  },
-  {
-    path: 'update-patient-info', component: UpdateinfoComponent
+    path: 'update-patient-info/:id', component: UpdateinfoComponent
   },
   {
     path: 'patient-dashboard', component: PatientDashboardComponent
@@ -88,6 +89,12 @@ const routes: Routes = [
   },
   {
     path: 'show-doctors/:day', component:ShowDoctorsComponent,
+  },
+  {
+    path: 'patient-history-doctor-view/:id', component:DoctorHistoryViewComponent,
+  },
+  {
+    path: 'patient-history-nurse-view/:id',component: PatientHistoryComponent
   }
 ];
 

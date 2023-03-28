@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
-import { PatientInfo } from '../components/login.service';
-import { AppointmentDoctor } from '../models/appointmentServiceModel';
+import { HttpClient } from '@angular/common/http';
+import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
+import { Observable } from 'rxjs';
+import { Guid } from 'guid-typescript';
+import { patientinfo } from 'src/app/models/patientinfomodel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,13 @@ export class PatientInfoService {
     return this.http.get<PatientInfo[]>(`http://localhost:5103/apigateway/GetAllPatients`);
   }
   
-  getPatientInfoById(id : string | null | undefined) {
-    return this.http.get<PatientInfo>(`http://localhost:5103/apigateway/PatientById/${id}`);
+  baseapiurl : string = 'http://localhost:5103';
+
+
+  getPatientInfo(patientId : string | undefined) : Observable<patientinfo>{
+
+    return this.http.get<patientinfo>(`${this.baseapiurl}/apigateway/PatientById/${patientId}`);
+
   }
 }
 
