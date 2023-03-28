@@ -1,32 +1,53 @@
-
-<p >
+<p>
     <mat-toolbar color="primary">
-    <button mat-icon-button matTooltip="go back">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-    <span class="example-spacer"></span>
-    <span>Appointments requests</span>
+        <button mat-icon-button matTooltip="go back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <span>All the accepted requests </span>
     </mat-toolbar>
-  </p>
+</p>
 
 <div class="inner2">
     <br>
     <div class="request-container">
-    <mat-card style="margin-bottom: 1rem;">
-        <mat-card-content>
-            <div class="appointment-card" style="display: flex; justify-content: center; align-items: center;">
-                <mat-icon class="assignment-icon">assignment</mat-icon>
-                <span style="font-size: 1rem; font-weight: 500; color: rgb(237, 97, 97); text-align: center;">Appointment requests</span>
+        <mat-card style="margin-bottom: 1rem;">
+            <mat-card-content>
+                <div class="appointment-card" style="display: flex; justify-content: center; align-items: center;">
+                    <mat-icon class="assignment-icon">assignment</mat-icon>
+                    <span
+                        style="font-size: 1rem; font-weight: 500; color: rgb(237, 97, 97); text-align: center;">Accepted
+                        requests</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <div class="cards-container" *ngFor="let capp of completeAppointments">
+            <div class="simple-card">
+                <mat-card class="main-card">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-content">
+                                <mat-card-content>Patient name : {{capp.patient.fullname}}</mat-card-content>
+                            </div>
+                            <div class="card-content">
+                                <mat-card-content>Doctor name : {{capp.doctor.name}}</mat-card-content>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card-content">
+                                <mat-card-content>Appointment date : {{capp.appointment.date}}</mat-card-content>
+                            </div>
+                        </div>
+                    </div>
+                    <div >
+                        <button mat-stroked-button color="accent" class="pick-btn">Pick</button>
+                    </div>
+                </mat-card>
             </div>
-        </mat-card-content>
-    </mat-card>
+        </div>
 
-
-    <mat-card>
-        <mat-card-content>Simple card</mat-card-content>
-      </mat-card>
-    
-    <!-- <div *ngFor="let pa of patientAppointmentInfo">
+        <!-- <div *ngFor="let pa of patientAppointmentInfo">
       <mat-accordion class="patient-container patient-container-2" multi="false">
         <mat-expansion-panel style="margin-bottom: 0.1rem; display: flex; justify-content: center; flex-direction: column;"  class="expansions" *ngIf="pa.appointment.status==0">
             <mat-expansion-panel-header>
@@ -68,6 +89,6 @@
         </mat-expansion-panel>
     </mat-accordion>
   </div> -->
-    <br>
+        <br>
     </div>
 </div>
