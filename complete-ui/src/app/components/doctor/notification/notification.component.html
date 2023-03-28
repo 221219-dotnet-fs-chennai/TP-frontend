@@ -23,14 +23,17 @@
     <h3 id="total-patients">Total : {{totalPatients}}</h3>
     <br>
     <mat-accordion class="patient-container" multi="false">
-      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patients" class="expansions">
+      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientsInfo" class="expansions">
         <mat-expansion-panel-header (click)="hideAll()">
           <mat-panel-title>
-            <button #x [value]="patient.id" style="display: none;" ></button>
-            {{x.value}} - {{patient.name}}
+            <button #x [value]="patient.fullname" style="display: none;" ></button>
+           {{patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
             {{patient.gender}}
+          </mat-panel-description>
+          <mat-panel-description>
+            {{patient.age}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -55,7 +58,7 @@
 
         <mat-card class="class-container" *ngIf="basicDetails">
           <br>
-          <h2 style="text-align: center; color: green;"> {{patient.name}}'s basic health record</h2>
+          <h2 style="text-align: center; color: green;"> {{patient.fullname}}'s basic health record</h2>
           <div class="card-container">
             <app-basic-details></app-basic-details>
           </div>
@@ -67,7 +70,7 @@
 
         <mat-card class="class-container" *ngIf="healthRecord">
           <br>
-          <h2 style="text-align: center; color: green;"> Add {{patient.name}}'s health record</h2>
+          <h2 style="text-align: center; color: green;"> Add {{patient.fullname}}'s health record</h2>
           <div class="card-container">
             <app-add-health></app-add-health>
           </div>
@@ -79,7 +82,7 @@
 
         <mat-card class="class-container" *ngIf="history">
           <br>
-          <h2 style="text-align: center; color: green;">{{patient.name}}'s health history</h2>
+          <h2 style="text-align: center; color: green;">{{patient.fullname}}'s health history</h2>
           <div class="card-container">
             <!-- <app-patient-complete-history></app-patient-complete-history> -->
           </div>
@@ -155,7 +158,7 @@
       </mat-drawer>
     </mat-drawer-container>
 
-    
+
 
   </div> -->
 </div>

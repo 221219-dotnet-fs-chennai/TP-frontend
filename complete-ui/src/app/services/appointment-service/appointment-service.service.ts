@@ -11,7 +11,7 @@ export class AppointmentServiceService {
 
   constructor(private http : HttpClient) { }
 
-  baseapiurl : string = 'https://localhost:55516';
+  baseapiurl : string = 'http://localhost:5103';
 
   addAppointmentByPatient(addAppointment : AppointmentDoctor) : Observable<AppointmentDoctor>{
     console.log(addAppointment);
@@ -26,7 +26,7 @@ export class AppointmentServiceService {
 }
 
 getAppointmentsByDoctorId(doctor_id : string) : Observable<AppointmentDoctor[]>{
-  return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/api/Appointment/GetAppointmentsByDoctorId?doctor_id=${doctor_id}`)
+  return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByDocId/${doctor_id}`)
 }
 
 updateStatusByDoctor(appointment_id : Guid|undefined , status : number | undefined) : Observable<AppointmentDoctor> {
