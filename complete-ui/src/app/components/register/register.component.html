@@ -107,7 +107,7 @@
             <button mat-button (click)="stepper.reset()">Reset</button>
           </div>
           <div style="margin-top: 0.2rem;">
-            <button [disabled]="!registerForm1.valid" (click)="registration()"  mat-raised-button color="primary">Sign
+            <button [disabled]="!registerForm1.valid" (click)="registration()" (click)="login()"  mat-raised-button color="primary">Sign
               Up</button><br><br>
             <span>Signed Up Already? <a matTooltip="go to login page" (click)="navToLogin()"
                 style="cursor: pointer; text-decoration: underline; color: blue;">Login</a> </span>

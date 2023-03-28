@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 // import { Schedule } from '../../../schedule';
 import { Schedule } from '../../admin/add-schedule/availability.service';
-import { AvailabilityService } from '../availability.service';
+import { AvailabilityService, DoctorSchedule } from '../availability.service';
 import { localStorageToken } from './localstorage.token';
 import { BookingAlertComponent } from '../booking-alert/booking-alert.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,13 +21,26 @@ export class ShowDoctorsComponent implements OnInit {
     event.forEach(ele => this.schedules.push(ele));
   }
 
+  doctorSchedule : DoctorSchedule[] = [] 
   ngOnInit(): void {
     let day
     this.activatedRoute.params.subscribe((data) => day = data['day'])
-
     this.schedule.GetDaySchedule(window.localStorage.getItem('selectedDay')).subscribe((data) => {
       this.schedules = data;
       console.log(this.schedules);
+      this.schedule.getAllDoctors().subscribe((docs)=>{
+        console.log(docs)
+        data.forEach(sch =>{
+          docs.forEach(doc => {
+            if(sch.doctorId == doc.id){
+              this.doctorSchedule.push({
+                Doctor : doc,
+                schedule : sch 
+              })
+            }
+          });
+        })
+      })
     })
   }
 

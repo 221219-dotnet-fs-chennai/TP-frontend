@@ -43,6 +43,13 @@ export class NavBarComponent {
           break;
         case 'nurse.com':
           if(this.loginService.login(profile?.email?.split('@')[1])){
+            this.loginService.getNurseByEmail(profile?.email).subscribe((data) =>{
+              console.log(data)
+              let json = JSON.stringify(data)
+              let jjson = JSON.parse(json)
+              // console.log(jjson);
+              window.localStorage.setItem("Nurse", jjson[0].id)
+            })
             this.router.navigate(['/nurse-dashboard']);
           }
           break;

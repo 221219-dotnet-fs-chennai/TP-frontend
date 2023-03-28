@@ -3,48 +3,47 @@
     <button mat-icon-button matTooltip="go back" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <span style="margin-left: 41%; font-size: x-large" class="space"
-      >Add Nurse</span
-    >
+    <span style="margin-left: 41%; font-size: x-large" class="space">Add Nurse</span>
     <span class="example-spacer"></span>
 
   </mat-toolbar>
 </div>
 
 
-<form class="example-form mainpage">
+<form [formGroup]="nurseForm" class="example-form mainpage" (ngSubmit)="createNurse()">
   <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Name</mat-label>
-    <input type="text" matInput [formControl]="emailFormControl" placeholder="Enter your name">
+    <input type="text" matInput formControlName="name" laceholder="Enter your name">
     <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 
-    <mat-error *ngIf="emailFormControl.hasError('required')">
+    <mat-error *ngIf="nurseForm.hasError('required')">
       Name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Email</mat-label>
-    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
     <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+    <mat-error *ngIf="nurseForm.hasError('email') && !nurseForm.hasError('required')">
       Please enter a valid email address
     </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
+    <mat-error *ngIf="nurseForm.hasError('required')">
       Email is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Phone</mat-label>
-    <input type="text" matInput  placeholder="Enter your phone number">
+    <input type="number" formControlName="phone_no" matInput placeholder="Enter your phone number">
     <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 
     <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
       Email is <strong>required</strong>
     </mat-error> -->
   </mat-form-field>
-  <button type="submit" class="submitbutton" mat-raised-button color="primary" [disabled]="!emailFormControl.valid">Submit</button>
+  <button type="submit" class="submitbutton" mat-raised-button color="primary"
+    [disabled]="!nurseForm.valid">Submit</button>
 </form>
-
+  
 
 <!-- <form [formGroup]="doctorForm" (ngSubmit)="addDoctor()" class="example-form">
 
@@ -76,9 +75,6 @@
     </div>
 
 </form> -->
-
-
-
 
 <!-- <div class="mainpage">
 <form>
@@ -113,6 +109,5 @@
   </div>
 </form>
 </div> -->
-
 
 <!-- <p>add-nurse works!</p> -->
