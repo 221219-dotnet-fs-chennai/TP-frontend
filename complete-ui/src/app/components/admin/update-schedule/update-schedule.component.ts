@@ -7,6 +7,8 @@ import { Schedule } from '../add-schedule/availability.service';
 import { AvailabilityService } from '../add-schedule/availability.service';
 import { GetAllDoctorsService } from './get-all-doctors.service';
 import { Doctor } from '../add-doctor/doctor';
+import { InfoComponent } from './info/info.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface UpdateDoctor {
   name: string;
@@ -30,7 +32,8 @@ export interface UpdateDoctor {
 export class UpdateScheduleComponent implements OnInit {
   constructor(
     private schedule: AvailabilityService,
-    private getAllService: GetAllDoctorsService
+    private getAllService: GetAllDoctorsService,
+    private dialog : MatDialog
   ) {}
 
   currentDate = new Date();
@@ -86,7 +89,7 @@ export class UpdateScheduleComponent implements OnInit {
       });
       console.log(this.schedules);
 
-      this.displayedColumns = ['position', 'name', 'specialisation', 'select'];
+      this.displayedColumns = ['name', 'specialisation', 'select'];
       this.dataSource = new MatTableDataSource<UpdateDoctor>(
         this.ELEMENT_DATA
       );
@@ -133,5 +136,14 @@ export class UpdateScheduleComponent implements OnInit {
     this.schedule
       .UpdateDaySchedule(dayNum, this.schedules)
       .subscribe((data) => console.log(data));
+  }
+
+
+  openInfoDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(InfoComponent, {
+      width: '550px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 }

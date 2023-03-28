@@ -1,9 +1,10 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterLoginService } from './register-login.service';
+import { RegisterLoginService, User, UserLogin } from './register-login.service';
 import { Guid } from 'guid-typescript';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-register',
@@ -18,50 +19,105 @@ import { Guid } from 'guid-typescript';
 })
 export class RegisterComponent implements OnInit{
   constructor(private router : Router, private fb : FormBuilder, private service : RegisterLoginService){}
-  isLoggedIn = true // TO-DO for hidding logout button
-  registerForm !: FormGroup
-  LoginForm !: FormGroup
-  // created !: Date
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      email : window.localStorage.getItem("pEmail"),
-      pasword: window.localStorage.getItem("pPassword"),
-      fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      phone: ['',[Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")]],
-      adressLine:['',[Validators.required,Validators.pattern("^.{5,}$")]],
-      city:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-      state:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-      age:['',[Validators.required,Validators.pattern("^[0-9]+$")]],
-      gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]],
-      created : new Date().toString()
-    })
-    this.LoginForm = this.fb.group({
-      loginId : Guid.create().toString(),
-      email : ['', [Validators.required, Validators.email]],
-      password:['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]]
-    })
+  
+  isLoggedIn = true 
+  isLoading = false  
+  firstFormGroup : FormGroup = this.fb.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this.fb.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isEditable = false;
+  
+  goNext(stepper : MatStepper){
+    stepper.next()
   }
-  login(){
-    console.log(this.LoginForm.getRawValue());
-    this.service.addNewLogin(this.LoginForm.getRawValue()).subscribe(data => {
-      if(data.status != 200 || data.status != 201){
-        window.alert("bad req")
-      }
-    }).unsubscribe()
-    // window.localStorage.setItem("pEmail", data.email)
-    // window.localStorage.setItem("pPassword", data.password)
-  }
+
+  registerForm1 : FormGroup = this.fb.group({
+    email : ['', [Validators.required, Validators.email]],
+    pasword: ['',[Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")]], 
+  })
+
+  registerForm2 : FormGroup = this.fb.group({
+    fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    phone: ['',[Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")]],
+    age:['',[Validators.required,Validators.pattern("^[0-9]+$")]],
+    gender : ['', [Validators.required,Validators.pattern("^(male|female|other|Male|Female|Other)$")]], 
+  })
+
+  registerForm3 : FormGroup = this.fb.group({
+    adressLine:['',[Validators.required,Validators.pattern("^.{5,}$")]],
+    city:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
+    state:['',[Validators.required,Validators.pattern("^[A-Za-z]+$")]],
+  })
+  
+  isOptional = false
+  isLinear = true
+  newUser !: User
   registration(){
-    console.log(this.registerForm.getRawValue())
-    this.service.addNewUser(this.registerForm.getRawValue()).subscribe((data : any) =>{
+    this.isLoading = true
+    // console.log(this.registerForm.getRawValue())
+    let newUser : User = {
+      email: this.registerForm1.getRawValue().email,
+      pasword: this.registerForm1.getRawValue().pasword,
+      fullname : this.registerForm2.getRawValue().fullname,
+      phone : this.registerForm2.getRawValue().phone,
+      age : this.registerForm2.getRawValue().age,
+      gender : this.registerForm2.getRawValue().gender,
+      adressLine : this.registerForm3.getRawValue().adressLine,
+      city : this.registerForm3.getRawValue().city,
+      state : this.registerForm3.getRawValue().state,
+      created: new Date().toLocaleDateString('en-US').toString()
+    }
+    this.service.addNewUser(newUser).subscribe((data : any) =>{
       if(data.status == 400) {
+        this.isLoading = false
         window.alert("Something went wrong")
       }
-      else{
+      else if(data.status != 400){
+        this.isLoading = false
         window.alert("added!")
+        this.router.navigate(['/login'])
       }
     })
   }
+
+  ngOnInit(): void {}
+  checkUser(){
+    this.isLoading = true
+    this.service.getUser(this.registerForm1.getRawValue().email, this.registerForm1.getRawValue().pasword)
+      .subscribe((data) => {
+        console.log(data)
+        if(data.status == 400){
+          window.localStorage.setItem("pEmail", this.registerForm1.getRawValue().email)
+          window.localStorage.setItem("pPassword", this.registerForm1.getRawValue().pasword)
+          window.alert("click ok continue")
+          this.isLoading = false
+        }
+        else if(data == 1){
+          window.alert("Account with this email already exists, please Login!")
+          this.router.navigate(['/login'])
+          console.log(data)
+          this.isLoading = false
+        }
+      })
+  }
+  login(){
+    let loginUser : UserLogin = {
+      email : this.registerForm1.getRawValue().email,
+      password: this.registerForm1.getRawValue().pasword
+    }
+    this.isLoading = true
+    // console.log(this.registerForm1.getRawValue());
+    this.service.addNewLogin(loginUser).subscribe(data => {
+      if(data != 302){
+        window.alert("Click ok to continue")
+        this.isLoading = false
+      }
+    }) 
+  }
+
   hide = true;
   // email = new FormControl('', [Validators.required, Validators.email]);
   // name = new FormControl('',[Validators.required, Validators.min(3)])

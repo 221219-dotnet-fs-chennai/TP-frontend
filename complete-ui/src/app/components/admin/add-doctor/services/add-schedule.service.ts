@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Guid } from 'guid-typescript';
 
 @Injectable({
@@ -7,5 +8,10 @@ import { Guid } from 'guid-typescript';
 export class AddScheduleService {
   selectedDate !: Date
   Docemail !: string | undefined
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
+
+  AddSchedule(email : string) {
+    return this.http.get<any>(`http://localhost:5103/apigateway/DoctorByEmail/${email}`);
+  }
 }

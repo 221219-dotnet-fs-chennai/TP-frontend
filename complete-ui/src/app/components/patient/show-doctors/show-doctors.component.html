@@ -14,14 +14,14 @@
     <!-- </mat-card> -->
     <br>
     <h3><b>{{schedule.doctorId | slice : 0 : 16}}</b></h3>
-    <mat-card-content>
+    <mat-card-content >
         <!-- <h3><label>Doctor name : </label> {{schedule.doctorId}} </h3> -->
         <h3>Cardiology </h3>
         <h3>10 years </h3>
     </mat-card-content>
     <br>
     <mat-card-actions class="book-btn">
-        <button mat-raised-button color="primary" (click)="openDialog('20ms', '20ms')" >Book appointment</button>
+        <button mat-raised-button color="primary" (click)="openDialog('20ms', '20ms', schedule.doctorId)" >Book appointment</button>
     </mat-card-actions>
     <br>
 </mat-card>

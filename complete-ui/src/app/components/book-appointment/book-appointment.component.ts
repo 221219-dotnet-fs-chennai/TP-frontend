@@ -25,7 +25,7 @@ export class BookAppointmentComponent implements OnInit {
 
   passDoctorIds() {
     // this.doctorIds.emit(this.schedules);
-    this.route.navigate(['show-doctors']);
+    this.route.navigate(['show-doctors', window.localStorage.getItem('selectedDay')]);
   }
 
 
@@ -53,14 +53,6 @@ export class BookAppointmentComponent implements OnInit {
     }
     console.log(this.dates);
     this.ipdate = new Date();
-  }
-
-  fetch() {
-    this.schedule.GetDaySchedule(this.selectedDay).subscribe((data) => {
-      this.schedules = data.sort();
-      console.log(this.schedules);
-    })
-
   }
 
   appointmentDate !: string;

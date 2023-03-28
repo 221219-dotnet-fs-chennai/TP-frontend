@@ -8,3 +8,11 @@
   margin: auto;
   margin-top: 3rem;
 }
+
+.schedule-btn{
+  display : flex;
+  justify-content: flex-end;
+  position : relative;
+  margin-top: 0.5%;
+  margin-right : 3%; 
+}

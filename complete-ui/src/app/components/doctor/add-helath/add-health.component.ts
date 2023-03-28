@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddhealthservService } from './service/addhealthserv.service';
 
 @Component({
@@ -10,13 +10,22 @@ import { AddhealthservService } from './service/addhealthserv.service';
 })
 export class AddHealthComponent {
   date: string;
-  constructor(private router: Router,private hserv:AddhealthservService,private fg:FormBuilder){
+  constructor(private router: Router,private hserv:AddhealthservService,private fg:FormBuilder,
+    private activatedRoute: ActivatedRoute){
     this.date = new Date().toISOString().slice(0, 16);
   }
+
+  patientName !: string 
+  
 
   healthform !: FormGroup
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.subscribe((data) => {
+      this.patientName = data['name'];
+    })
+
     this.healthform = this.fg.group({
       patient_Id: "p12334",
       doctor_Id : "D34765",

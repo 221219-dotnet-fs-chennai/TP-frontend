@@ -8,6 +8,10 @@
   <span class="example-spacer"></span>
 </mat-toolbar><br>
 
+<div class="schedule-btn">
+  <button mat-raised-button color="warn" (click)="openAddDialog('20ms', '20ms')">Add 1<sup>st</sup> schedule for existing doctor</button>
+</div>
+
 <form [formGroup]="doctorForm" (ngSubmit)="addDoctor()">
   <div class="container">
     <div>
@@ -28,16 +32,38 @@
         <input type="text" matInput formControlName="gender" placeholder="Select" />
       </mat-form-field>
     </div>  
-    <div>
+    <!-- <div>
       <mat-form-field appearance="outline">
         <mat-label>Specialization</mat-label>
         <input type="text" matInput formControlName="specialization" placeholder="Ex. Cardio" />
       </mat-form-field>
-    </div>  
+    </div> -->
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Specialization</mat-label>
+        <mat-select [(value)]="selectedSpecialization" formControlName="specialization">
+          <mat-option value="Allergist">Allergist</mat-option>
+          <mat-option value="Anesthesiologist">Anesthesiologist</mat-option>
+          <mat-option value="Cardiologist">Cardiologist</mat-option>
+          <mat-option value="Dermatologist">Dermatologist</mat-option>
+          <mat-option value="Dentist">Dentist</mat-option>
+          <mat-option value="Endocrinologist">Endocrinologist</mat-option>
+          <mat-option value="Hematologist">Hematologist</mat-option>
+          <mat-option value="Internist">Internist</mat-option>
+          <mat-option value="Nephrologist">Nephrologist</mat-option>
+          <mat-option value="Neurologist">Neurologist</mat-option>
+          <mat-option value="Gynecologist">Gynecologist</mat-option>
+          <mat-option value="Ophthalmologist">Ophthalmologist</mat-option>
+          <mat-option value="Plastic Surgeon">Plastic Surgeon</mat-option>
+          <mat-option value="Psychiatrist">Psychiatrist</mat-option>
+          <mat-option value="Urologist">Urologist</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Photo url</mat-label>
-        <input type="text" matInput formControlName="imgUrl" placeholder="Ex. https://doctor.pgn"/>
+        <input type="text" matInput formControlName="imgUrl" placeholder="Ex. https://doctor.png"/>
       </mat-form-field>
     </div>  
     <div>

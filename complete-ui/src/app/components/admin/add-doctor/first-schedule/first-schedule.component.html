@@ -1,0 +1,34 @@
+<div mat-dialog-content *ngIf="box">
+    <h2 style="text-align: center; color:tomato">Enter the below fields</h2>
+    <br>
+    <form [formGroup]="doctorForm">
+        <label><span class="email-label">Enter the existing email : </span></label> <br>
+        <div>
+            <br>
+            <mat-form-field appearance="outline" class="email-field">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email"  (click)="emailErrorMsg = false" placeholder="Ex. mat@gmail.com" />
+            </mat-form-field>
+            <span *ngIf="emailErrorMsg" style="color: red;">Email doesn't exist</span>
+        </div>
+    </form>
+    <br>
+    <label><span class="email-label">Select the joining date : </span></label> <br>
+    <div>
+        <br>
+        <mat-form-field style="display: flex; justify-content: center;" appearance="outline">
+            <mat-label>Choose a joining date</mat-label>
+            <input matInput [matDatepicker]="picker" [min]="today" [(ngModel)]="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+<div class="btns" mat-dialog-actions *ngIf="box">
+    <button mat-button mat-dialog-close>No</button>
+    <button [disabled]="!date || !doctorForm.valid" (click)="getDate()" mat-button
+         cdkFocusInitial
+        (click)="getDoctorId()">Ok</button>
+    <!-- open the radio box here -->
+</div>

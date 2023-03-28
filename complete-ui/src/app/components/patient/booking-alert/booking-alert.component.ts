@@ -19,14 +19,11 @@ export class BookingAlertComponent {
     }
 
     addAppointment : AppointmentDoctor = {
-
-      doctorId : '0245b75e-2398-4a8d-8617-44fa42f534c1',
-      patientId : '1245b75e-2398-4a8d-8617-44fa42f534c6',
-      nurseId : '2245b75e-2398-4a8d-8617-44fa42f534c6',
+      doctorId : window.localStorage.getItem('doctorId'),
+      patientId : window.localStorage.getItem('patientId'),
+      nurseId : '',
       status : 0,
       date : this.localStorage.getItem('appointmentDate')
-
-
     }
 
     addAppointmentByPatient(){

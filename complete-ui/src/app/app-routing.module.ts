@@ -72,6 +72,9 @@ const routes: Routes = [
     path: 'add-patient-health', component: AddHealthComponent,
   },
   {
+    path: 'add-patient-health/:name', component: AddHealthComponent,
+  },
+  {
     path: 'view-complete-history-doc', component:PatientCompleteHistoryDocComponent
   },
   {
@@ -82,6 +85,9 @@ const routes: Routes = [
   },
   {
     path: 'show-doctors', component:ShowDoctorsComponent,
+  },
+  {
+    path: 'show-doctors/:day', component:ShowDoctorsComponent,
   }
 ];
 

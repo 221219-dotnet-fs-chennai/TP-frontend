@@ -22,7 +22,6 @@ export class NavBarComponent {
       password:['']
     })
     this.auth.user$.subscribe((profile) => {
-      
       switch (profile?.email?.split('@')[1]) {
         case 'admin.com':
           // console.log("jkhjk");
@@ -33,6 +32,12 @@ export class NavBarComponent {
           break;
         case 'doctor.com':
           if(this.loginService.login(profile?.email?.split('@')[1])){
+            this.loginService.getDoctorByEmail(profile?.email).subscribe((data) => {
+              // console.log(data)
+              let json = JSON.stringify(data)
+              let jjson = JSON.parse(json)
+              window.localStorage.setItem("Doctor", jjson.id)
+            })
             this.router.navigate(['/doctor-dashboard']);
           }
           break;

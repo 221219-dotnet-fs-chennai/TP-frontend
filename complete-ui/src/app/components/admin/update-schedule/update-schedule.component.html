@@ -1,23 +1,18 @@
 
-<div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center;">
-  <div style="display: flex; justify-content: center; align-items: center; width: 100vw; margin: auto;">
-    <mat-card style="width: 100vw;">
-      <div style="padding: 1rem 0 0 1rem">
-        <mat-card-title>
-          Note
-        </mat-card-title>
-        <mat-card-content style="display: flex; flex-direction: column;">
-          <span>To mark availabity of the doctors, please mark the check boxes and click on schedule button below.</span>
-          <span>To mark unavailabity of the doctors, please leave check boxes empty and click on schedule button below.</span>
-        </mat-card-content>
-      </div>
-    </mat-card>
-  </div>
+<div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center;" class="update-box">
+  
   <mat-card class="table-card">
     <br>
     <mat-card-title class="update-title">
-      <div>
-        <span style="color: ec3b79;">Update doctor schedule</span>
+      <div class="update-head">
+        <div class="update-text">
+          <span style="color: ec3b79;">Update doctor schedule</span>
+        </div>
+        <div class="info-icon">
+        <button mat-icon-button  aria-label="Example icon button with a home icon" matTooltip="info" (click)="openInfoDialog('20ms','20ms')">
+          <mat-icon style="color:slategray;">info</mat-icon>
+        </button>
+        </div>
       </div>
       <div style="display: flex;align-items: center; justify-content: center; gap: 1em;">
         <div>
@@ -52,10 +47,10 @@
       </div>
       <div class="example-table-container">
         <table  mat-table [dataSource]="dataSource" class="mat-elevation-z14">
-            <ng-container matColumnDef="position" >
+            <!-- <ng-container matColumnDef="position" >
                 <th mat-header-cell *matHeaderCellDef class="position-head"> No. </th>
                 <td mat-cell *matCellDef="let element" class="position-data"> {{element.position}} </td>
-            </ng-container>
+            </ng-container> -->
             
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef class="position-head"> Doctor name </th>
