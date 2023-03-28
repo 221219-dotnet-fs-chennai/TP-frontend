@@ -57,22 +57,24 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion> -->
-    <div *ngFor="let appointment of appointmentdoctor">
+    <div *ngFor="let pa of patientAppointmentInfo">
       <mat-accordion class="patient-container patient-container-2" multi="false">
-        <mat-expansion-panel style="margin-bottom: 0.1rem; display: flex; justify-content: center; flex-direction: column;"  class="expansions" *ngIf="appointment.status==0">
+        <mat-expansion-panel style="margin-bottom: 0.1rem; display: flex; justify-content: center; flex-direction: column;"  class="expansions" *ngIf="pa.appointment.status==0">
             <mat-expansion-panel-header>
                 <mat-panel-title class="gender-icon-gap">
-                    <!-- <div [ngSwitch]="appointment.gender">
+                    <div [ngSwitch]="pa.patient.gender">
                         <mat-icon *ngSwitchCase="'male'">male</mat-icon>
+                        <mat-icon *ngSwitchCase="'Male'">male</mat-icon>
                         <mat-icon *ngSwitchCase="'female'">female</mat-icon>
+                        <mat-icon *ngSwitchCase="'Female'">female</mat-icon>
                         <mat-icon *ngSwitchDefault>account_circle</mat-icon>
-                    </div> -->
-                    <button #x [value]="appointment.appointmentId" style="display: none;"></button>
+                    </div>
+                    <button #x [value]="pa.appointment.appointmentId" style="display: none;"></button>
                     <!-- {{x.value}} - {{appointment.name}} -->
-                    {{appointment.appointmentId}}    {{appointment.status}}
+                    {{pa.patient.fullname}}    {{pa.appointment.status}}
                 </mat-panel-title>
                 <mat-panel-description>
-                    {{appointment.date}}
+                    {{pa.appointment.date}}
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
@@ -81,15 +83,15 @@
                 <p></p>
                 <button class="btn-bottom-border first-btn" extended mat-button color="accent" style="color: green;"
                     disabled="true">
-                    Booked appointment for <br>{{appointment.date}}
+                    Booked appointment for <br>{{pa.appointment.date}}
                 </button>
                 <span class="example-spacer2"></span>
-                <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;" (click)="updateStatusByDoctor(appointment.appointmentId,1)"
-                    matTooltip="accept request" (click)="appointment.status=1">
+                <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,1)"
+                    matTooltip="accept request" (click)="pa.appointment.status=1">
                     <mat-icon>done</mat-icon>Accept
                 </button>
-                <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;" (click)="updateStatusByDoctor(appointment.appointmentId,2)"
-                    matTooltip="reject request" (click)="appointment.status=2" >
+                <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,2)"
+                    matTooltip="reject request" (click)="pa.appointment.status=2" >
                     <mat-icon>clear</mat-icon>Reject
                 </button>
                 <br>
