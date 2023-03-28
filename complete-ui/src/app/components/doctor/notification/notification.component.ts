@@ -45,8 +45,8 @@ export class NotificationComponent implements OnInit{
   doctorName !: string | undefined
   doctorEmail !: string | undefined
 
-  navToViewHistory(){
-    this.route.navigate(['view-complete-history-doc'])
+  navToViewHistory(id : string | undefined){
+    this.route.navigate(['patient-history-doctor-view',id])
   }
   navToAddRecord(name : string){
     this.route.navigate(['add-patient-health', name])

@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
   <mat-toolbar color="primary" style="gap: 2rem; display: flex; justify-content: space-between;">
     <button mat-icon-button matTooltip="go back" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
@@ -6,11 +6,10 @@
     <li class="example-spacer"></li>
     <li style="font-size: 1rem;">Patient history</li>
   </mat-toolbar>
-</p>
-
+</p> -->
 
 <div class="container">
-  <div class="card-main-section" *ngFor="let basic of basics">
+  <div class="card-main-section" *ngFor="let basic of basics let i = index">
     <div>
       <mat-card class="card-grp">
         <mat-accordion multi=false>
@@ -18,7 +17,7 @@
             <mat-expansion-panel disabled>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Patient 1
+                  Appointment {{i+1}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
             </mat-expansion-panel>
@@ -91,7 +90,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- <body class="body-container">
   <mat-card class="example-card" *ngFor="let basic of basics" >
