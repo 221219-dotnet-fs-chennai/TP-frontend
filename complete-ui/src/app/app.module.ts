@@ -76,7 +76,8 @@ import { TableViewComponent } from './components/admin/view-patients/table-view/
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FirstScheduleComponent } from './components/admin/add-doctor/first-schedule/first-schedule.component';
-import { InfoComponent } from './components/admin/update-schedule/info/info.component'; 
+import { InfoComponent } from './components/admin/update-schedule/info/info.component';
+import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component'; 
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { InfoComponent } from './components/admin/update-schedule/info/info.comp
     AddScheduleComponent,
     TableViewComponent,
     FirstScheduleComponent,
-    InfoComponent
+    InfoComponent,
+    DoctorHistoryViewComponent
   ],
   imports: [
     BrowserModule,
