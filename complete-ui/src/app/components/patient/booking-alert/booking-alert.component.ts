@@ -18,17 +18,25 @@ export class BookingAlertComponent {
       });
     }
 
-    addAppointment : AppointmentDoctor = {
-      doctorId : window.localStorage.getItem('doctorId'),
-      patientId : window.localStorage.getItem('patientId'),
-      nurseId : '',
-      status : 0,
-      date : this.localStorage.getItem('appointmentDate')
-    }
+    // addAppointment : AppointmentDoctor = {
+    //   doctorId : window.localStorage.getItem('doctorId'),
+    //   patientId : window.localStorage.getItem('patientId'),
+    //   nurseId : '',
+    //   status : 0,
+    //   date : this.localStorage.getItem('appointmentDate')
+    // }
 
     addAppointmentByPatient(){
-      console.log(this.addAppointment)
-      this.appointmentService.addAppointmentByPatient(this.addAppointment)
+      // console.log(this.addAppointment)
+      this.appointmentService.addAppointmentByPatient(
+        {
+          doctorId : window.localStorage.getItem('doctorId'),
+          patientId : window.localStorage.getItem('patientId'),
+          nurseId : '',
+          status : 0,
+          date : this.localStorage.getItem('appointmentDate')
+        }
+      )
       .subscribe({
         next : (appointment) =>{
           console.log(appointment);
