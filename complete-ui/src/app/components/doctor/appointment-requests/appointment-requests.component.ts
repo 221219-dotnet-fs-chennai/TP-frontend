@@ -15,6 +15,8 @@ export class AppointmentRequestsComponent implements OnInit {
 
 
   appointmentdoctor : AppointmentDoctor[] = [];
+
+  doctorId : string | null = window.localStorage.getItem('Doctor');
   
   appointments : AppointmentDoctor[] = []
 
@@ -22,18 +24,16 @@ export class AppointmentRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentService.getAppointmentsByStatus(0).subscribe((data) => this.appointments = data)
     console.log(this.appointments)
-    this.appointmentService.getAppointmentsByDoctorId('0245b75e-2398-4a8d-8617-44fa42f534c1')
-    .subscribe({
-      next:(appointments) =>{
-      this.appointmentdoctor = appointments;
-      console.log(this.appointmentdoctor)
-      },
-      error : (response) => {
-        console.log(response);
-      }
-
-
-    });
+    // this.appointmentService.getAppointmentsByDoctorId('0245b75e-2398-4a8d-8617-44fa42f534c1')
+    // .subscribe({
+    //   next:(appointments) =>{
+    //   this.appointmentdoctor = appointments;
+    //   console.log(this.appointmentdoctor)
+    //   },
+    //   error : (response) => {
+    //     console.log(response);
+    //   }
+    // });
 
   }
 
@@ -48,39 +48,8 @@ export class AppointmentRequestsComponent implements OnInit {
       }
     });
   }
-  // viewSidebar = true;
 
   navToDashboard(){
     this,this.router.navigate(['doctor-dashboard'])
   }
-  // appointments : Appointment[] = [{
-  //   id : "AP-1",
-  //   name : "Hannah",
-  //   gender : "female",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-2",
-  //   name : "Clay",
-  //   gender : "male",
-  //   date : "23/02/2000"
-  // },
-  // {
-  //   id : "AP-3",
-  //   name : "Justin",
-  //   gender : "others",
-  //   date : "23/02/2000"
-  // }]
 }
