@@ -68,3 +68,25 @@ table {
   padding-left: 2%;
 } 
 
+.update-head{
+  display: flex;
+  flex-direction: row;
+  gap : 6px;
+}
+
+/*
+.info-icon{
+  position: relative;
+  top : 10px;
+} */
+
+.update-text{
+  position: relative;
+  top : 8px;
+  font-size: 28px;
+}
+
+.update-box{
+  position: relative;
+  margin-top: 6%;
+}

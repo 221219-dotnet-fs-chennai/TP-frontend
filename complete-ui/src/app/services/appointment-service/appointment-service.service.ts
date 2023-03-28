@@ -16,18 +16,22 @@ export class AppointmentServiceService {
   addAppointmentByPatient(addAppointment : AppointmentDoctor) : Observable<AppointmentDoctor>{
     console.log(addAppointment);
 
-    return this.http.post<AppointmentDoctor>(this.baseapiurl + '/api' + '/Appointment' + '/AddAppointmentByPatient' , addAppointment);
+    return this.http.post<AppointmentDoctor>(this.baseapiurl + '/apigateway/AddNewAppointment' , addAppointment);
   }
 
   getAppointmentsByStatusOne() : Observable<AppointmentDoctor[]>
 {
-  return this.http.get<AppointmentDoctor[]>(this.baseapiurl + '/api' + '/Appointment' + '/GetAppointmentsByStatusOne')
+  return this.http.get<AppointmentDoctor[]>(this.baseapiurl + '/apigateway/GetAcceptedAppointments')
+}
 
+getAppointmentsByStatus(status : number) : Observable<AppointmentDoctor[]>{
+  return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByStatus/${status}`)
 }
 
 getAppointmentsByDoctorId(doctor_id : string) : Observable<AppointmentDoctor[]>{
   return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByDocId/${doctor_id}`)
 }
+
 
 updateStatusByDoctor(appointment_id : Guid|undefined , status : number | undefined) : Observable<AppointmentDoctor> {
   // return this.http.put<AppointmentDoctor>(this.baseapiurl + '/api' + '/Appointment' + '/UpdateStatusByDoctor?appointment_id=' + appointment_id + '&status=' + status , {});

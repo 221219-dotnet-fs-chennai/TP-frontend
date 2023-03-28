@@ -27,14 +27,11 @@ export class PatienthistoryService {
 
   constructor(private http: HttpClient) { }
 
-  getBasicRecord(id:string):Observable<any>{
+  getBasicRecord(id:string | undefined):Observable<any>{
     return this.http.get<any>('http://localhost:5103/apigateway/GetPatientRecord/'+id)
   }
 
-  getHealthRecord(id:string):Observable<any>{
+  getHealthRecord(id:string | undefined):Observable<any>{
     return this.http.get<any>('http://localhost:5103/apigateway/GetPatientHealthRecord/'+id)
   }
-
-
-
 }

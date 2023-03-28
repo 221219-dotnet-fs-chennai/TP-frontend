@@ -45,10 +45,10 @@
             <mat-icon>visibility</mat-icon>Basic details
           </button>
           <button class="btn-bottom-border" extended mat-button color="accent"
-            matTooltip="View patient's health history" (click)="navToViewHistory()">
+            matTooltip="View patient's health history" (click)="navToViewHistory(patient.patId)">
             <mat-icon>visibility</mat-icon>Health history
           </button>
-          <button (click)="navToAddRecord()" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
+          <button (click)="navToAddRecord(patient.fullname)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
             <mat-icon>add</mat-icon>Add record
           </button>
         </div>

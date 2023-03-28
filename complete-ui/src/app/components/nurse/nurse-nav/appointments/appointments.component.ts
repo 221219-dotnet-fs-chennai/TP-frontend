@@ -29,8 +29,6 @@ export class AppointmentsComponent implements OnInit {
 
     this.localStorage.setItem('app_id for nurse',app_id);
 
-
-
   }
 
   ngOnInit(): void {
@@ -65,11 +63,11 @@ export class AppointmentsComponent implements OnInit {
     this.step--;
   }
 
-  navigateToViewHistory(){
-    this.router.navigate(['view-patient-history'])
+  navigateToViewHistory(id : string | null | undefined){
+    this.router.navigate(['patient-history-nurse-view', id])
   }
-  navigateToUpdate(){
-    this.router.navigate(['update-patient-info'])
+  navigateToUpdate(id : string | null | undefined){
+    this.router.navigate(['update-patient-info', id])
   }
 
   appointments:appointmentdetails[] = [{

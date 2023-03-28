@@ -1,85 +1,172 @@
-<p>
-  <mat-toolbar color="primary">
+<!-- <p>
+  <mat-toolbar color="primary" style="gap: 2rem; display: flex; justify-content: space-between;">
     <button mat-icon-button matTooltip="go back" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <li class="example-spacer"></li>
     <li style="font-size: 1rem;">Patient history</li>
   </mat-toolbar>
-</p>
-<mat-card class="example-card" *ngFor="let basic of basics">
-  <mat-card-header>
-    <div class="card-head">
-      <!-- <div mat-card-avatar class="example-header-image"></div> -->
-      <mat-card-title>Patient 1 <p style="font-size: 0.875rem;">Mat</p> </mat-card-title>
-      <mat-card-subtitle>13-MAR-2023</mat-card-subtitle>
-    </div>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-card-content class="card">
+</p> -->
 
+<div class="container">
+  <div class="card-main-section" *ngFor="let basic of basics let i = index">
     <div>
-      <h3>Basic Details</h3>
+      <mat-card class="card-grp">
+        <mat-accordion multi=false>
+          <mat-accordion>
+            <mat-expansion-panel disabled>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Appointment {{i+1}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+      
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Basic details
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+      
+                <div class="basic-section">
+                    <li>BP</li>
+                    <p>{{basic.bp}}</p>
+                    <li>SpO2</li>
+                    <p>{{basic.spO2}}</p>
+                    <li>Heart Rate</li>
+                    <p>{{basic.heart_Rate}}</p>
+                    <li>Height</li>
+                    <p>{{basic.height}}</p>
+                    <li>Weight</li>
+                    <p>{{basic.weight}}</p>
+                    <li>Temperature</li>
+                    <p>{{basic.temperature}}</p>
+                    <li>Blood Group</li>
+                    <p>{{basic.bloodGroup}}</p>
+                </div>
+            </mat-expansion-panel>
+          </mat-accordion>  
+          
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Test details
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let health of healths">
+                <div class="tests-section">
+                    <li>Blood Test</li>
+                    <p>{{health.test}}</p>
+                    <li>Result</li>
+                    <p>{{health.result}}</p>
+                  </div>
+                  <mat-divider></mat-divider>
+                </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+      
+      
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Drugs details
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let health of healths">
+              <div class="drugs-section">
+                <li>{{health.drugs}}</li>
+              </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-accordion>
+        
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- <body class="body-container">
+  <mat-card class="example-card" *ngFor="let basic of basics" >
+    <mat-card-header>
+      <div class="card-head">
+        <mat-card-title>Patient 1 <p style="font-size: 0.875rem;">Mat</p> </mat-card-title>
+        <mat-card-subtitle>13-MAR-2023</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="card">
+  
+      <div class="basic-details">
+        <h3>Basic Details</h3>
+        <ol>
+          <div class="card-desp">
+            <li>BP</li>
+            <p>{{basic.bp}}</p>
+          </div>
+          <div class="card-desp">
+            <li>SpO2</li>
+            <p>{{basic.spO2}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Heart Rate</li>
+            <p>{{basic.heart_Rate}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Height</li>
+            <p>{{basic.height}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Weight</li>
+            <p>{{basic.weight}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Temperature</li>
+            <p>{{basic.temperature}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Blood Group</li>
+            <p>{{basic.bloodGroup}}</p>
+          </div>
+        </ol>
+      </div>
+  
+  
+      <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
+      <div *ngFor="let health of healths">
+        <h3>Tests</h3>
+        <ol>
+          <div class="card-desp">
+            <li>Blood Test</li>
+            <p>{{health.test}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Result</li>
+            <p>{{health.result}}</p>
+          </div>
+          <div class="card-desp">
+            <li>Conclusion</li>
+            <p>{{health.conslusion}}</p>
+          </div>
+        </ol>
+      </div>
+  
+  
+      <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
+      <div *ngFor="let health of healths">
+        <h3>Drugs</h3>
       <ol>
-        <div class="card-desp">
-          <li>BP</li>
-          <p>{{basic.bp}}</p>
-        </div>
-        <div class="card-desp">
-          <li>SpO2</li>
-          <p>{{basic.spO2}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Heart Rate</li>
-          <p>{{basic.heart_Rate}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Height</li>
-          <p>{{basic.height}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Weight</li>
-          <p>{{basic.weight}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Temperature</li>
-          <p>{{basic.temperature}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Blood Group</li>
-          <p>{{basic.bloodGroup}}</p>
-        </div>
+        <li>{{health.drugs}}</li>
       </ol>
-    </div>
-
-
-    <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
-    <div *ngFor="let health of healths">
-      <h3>Tests</h3>
-      <ol>
-        <div class="card-desp">
-          <li>Blood Test</li>
-          <p>{{health.test}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Result</li>
-          <p>{{health.result}}</p>
-        </div>
-        <div class="card-desp">
-          <li>Conclusion</li>
-          <p>{{health.conslusion}}</p>
-        </div>
-      </ol>
-    </div>
-
-
-    <mat-divider style="margin-bottom: 0.5rem;"></mat-divider>
-    <div *ngFor="let health of healths">
-      <h3>Drugs</h3>
-    <ol>
-      <li>{{health.drugs}}</li>
-    </ol>
-    </div>
-
-  </mat-card-content>
-</mat-card>
+      </div>
+  
+    </mat-card-content>
+  </mat-card>
+  <mat-paginator class="pagination" style="display: flex; justify-content: flex-end;" #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator> 
+</body> -->

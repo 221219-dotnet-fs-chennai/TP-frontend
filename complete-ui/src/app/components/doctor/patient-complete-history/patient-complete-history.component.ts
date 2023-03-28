@@ -10,21 +10,18 @@ import { Basic, Health, PatienthistoryService } from './services/patienthistory.
 })
 export class PatientCompleteHistoryDocComponent implements OnInit{
 
-  basics:any[]=[];
-
-  healths:any[]=[];
-  id:string="mmmm"
-
-
-
-
+  basics:any[]=[]
+  healths:any[]=[]
   constructor(private router: Router,private patienthistory:PatienthistoryService,private route:ActivatedRoute){}
+  patientId !: string  
   ngOnInit(): void 
   {
+    // let patientId 
+    // this.route.params.subscribe((data) => {
+    //   this.patientId = data['id']
+    // })
 
-    
-
-    this.patienthistory.getBasicRecord(this.id)
+    this.patienthistory.getBasicRecord(this.patientId)
     .subscribe({
       next:(basics) => {
         this.basics = basics;
@@ -33,8 +30,8 @@ export class PatientCompleteHistoryDocComponent implements OnInit{
         console.log(response);
       }
     })
-
-    this.patienthistory.getHealthRecord(this.id)
+    
+    this.patienthistory.getHealthRecord(this.patientId)
     .subscribe({
       next:(healths) =>{
         this.healths = healths;
@@ -45,8 +42,7 @@ export class PatientCompleteHistoryDocComponent implements OnInit{
     })
   }
 
-
-  goBack(){
-    this.router.navigate(['doctor-dashboard'])
-  }
+  // goBack(){
+  //   this.router.navigate(['doctor-dashboard'])
+  // }
 }

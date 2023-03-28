@@ -2,13 +2,13 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, LOCALE_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { localStorageToken } from '../..//patient/show-doctors/localstorage.token';
-import { DatePipe, formatDate } from '@angular/common';
 import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 import { AppointmentDoctor } from '../../../models/appointmentServiceModel';
+import { localStorageToken } from '../../patient/show-doctors/localstorage.token';
+import { DatePipe, formatDate } from '@angular/common';
 import { PatientInfoService } from 'src/app/services/patient-info.service';
-import { patientinfo } from 'src/app/models/patientinfomodel';
-
+import{ patientinfo } from 'src/app/models/patientinfomodel';
+import { Guid } from 'guid-typescript';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -53,11 +53,11 @@ export class NotificationComponent implements OnInit {
   doctorName !: string | undefined
   doctorEmail !: string | undefined
 
-  navToViewHistory() {
-    this.route.navigate(['view-complete-history-doc'])
+  navToViewHistory(id : Guid | undefined){
+    this.route.navigate(['patient-history-doctor-view',id])
   }
-  navToAddRecord() {
-    this.route.navigate(['add-patient-health'])
+  navToAddRecord(name : string){
+    this.route.navigate(['add-patient-health', name])
   }
 
   appointmentdoctor: AppointmentDoctor[] = [];
@@ -66,7 +66,8 @@ export class NotificationComponent implements OnInit {
   patientsInfo : patientinfo[] = [];
   ngOnInit() {
     this.totalPatients = this.patients.length;
-    this.notificationBadge = this.appointments.length;
+    // this.notificationBadge = this.appointments.length;
+    this.appointmentService.getAppointmentsByStatus(0).subscribe((data) => this.notificationBadge = data.length)
     this.auth.user$.subscribe((data) => {
       this.doctorName = data?.email?.split("@")[0]
       this.doctorEmail = data?.email
@@ -163,34 +164,20 @@ export class NotificationComponent implements OnInit {
 
 
 
-  patients: Patient[] = [{
-    id: "1",
-    name: "Patient 1",
-    gender: "Male",
-    History: `this is patient 1's history<br>
-    this is patient 1's history<br>
-    this is patient 1's history<br>
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
+   patients : Patient[] = [{
+    id : "1",
+    name : "Patient 1",
+    gender : "Male",
   },
   {
-    id: "2",
-    name: "Patient 2",
-    gender: "Male",
-    History: `this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
+    id : "2",
+    name : "Patient 2",
+    gender : "Male",
   },
   {
-    id: "3",
-    name: "Patient 3",
-    gender: "Male",
-    History: `this is patient 1's history
-    this is patient 1's history
-    this is patient 1's history`
+    id : "3",
+    name : "Patient 3",
+    gender : "Male",
   }]
 
 
@@ -228,11 +215,10 @@ export class NotificationComponent implements OnInit {
 
 }
 
-export interface Patient {
-  id: string
-  name: string,
-  gender: string,
-  History: string
+export interface Patient{
+  id : string
+  name  : string,
+  gender : string
 }
 
 export interface Appointment {
