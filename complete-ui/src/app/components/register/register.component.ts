@@ -104,7 +104,9 @@ export class RegisterComponent implements OnInit{
       })
   }
   login(){
+    let id = Guid.create()
     let loginUser : UserLogin = {
+      loginId : id.toString(),
       email : this.registerForm1.getRawValue().email,
       password: this.registerForm1.getRawValue().pasword
     }
