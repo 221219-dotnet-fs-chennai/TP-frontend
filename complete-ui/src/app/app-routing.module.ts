@@ -73,7 +73,7 @@ const routes: Routes = [
     path: 'add-patient-health', component: AddHealthComponent,
   },
   {
-    path: 'add-patient-health/:name', component: AddHealthComponent,
+    path: 'add-patient-health/:PID/:AID', component: AddHealthComponent,
   },
   {
     path: 'view-complete-history-doc', component:PatientCompleteHistoryDocComponent

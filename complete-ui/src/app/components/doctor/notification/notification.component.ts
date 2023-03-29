@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, LOCALE_ID } from '@angular/core';
+import { Component, Inject, OnInit, LOCALE_ID, NgIterable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
+import { AppointmentPatient, AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 import { AppointmentDoctor } from '../../../models/appointmentServiceModel';
 import { localStorageToken } from '../../patient/show-doctors/localstorage.token';
 import { DatePipe, formatDate } from '@angular/common';
@@ -60,14 +60,20 @@ export class NotificationComponent implements OnInit {
   navToViewHistory(id: Guid | undefined) {
     this.route.navigate(['patient-history-doctor-view', id]);
   }
-  navToAddRecord(name: string) {
-    this.route.navigate(['add-patient-health', name]);
+  navToAddRecord(PID: Guid, AID : Guid) {
+    this.route.navigate(['add-patient-health', PID, AID]);
   }
 
   appointmentdoctor: AppointmentDoctor[] = [];
   todayAppointment: AppointmentDoctor[] = [];
   appointmentpatient!: string[] | undefined[];
+
+  patientByAppointments : AppointmentPatient[] = []
+  newAppPat : any[] = []
+  doctorApp : any[] = []
   patientsInfo: patientinfo[] = [];
+  appointments : AppointmentDoctor[] = []
+
   ngOnInit() {
     this.totalPatients = this.patients.length;
     // this.notificationBadge = this.appointments.length;
@@ -78,39 +84,67 @@ export class NotificationComponent implements OnInit {
       this.doctorName = data?.email?.split('@')[0];
       this.doctorEmail = data?.email;
     });
-    this.appointmentService
-      .getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
-      .subscribe({
-        next: (appointments) => {
-          this.appointmentdoctor = appointments;
-          // console.log(this.appointmentdoctor)
+    
+    this.appointmentService.getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
+      .subscribe((AppByDocId) => {
+        this.doctorApp.push({AppByDocId})
+        this.patientinfo.getAllPatientInfos().subscribe((patients)=>{
+          // AppByDocId.ma
+          AppByDocId.forEach(app =>{
+            patients.forEach(pat=>{
+              this.appointments = []
+              if( app.patientId?.toString() == pat.patId.toString() && app.status == 1 && app.date == this.todayDate){
+                //this.newAppPat.push({AppByDocId, pat})
+                AppByDocId.forEach(appo => {
+                  if(appo.patientId?.toString() == pat.patId.toString())
+                  this.appointments.push(appo)
+                })
+                this.patientByAppointments.push({
+                  appointment : this.appointments,
+                  patient : pat
+                })
+              }
+            })
+          })
+        })
+      })
+      console.log(this.patientByAppointments);
+      console.log(this.newAppPat);
+      
+    // this.appointmentService
+    //   .getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
+    //   .subscribe({
+    //     next: (appointments) => {
+    //       this.appointmentdoctor = appointments;
+    //       // console.log(this.appointmentdoctor)
 
-          this.appointmentdoctor.forEach((element) => {
-            if (this.todayDate == element.date && element.status == 1) {
-              // console.log(element);
-              this.todayAppointment.push(element);
-            }
+    //       this.appointmentdoctor.forEach((element) => {
+    //         if (this.todayDate == element.date && element.status == 1) {
+    //           // console.log(element);
+    //           this.todayAppointment.push(element);
+    //         }
 
-            // console.log(this.todayAppointment);
-          });
+    //         // console.log(this.todayAppointment);
+    //       });
 
-          this.todayAppointment.forEach((element) => {
-            this.patientinfo.getPatientInfo(element.patientId).subscribe({
-              next: (appointed) => {
-                this.patientsInfo.push(appointed);
-                console.log(this.patientinfo);
-              },
-              error: (response) => console.log(response),
-            });
-          });
-        },
-        error: (response) => {
-          console.log(response);
-        },
-      });
+    //       this.todayAppointment.forEach((element) => {
+    //         this.patientinfo.getPatientInfo(element.patientId).subscribe({
+    //           next: (appointed) => {
+    //             this.patientsInfo.push(appointed);
+    //             console.log(this.patientinfo);
+    //           },
+    //           error: (response) => console.log(response),
+    //         });
+    //       });
+    //     },
+    //     error: (response) => {
+    //       console.log(response);
+    //     },
+    //   });
 
-    console.log(this.todayAppointment);
-    console.log(this.patientsInfo);
+
+    // console.log(this.todayAppointment);
+    // console.log(this.patientsInfo);
   }
 
   toggleBadgeVisibility() {
@@ -160,38 +194,38 @@ export class NotificationComponent implements OnInit {
     },
   ];
 
-  appointments: Appointment[] = [
-    {
-      id: 'AP-1',
-      name: 'Hannah',
-      gender: 'female',
-      date: '23/02/2000',
-    },
-    {
-      id: 'AP-2',
-      name: 'Clay',
-      gender: 'male',
-      date: '23/02/2000',
-    },
-    {
-      id: 'AP-2',
-      name: 'Clay',
-      gender: 'male',
-      date: '23/02/2000',
-    },
-    {
-      id: 'AP-2',
-      name: 'Clay',
-      gender: 'male',
-      date: '23/02/2000',
-    },
-    {
-      id: 'AP-3',
-      name: 'Justin',
-      gender: 'others',
-      date: '23/02/2000',
-    },
-  ];
+  // appointments: Appointment[] = [
+  //   {
+  //     id: 'AP-1',
+  //     name: 'Hannah',
+  //     gender: 'female',
+  //     date: '23/02/2000',
+  //   },
+  //   {
+  //     id: 'AP-2',
+  //     name: 'Clay',
+  //     gender: 'male',
+  //     date: '23/02/2000',
+  //   },
+  //   {
+  //     id: 'AP-2',
+  //     name: 'Clay',
+  //     gender: 'male',
+  //     date: '23/02/2000',
+  //   },
+  //   {
+  //     id: 'AP-2',
+  //     name: 'Clay',
+  //     gender: 'male',
+  //     date: '23/02/2000',
+  //   },
+  //   {
+  //     id: 'AP-3',
+  //     name: 'Justin',
+  //     gender: 'others',
+  //     date: '23/02/2000',
+  //   },
+  // ];
 }
 
 export interface Patient {

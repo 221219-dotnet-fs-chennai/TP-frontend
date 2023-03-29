@@ -23,17 +23,17 @@
     <h3 id="total-patients">Total : {{totalPatients}}</h3>
     <br>
     <mat-accordion class="patient-container" multi="false">
-      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientsInfo" class="expansions">
+      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientByAppointments" class="expansions">
         <mat-expansion-panel-header (click)="hideAll()">
           <mat-panel-title>
-            <button #x [value]="patient.fullname" style="display: none;" ></button>
-           {{patient.fullname}}
+            <button #x [value]="patient.patient.fullname"tyle="display: none;" ></button>
+           {{patient.patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
-            {{patient.gender}}
+            {{patient.patient.gender}}
           </mat-panel-description>
           <mat-panel-description>
-            {{patient.age}}
+            {{patient.patient.age}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -45,10 +45,10 @@
             <mat-icon>visibility</mat-icon>Basic details
           </button>
           <button class="btn-bottom-border" extended mat-button color="accent"
-            matTooltip="View patient's health history" (click)="navToViewHistory(patient.patId)">
+            matTooltip="View patient's health history" (click)="navToViewHistory(patient.patient.patId)">
             <mat-icon>visibility</mat-icon>Health history
           </button>
-          <button (click)="navToAddRecord(patient.fullname)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
+          <button (click)="navToAddRecord(patient.patient.patId,patient.appointment[0].appointmentId)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
             <mat-icon>add</mat-icon>Add record
           </button>
         </div>
@@ -57,8 +57,9 @@
         <!-- Basic details patient -->
 
         <mat-card class="class-container" *ngIf="basicDetails">
+          
           <br>
-          <h2 style="text-align: center; color: green;"> {{patient.fullname}}'s basic health record</h2>
+          <h2 style="text-align: center; color: green;"> {{patient.patient.fullname}}'s basic health record</h2>
           <div class="card-container">
             <app-basic-details></app-basic-details>
           </div>
@@ -69,8 +70,9 @@
         <!-- Add patient health record -->
 
         <mat-card class="class-container" *ngIf="healthRecord">
+          
           <br>
-          <h2 style="text-align: center; color: green;"> Add {{patient.fullname}}'s health record</h2>
+          <h2 style="text-align: center; color: green;"> Add {{patient.patient.fullname}}'s health record</h2>
           <div class="card-container">
             <app-add-health></app-add-health>
           </div>
@@ -82,7 +84,7 @@
 
         <mat-card class="class-container" *ngIf="history">
           <br>
-          <h2 style="text-align: center; color: green;">{{patient.fullname}}'s health history</h2>
+          <h2 style="text-align: center; color: green;">{{patient.patient.fullname}}'s health history</h2>
           <div class="card-container">
             <!-- <app-patient-complete-history></app-patient-complete-history> -->
           </div>
