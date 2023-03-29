@@ -28,19 +28,20 @@ export class AddNurseComponent implements OnInit{
       phone_no: ['']
     })
   }
-  isLoading = true
+  isLoading = false
   nurse !: Nurse
   nurseForm!: FormGroup;
   createNurse(){
+    this.isLoading = true
     console.log(this.nurseForm.getRawValue())
     this.service.addNurse(this.nurseForm.getRawValue()).subscribe((data) => {
       console.log(data.status)
-      if(data.status != 400 || data.status != 502){
+      if(data.status == 400 || data.status == 502){
+        window.alert("something went wrong, try after later")
+      }else{
+        window.alert("Added!")
         this.nurse = data
         this.isLoading = false
-        window.alert("Added!")
-      }else{
-        window.alert("something went wrong, try after some time.")
       }
     })
   }

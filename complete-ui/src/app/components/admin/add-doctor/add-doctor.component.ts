@@ -30,12 +30,21 @@ export class AddDoctorComponent implements OnInit {
     })
   }
   doctorForm!: FormGroup;
+  isLoading = false
   
   addDoctor(){
+    this.isLoading = true
     console.log(this.doctorForm.getRawValue())
     this.service.addDoctor(this.doctorForm.getRawValue()).subscribe((data)=>{
       // console.log(JSON.stringify(data));
-      window.localStorage.setItem("doctorId", JSON.stringify(data.id))
+      if(data.status == 400){
+        window.alert("something went wrong, try again later")
+      }
+      else if(data){
+        window.localStorage.setItem("doctorId", JSON.stringify(data.id))
+        this.isLoading = false
+        window.alert("Added")
+      }
     })
   }
   navToAdminDash(){

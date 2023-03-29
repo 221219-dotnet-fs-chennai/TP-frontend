@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppointmentDoctor, AppointmentDoctorOne } from 'src/app/models/appointmentServiceModel';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Guid } from 'guid-typescript';
 import { Appointment } from 'src/app/components/doctor/notification/notification.component';
 import { Patient } from 'src/app/components/admin/view-patients/get-patients.service';
@@ -36,6 +36,9 @@ export class AppointmentServiceService {
     return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByDocId/${doctor_id}`)
   }
 
+  getAppointmentsByNurseId(nurse_id: string | null | undefined): Observable<AppointmentDoctor[]> {
+    return this.http.get<AppointmentDoctor[]>(`${this.baseapiurl}/apigateway/GetAppointmentsByNurId/${nurse_id}`)
+  }
 
   updateStatusByDoctor(appointment_id: Guid | undefined, status: number | undefined): Observable<AppointmentDoctor> {
     // return this.http.put<AppointmentDoctor>(this.baseapiurl + '/api' + '/Appointment' + '/UpdateStatusByDoctor?appointment_id=' + appointment_id + '&status=' + status , {});

@@ -47,7 +47,7 @@ const routes: Routes = [
   //   path: 'view-patient-history', component: PatientHistoryComponent
   // },
   {
-    path: 'update-patient-info/:id', component: UpdateinfoComponent
+    path: 'update-patient-info/:id/:AID', component: UpdateinfoComponent
   },
   {
     path: 'patient-dashboard', component: PatientDashboardComponent
