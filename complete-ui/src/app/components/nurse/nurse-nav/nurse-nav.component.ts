@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -8,7 +9,10 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./nurse-nav.component.css']
 })
 export class NurseNavComponent implements OnInit{
-  constructor(public auth : AuthService, @Inject(DOCUMENT) private doc: Document){}
+  constructor(public auth : AuthService, @Inject(DOCUMENT) private doc: Document,
+  private router : Router){}
+
+
   ngOnInit(): void {
     this.auth.user$.subscribe((data) => {
       this.nurseName = data?.email?.split("@")[0]
@@ -22,8 +26,9 @@ export class NurseNavComponent implements OnInit{
   nemail = 'robin@nurse.com'
   
   enableSidebar(){
-    
+    this.router.navigate(['nurse/pick-appointments']);
   }
+  
   logout() {
     this.auth.logout({
       logoutParams: {

@@ -21,6 +21,7 @@ import { PatientCompleteHistoryDocComponent } from './components/doctor/patient-
 import { PatientProfileComponent } from './components/patient/patient-profile/patient-profile.component';
 import { ShowDoctorsComponent } from './components/patient/show-doctors/show-doctors.component';
 import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component';
+import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,9 @@ const routes: Routes = [
   },
   {
     path: 'patient-history-nurse-view/:id',component: PatientHistoryComponent
+  },
+  {
+    path: 'nurse/pick-appointments', component : PickAppointmentsComponent
   }
 ];
 

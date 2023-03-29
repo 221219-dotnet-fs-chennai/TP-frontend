@@ -1,0 +1,38 @@
+.cards-container{
+    position : relative;
+    width : 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin : auto;
+}
+
+.simple-card{
+    position : relative;
+    margin: 0.7rem;
+}
+
+.card{
+    display : flex;
+    flex-direction: column;
+    gap : 0.15rem;
+}
+
+.card-content{
+    display : flex;
+    flex-direction: row;
+    gap : 7rem
+}
+
+.main-card{
+    display : flex;
+    flex-direction: row;
+    gap : 1rem;
+}
+
+.pick-btn{
+    display : flex;
+    justify-content: flex-end;
+    position: relative;
+    right : 2px;
+}
