@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 
 export interface patientinfo{
-  patId : Guid,
+  patId : Guid ,
   fullname : string,
   age : number,
   gender : string,
