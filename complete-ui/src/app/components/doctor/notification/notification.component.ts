@@ -96,12 +96,10 @@ export class NotificationComponent implements OnInit {
       .subscribe((AppByDocId) => {
         this.doctorApp.push({AppByDocId})
         this.patientinfo.getAllPatientInfos().subscribe((patients)=>{
-          // AppByDocId.ma
           AppByDocId.forEach(app =>{
             patients.forEach(pat=>{
               this.appointments = []
               if( app.patientId?.toString() == pat.patId.toString() && app.status == 1 && app.date == this.todayDate){
-                //this.newAppPat.push({AppByDocId, pat})
                 AppByDocId.forEach(appo => {
                   if(appo.patientId?.toString() == pat.patId.toString())
                   this.appointments.push(appo)
@@ -118,40 +116,6 @@ export class NotificationComponent implements OnInit {
       console.log(this.patientByAppointments);
       console.log(this.newAppPat);
       
-    // this.appointmentService
-    //   .getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
-    //   .subscribe({
-    //     next: (appointments) => {
-    //       this.appointmentdoctor = appointments;
-    //       // console.log(this.appointmentdoctor)
-
-    //       this.appointmentdoctor.forEach((element) => {
-    //         if (this.todayDate == element.date && element.status == 1) {
-    //           // console.log(element);
-    //           this.todayAppointment.push(element);
-    //         }
-
-    //         // console.log(this.todayAppointment);
-    //       });
-
-    //       this.todayAppointment.forEach((element) => {
-    //         this.patientinfo.getPatientInfo(element.patientId).subscribe({
-    //           next: (appointed) => {
-    //             this.patientsInfo.push(appointed);
-    //             console.log(this.patientinfo);
-    //           },
-    //           error: (response) => console.log(response),
-    //         });
-    //       });
-    //     },
-    //     error: (response) => {
-    //       console.log(response);
-    //     },
-    //   });
-
-
-    // console.log(this.todayAppointment);
-    // console.log(this.patientsInfo);
   }
 
   toggleBadgeVisibility() {
@@ -201,39 +165,6 @@ export class NotificationComponent implements OnInit {
       gender: 'Male',
     },
   ];
-
-  // appointments: Appointment[] = [
-  //   {
-  //     id: 'AP-1',
-  //     name: 'Hannah',
-  //     gender: 'female',
-  //     date: '23/02/2000',
-  //   },
-  //   {
-  //     id: 'AP-2',
-  //     name: 'Clay',
-  //     gender: 'male',
-  //     date: '23/02/2000',
-  //   },
-  //   {
-  //     id: 'AP-2',
-  //     name: 'Clay',
-  //     gender: 'male',
-  //     date: '23/02/2000',
-  //   },
-  //   {
-  //     id: 'AP-2',
-  //     name: 'Clay',
-  //     gender: 'male',
-  //     date: '23/02/2000',
-  //   },
-  //   {
-  //     id: 'AP-3',
-  //     name: 'Justin',
-  //     gender: 'others',
-  //     date: '23/02/2000',
-  //   },
-  // ];
 }
 
 export interface Patient {
