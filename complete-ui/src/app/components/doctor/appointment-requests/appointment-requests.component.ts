@@ -39,7 +39,7 @@ export class AppointmentRequestsComponent implements OnInit {
         data.forEach(appo => {
           response.forEach(pati => {
             console.log(pati.patId)
-            if(appo.patientId == pati.patId.toString()) {
+            if(appo.patientId == pati.patId.toString() && appo.doctorId == window.localStorage.getItem('Doctor')) {
               this.patientAppointmentInfo.push({
                 appointment : appo,
                 patient : pati
