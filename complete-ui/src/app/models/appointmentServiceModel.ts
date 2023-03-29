@@ -1,7 +1,7 @@
 import { Guid } from "guid-typescript";
 export interface AppointmentDoctor
 {
-  [x: string]: any;
+  // [x: string]: any;
   appointmentId : Guid,
   patientId? : string | null | undefined,
   doctorId? : string | null,

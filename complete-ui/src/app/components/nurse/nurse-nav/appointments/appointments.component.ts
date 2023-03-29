@@ -39,6 +39,8 @@ export class AppointmentsComponent implements OnInit {
 
   }
 
+  appointmentsByNursePatient : AppointmentDoctor[] = []
+  isLoading = true;
   ngOnInit(): void {
     this.auth.user$.subscribe((data) => {
       this.nurseName = data?.email?.split("@")[0]
@@ -59,6 +61,24 @@ export class AppointmentsComponent implements OnInit {
       })
     })
     console.log(this.nursePatientAppointments)
+    
+    this.appointmentService.getAppointmentsByStatus(3).subscribe((data) => {
+      this.appointmentsByNursePatient = data
+    })
+
+    this.appointmentService.getAppointmentsByStatusOne()
+    .subscribe({
+      next:(appointments) =>{
+      this.appointmentdoctor = appointments;
+      console.log(this.appointmentdoctor)
+      },
+      error : (response) => {
+        console.log(response);
+      }
+
+
+    });
+
   }
 
   nurseName !: string | undefined
@@ -78,8 +98,8 @@ export class AppointmentsComponent implements OnInit {
   navigateToViewHistory(id : string | null | undefined){
     this.router.navigate(['patient-history-nurse-view', id])
   }
-  navigateToUpdate(id : string | null | undefined){
-    this.router.navigate(['update-patient-info', id])
+  navigateToUpdate(id : string | null | undefined, AID : string | null | undefined){
+    this.router.navigate(['update-patient-info', id, AID])
   }
 
   appointments:appointmentdetails[] = [{

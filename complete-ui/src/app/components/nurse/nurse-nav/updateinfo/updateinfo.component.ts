@@ -52,7 +52,6 @@ export class UpdateinfoComponent implements OnInit {
       health_Id: "p67435",
       allergy: ['', [Validators.required]]
     });
-
   }
 
 

@@ -6,8 +6,8 @@
     <span style="cursor: pointer;" matTooltip="Add new doctor details">Add doctor</span>
   </div>
   <span class="example-spacer"></span>
-</mat-toolbar><br>
-
+</mat-toolbar>
+<mat-progress-bar *ngIf="isLoading" color="accent" mode="indeterminate"></mat-progress-bar>
 <div class="schedule-btn">
   <button mat-raised-button color="warn" (click)="openAddDialog('20ms', '20ms')">Add 1<sup>st</sup> schedule for existing doctor</button>
 </div>
