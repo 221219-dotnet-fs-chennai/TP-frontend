@@ -28,7 +28,7 @@ export class NotificationComponent implements OnInit {
 
   title = 'Notification component';
   hidden = false;
-  notificationBadge!: number;
+  notificationBadge : number = 0
   panelOpenState = false;
   showFiller = false;
   viewSidebar = true;
@@ -76,10 +76,17 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit() {
     this.totalPatients = this.patients.length;
-    // this.notificationBadge = this.appointments.length;
     this.appointmentService
       .getAppointmentsByStatus(0)
-      .subscribe((data) => (this.notificationBadge = data.length));
+      .subscribe((data) => {
+        data.forEach(element => {
+          if(element.doctorId == window.localStorage.getItem('Doctor')){
+            console.log("Badge increased");
+            this.notificationBadge += 1;
+          }
+        })
+        console.log(this.notificationBadge)
+      });
     this.auth.user$.subscribe((data) => {
       this.doctorName = data?.email?.split('@')[0];
       this.doctorEmail = data?.email;
@@ -152,7 +159,8 @@ export class NotificationComponent implements OnInit {
   }
 
   enableSidebar() {
-    this.route.navigate(['appointment-requests']);
+    if(this.notificationBadge > 0)
+      this.route.navigate(['appointment-requests']);
   }
 
   toggleHistory() {
