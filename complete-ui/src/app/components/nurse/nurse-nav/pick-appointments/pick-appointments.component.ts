@@ -7,6 +7,7 @@ import { PatientInfoService } from 'src/app/services/patient-info.service';
 import { AvailabilityService } from 'src/app/components/patient/availability.service';
 import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
 import { PatientInfo } from 'src/app/components/login.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-pick-appointments',
@@ -37,7 +38,7 @@ export class PickAppointmentsComponent {
                 }
               })
               doctors.forEach(doctor => {
-                if(doctor.id == appo.patientId){
+                if(doctor.id == appo.doctorId){
                   this.doc = doctor
                 }
               })
@@ -50,6 +51,14 @@ export class PickAppointmentsComponent {
           })
         })
     })
+  }
+
+  pickAppointment(appointmentId : Guid | undefined) {
+    this.appointmentService.updateNurseIdByNurse(appointmentId,window.localStorage.getItem('Nurse')).subscribe((data) => {
+      console.log(data);
+    })
+    // window.location.reload()
+    console.log("reloaded")
   }
 }
 

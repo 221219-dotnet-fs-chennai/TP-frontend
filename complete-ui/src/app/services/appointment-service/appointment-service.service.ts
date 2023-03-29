@@ -39,7 +39,7 @@ export class AppointmentServiceService {
 
   }
 
-  updateNurseIdByNurse(appointment_id: Guid | undefined, nurse_id: string | undefined): Observable<AppointmentDoctor> {
+  updateNurseIdByNurse(appointment_id: Guid | undefined, nurse_id: string | undefined | null): Observable<AppointmentDoctor> {
     return this.http.put<AppointmentDoctor>(`${this.baseapiurl}/apigateway/UpdateAppointmentNurseId/${appointment_id}/${nurse_id}`, {});
   }
 }
