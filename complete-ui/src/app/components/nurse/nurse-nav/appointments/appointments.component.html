@@ -20,7 +20,7 @@
         <mat-divider></mat-divider>
         <div style="display: flex; align-items: center; justify-content: center;">
           <!-- <button matTooltip="Update basic details for the patient" (click)="navigateToUpdate()" (click)="getAppointmentId(app.appointmentId)" mat-button color="primary">Update</button> -->
-            <button matTooltip="Update basic details for the patient" (click)="navigateToUpdate(app.patientId)"  mat-button color="primary">Update</button>
+            <button matTooltip="Update basic details for the patient" (click)="navigateToUpdate(app.patientId, app.appointmentId.toString())"  mat-button color="primary">Update</button>
             <button matTooltip="View patient history" (click)="navigateToViewHistory(app.patientId)" mat-button color="primary">History</button>
         </div>
       </mat-expansion-panel>
