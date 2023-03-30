@@ -60,8 +60,21 @@ export class NotificationComponent implements OnInit {
   navToViewHistory(id: Guid | undefined) {
     this.route.navigate(['patient-history-doctor-view', id]);
   }
-  navToAddRecord(PID: Guid, AID : Guid) {
-    this.route.navigate(['add-patient-health', PID, AID]);
+
+  navToAddRecord(PID: Guid) {
+    let AID : Guid = Guid.create()
+    let name : string = ''
+    this.patientByAppointments.forEach(pba => {
+      if(pba.patient.patId == PID) {
+        name = pba.patient.fullname
+        pba.appointment.forEach(appo => {
+          if(appo.date == this.todayDate) {
+            AID = appo.appointmentId
+          }
+        })
+      }
+    })
+    this.route.navigate(['add-patient-health',name, PID, AID]);
   }
 
   appointmentdoctor: AppointmentDoctor[] = [];
@@ -73,6 +86,7 @@ export class NotificationComponent implements OnInit {
   doctorApp : any[] = []
   patientsInfo: patientinfo[] = [];
   appointments : AppointmentDoctor[] = []
+  appId !: string
 
   ngOnInit() {
     this.totalPatients = this.patients.length;
@@ -99,7 +113,7 @@ export class NotificationComponent implements OnInit {
           AppByDocId.forEach(app =>{
             patients.forEach(pat=>{
               this.appointments = []
-              if( app.patientId?.toString() == pat.patId.toString() && app.status == 1 && app.date == this.todayDate){
+              if( app.patientId?.toString() == pat.patId.toString() && app.status == 3 && app.date == this.todayDate){
                 AppByDocId.forEach(appo => {
                   if(appo.patientId?.toString() == pat.patId.toString())
                   this.appointments.push(appo)

@@ -28,22 +28,22 @@
         <br>
         <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the test to add new one </b></mat-hint>
         <br><br><br>
+        <form [formGroup]="testForm" (ngSubmit)="SubmitTest()">
         <div class="test-fields">
-
-          <mat-form-field appearance="outline">
-            <mat-label>Test</mat-label>
-            <input matInput formControlName="test" placeholder="Enter test name" >
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Result</mat-label>
-            <input matInput formControlName="result" placeholder="Enter test result">
-            <mat-icon matSuffix>create</mat-icon>
-          </mat-form-field>
-          <div class="test-btn">
-          <button mat-raised-button color="warn"  >Add test</button>
-        </div>
-        </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Test</mat-label>
+              <input matInput formControlName="Test" placeholder="Enter test name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Result</mat-label>
+              <input matInput formControlName="result" placeholder="Enter test result">
+              <mat-icon matSuffix>create</mat-icon>
+            </mat-form-field>
+            <div class="test-btn">
+              <button mat-raised-button color="warn">Add test</button>
+            </div>
+          </div>
+        </form>
 
         <mat-action-row>
           <button mat-button color="primary" (click)="nextStep()">Next</button>
@@ -63,23 +63,24 @@
         <br>
         <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the medication to add new one </b></mat-hint>
         <br><br><br>
+        <form [formGroup]="drugForm" (ngSubmit)="SubmitDrugs()">
         <div class="test-fields">
-
           <mat-form-field appearance="outline">
             <mat-label>Medicine</mat-label>
-            <input matInput formControlName="drugs" placeholder="Enter medicine name">
+            <input matInput formControlName="Drugs" placeholder="Enter medicine name">
           </mat-form-field>
-
           <mat-form-field appearance="outline">
             <mat-label>Quantity</mat-label>
-            <input matInput placeholder="Enter the medicine quantity">
+            <input matInput formControlName="Quantity" placeholder="Enter the medicine quantity">
             <mat-icon matSuffix>assignment</mat-icon>
           </mat-form-field>
           <div class="test-btn">
-            <button color="warn" mat-raised-button >Add medicine</button>
+            <button color="warn" mat-raised-button>Add medicine</button>
           </div>
           <!-- <button mat-raised-button class="hide-btn"></button> -->
         </div>
+      </form>
+
 
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Previous</button>
@@ -88,6 +89,7 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Conclusion
@@ -99,19 +101,18 @@
 
         <br>
         <br><br>
+        <form [formGroup]="healthform" (ngSubmit)="submitHealth()">
         <div class="test-fields">
-
-          <mat-form-field appearance="outline">
-            <mat-label>suggestions</mat-label>
-            <input matInput formControlName="conclusion" placeholder="Enter suggestion">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          </mat-form-field>
-
-          <div class="test-btn">
-              <button mat-raised-button color="warn" (click)="AddHealth()">Add suggestion</button>
+            <mat-form-field appearance="outline">
+              <mat-label>suggestions</mat-label>
+              <textarea matInput formControlName="Conclusion" placeholder="Enter suggestion"></textarea>
+              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <div class="test-btn">
+              <button mat-raised-button color="warn">Add suggestion</button>
+            </div>
           </div>
-          
-        </div>
+        </form>
 
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Previous</button>
