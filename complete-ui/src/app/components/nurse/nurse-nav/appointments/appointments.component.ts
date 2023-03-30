@@ -98,7 +98,7 @@ export class AppointmentsComponent implements OnInit {
   navigateToViewHistory(id : string | null | undefined){
     this.router.navigate(['patient-history-nurse-view', id])
   }
-  navigateToUpdate(id : string | null | undefined, AID : string | null | undefined){
+  navigateToUpdate(id : string | null | undefined, AID : Guid | undefined){
     this.router.navigate(['update-patient-info', id, AID])
   }
 

@@ -3,6 +3,7 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddhealthservService } from './service/addhealthserv.service';
 import { Guid } from 'guid-typescript';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-add-health',
@@ -12,7 +13,8 @@ import { Guid } from 'guid-typescript';
 export class AddHealthComponent {
   constructor(private router: Router,private hserv:AddhealthservService,private fg:FormBuilder, private activatedRoute: ActivatedRoute){}
     
-  formatedDate = new Date().toISOString().slice(0,19).replace("T", " ")
+  
+  // newDate = new Date(this.formatedDate);
   patientName !: string 
   // P_id !: Guid
   // A_id !: Guid
@@ -22,7 +24,9 @@ export class AddHealthComponent {
   drugForm !: FormGroup
   isLoading = false
   ngOnInit(): void {
-    console.log(this.formatedDate)
+
+    let formatedDate = new Date().toISOString().slice(0,10)
+    console.log(formatedDate)
     let P_id : Guid = Guid.create()
     let A_id : Guid = Guid.create()
     this.activatedRoute.params.subscribe((data) => {
@@ -49,7 +53,7 @@ export class AddHealthComponent {
 
     //health from
     this.healthform = this.fg.group({
-      DateTime: this.formatedDate,
+      date_Time: formatedDate,
       Patient_Id: P_id.toString(),
       Doctor_Id : window.localStorage.getItem("Doctor"),
       Appointment_Id : A_id.toString(),
@@ -58,6 +62,7 @@ export class AddHealthComponent {
   }
 
   submitHealth(){
+    // console.log(this.healthform)
     this.isLoading = true
     this.hserv.saveHealth(this.healthform.getRawValue()).subscribe((res) => {
       if(res.status == 400 || res.status == 401 || res.status == 503){
@@ -75,24 +80,33 @@ export class AddHealthComponent {
   }
 
   SubmitTest(){
+    this.isLoading = true
     this.hserv.savetest(this.testForm.getRawValue()).subscribe((res)=>{
-      // if(res.status == 400 || res.status == 401 || res.status == 503){
-      //   window.alert("something went wrong")
-      // }
-      // else if(res){
-      //   window.alert("Added")
-      // }
+      if(res.status == 400 || res.status == 401 || res.status == 503){
+        window.alert("something went wrong")
+        this.isLoading = false
+      }
+      else if(res){
+        window.alert("Added")
+        this.isLoading = false
+      }
+      else{
+        this.isLoading = false
+      }
     })
   }
 
   SubmitDrugs(){
-    console.log(this.drugForm.getRawValue())
+    this.isLoading = true
+    // console.log(this.drugForm.getRawValue())
     this.hserv.savemedical(this.drugForm.getRawValue()).subscribe((res)=>{
       if(res.status == 400 || res.status == 401 || res.status == 503){
         window.alert("something went wrong")
+        this.isLoading = false
       }
       else if(res){
         window.alert("Added")
+        this.isLoading = false
       }
     })
   }

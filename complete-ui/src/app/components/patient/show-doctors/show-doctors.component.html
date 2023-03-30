@@ -10,7 +10,8 @@
 <div class="card-container">
 <mat-card class="example-card" *ngFor="let schedule of doctorSchedule">
     <!-- <mat-card class="doctor-image"> -->
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Doctor image" class="doctor-image">
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Doctor image" class="doctor-image"> -->
+        <img mat-card-image src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Doctor image" class="doctor-image">
     <!-- </mat-card> -->
     <br>
     <h3><b>{{schedule.Doctor.name}}</b></h3>
@@ -18,7 +19,7 @@
         <!-- <h3><label>Doctor name : </label> {{schedule.doctorId}} </h3> -->
         <h3>{{schedule.Doctor.specialization}} </h3>
         <h3>{{schedule.Doctor.experience}} </h3>
-        <p>{{schedule.schedule.doctorId}}</p>
+        <!-- <p>{{schedule.schedule.doctorId}}</p> -->
     </mat-card-content>
     <br>
     <mat-card-actions class="book-btn">
