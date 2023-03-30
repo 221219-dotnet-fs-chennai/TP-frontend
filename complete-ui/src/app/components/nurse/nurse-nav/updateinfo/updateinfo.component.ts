@@ -59,7 +59,6 @@ export class UpdateinfoComponent implements OnInit {
       health_Id: this.patId,
       allergy: ['', []]
     });
-
   }
 
 

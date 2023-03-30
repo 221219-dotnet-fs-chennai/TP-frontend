@@ -35,7 +35,7 @@
             <mat-icon>visibility</mat-icon>Health history
           </button>
           <button  class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's basic health details"
-          (click)="navigateToUpdate(app.appointment.patientId, app.appointment.appointmentId)">
+          (click)="navigateToUpdate(app.appointment.patientId, app.appointment.appointmentId?.toString())">
             <mat-icon>add</mat-icon>Add basic health
           </button>
         </div>

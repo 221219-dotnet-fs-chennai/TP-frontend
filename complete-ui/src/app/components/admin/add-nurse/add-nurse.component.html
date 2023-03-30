@@ -5,10 +5,9 @@
     </button>
     <span style="margin-left: 41%; font-size: x-large" class="space">Add Nurse</span>
     <span class="example-spacer"></span>
-
   </mat-toolbar>
 </div>
-
+<mat-progress-bar *ngIf="isLoading" color="accent" mode="indeterminate"></mat-progress-bar>
 
 <form [formGroup]="nurseForm" class="example-form mainpage" (ngSubmit)="createNurse()">
   <mat-form-field appearance="outline" class="example-full-width">
