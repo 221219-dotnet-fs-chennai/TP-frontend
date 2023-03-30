@@ -9,6 +9,8 @@ import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
 import { PatientInfo } from 'src/app/components/login.service';
 import { Guid } from 'guid-typescript';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-pick-appointments',
@@ -19,7 +21,7 @@ export class PickAppointmentsComponent {
   constructor(private appointmentService : AppointmentServiceService,
     private patientInfoService : PatientInfoService,
     private doctorsService : AvailabilityService,
-    private router : Router) {}
+    private router : Router,private _snackBar: MatSnackBar) {}
 
     completeAppointments : CompleteAppointment[] = []
 
@@ -62,9 +64,18 @@ export class PickAppointmentsComponent {
   pickAppointment(appointmentId : Guid | undefined) {
     this.appointmentService.updateNurseIdByNurse(appointmentId,window.localStorage.getItem('Nurse')).subscribe((data) => {
       console.log(data);
+      if(data != null) {
+        this.openSnackBar()
+      }
     })
     // window.location.reload()
     console.log("reloaded")
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: 2500,
+    });
   }
 }
 

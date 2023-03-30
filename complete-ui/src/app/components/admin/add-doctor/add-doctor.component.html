@@ -86,7 +86,7 @@
   </div>
 </form>
 <div style="display: flex;flex-direction: column; gap: 1rem; margin-top: 1rem; justify-content: center; align-items: center; "> 
-  <button style="padding: 1rem 4.6rem;" mat-stroked-button color="primary" (click)="openPickDialog('20ms', '20ms')">Add schedule</button>
+  <button style="padding: 1rem 4.6rem;" mat-stroked-button color="primary" (click)="openPickDialog('20ms', '20ms')" [disabled]="!doctorForm.valid">Add schedule</button>
 </div>
 <div *ngIf="show">
   <app-add-schedule style="display: flex; justify-content: center;"></app-add-schedule>

@@ -48,7 +48,7 @@ export class AppointmentsComponent implements OnInit {
       this.patientInfoService.getAllPatientInfos().subscribe((patients) => {
         appointmentsBy3.forEach(appo => {
           patients.forEach(pat => {
-            if(appo.nurseId == window.localStorage.getItem('Nurse') && appo.patientId == pat.patId.toString() && appo.date == this.todayDate){
+            if(appo.nurseId == window.localStorage.getItem('Nurse') && appo.patientId == pat.patId.toString() && appo.date == this.todayDate && appo.status == 3){
               this.nursePatientAppointments.push({
                 appointment : appo,
                 patient : pat
@@ -78,8 +78,8 @@ export class AppointmentsComponent implements OnInit {
   navigateToViewHistory(id : string | null | undefined){
     this.router.navigate(['patient-history-nurse-view', id])
   }
-  navigateToUpdate(id : string | null | undefined){
-    this.router.navigate(['update-patient-info', id])
+  navigateToUpdate(pid : string | null | undefined, aid : Guid | undefined){
+    this.router.navigate(['update-patient-info', pid, aid?.toString()])
   }
 
   appointments:appointmentdetails[] = [{
