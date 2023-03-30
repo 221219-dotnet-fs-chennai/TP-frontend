@@ -8,6 +8,7 @@ import { AvailabilityService } from 'src/app/components/patient/availability.ser
 import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
 import { PatientInfo } from 'src/app/components/login.service';
 import { Guid } from 'guid-typescript';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pick-appointments',
@@ -17,7 +18,8 @@ import { Guid } from 'guid-typescript';
 export class PickAppointmentsComponent {
   constructor(private appointmentService : AppointmentServiceService,
     private patientInfoService : PatientInfoService,
-    private doctorsService : AvailabilityService) {}
+    private doctorsService : AvailabilityService,
+    private router : Router) {}
 
     completeAppointments : CompleteAppointment[] = []
 
@@ -51,6 +53,10 @@ export class PickAppointmentsComponent {
           })
         })
     })
+  }
+
+  navToNurseDashBoard(){
+    this.router.navigate(['nurse-dashboard']);
   }
 
   pickAppointment(appointmentId : Guid | undefined) {

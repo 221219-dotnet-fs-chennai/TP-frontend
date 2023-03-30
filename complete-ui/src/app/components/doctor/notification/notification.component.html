@@ -2,15 +2,23 @@
   <mat-toolbar color="primary" class="nav-bar">
     <span>Doctor Dashboard</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" matTooltip="view notifications"
-      (click)="enableSidebar()" aria-label="Example icon-button with share icon">
+    <button mat-icon-button class="example-icon" matTooltip="view notifications" [matMenuTriggerFor]="notification"
+      (click)="notificationBadge > 0 && enableSidebar()" aria-label="Example icon-button with share icon">
       <mat-icon [matBadge]="notificationBadge > 0? notificationBadge : null"
         matBadgeColor="warn">notifications</mat-icon>
     </button>
+    <mat-menu #notification="matMenu">
+      <div mat-dialog-content *ngIf="notificationBadge <= 0">
+        <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
+          <h3 style="margin-bottom: -0.5rem;">Zero appointment requests 😍</h3>
+        </div>
+      </div>
+    </mat-menu>
     <!-- <span *ngIf="(auth.isAuthenticated$ | async) === true"> -->
-      <button (click)="logout()" matTooltip="logout" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>logout</mat-icon>
-      </button>
+    <button (click)="logout()" matTooltip="logout" mat-icon-button class="example-icon"
+      aria-label="Example icon-button with share icon">
+      <mat-icon>logout</mat-icon>
+    </button>
     <!-- </span> -->
   </mat-toolbar>
 </p>
@@ -23,7 +31,8 @@
     <h3 id="total-patients">Total : {{totalPatients}}</h3>
     <br>
     <mat-accordion class="patient-container" multi="false">
-      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientByAppointments" class="expansions">
+      <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientByAppointments"
+        class="expansions">
         <mat-expansion-panel-header (click)="hideAll()">
           <mat-panel-title>
             <button #x [value]="patient.patient.fullname"style="display: none;" ></button>
@@ -41,7 +50,8 @@
         <!-- Patient expansion buttons -->
 
         <div class="example-button-row">
-          <button class="btn-bottom-border" extended mat-button color="accent" matTooltip="View basic health details" (click)="toggleBasicDetails()">
+          <button class="btn-bottom-border" extended mat-button color="accent" matTooltip="View basic health details"
+            (click)="toggleBasicDetails()">
             <mat-icon>visibility</mat-icon>Basic details
           </button>
           <button class="btn-bottom-border" extended mat-button color="accent"
@@ -57,7 +67,7 @@
         <!-- Basic details patient -->
 
         <mat-card class="class-container" *ngIf="basicDetails">
-          
+
           <br>
           <h2 style="text-align: center; color: green;"> {{patient.patient.fullname}}'s basic health record</h2>
           <div class="card-container">
@@ -70,7 +80,7 @@
         <!-- Add patient health record -->
 
         <mat-card class="class-container" *ngIf="healthRecord">
-          
+
           <br>
           <h2 style="text-align: center; color: green;"> Add {{patient.patient.fullname}}'s health record</h2>
           <div class="card-container">
@@ -89,8 +99,9 @@
             <!-- <app-patient-complete-history></app-patient-complete-history> -->
           </div>
           <br>
-          <mat-card-actions  class="btn-close">
-            <button mat-stroked-button color="accent" style="border: none; font-size: medium;" (click)="history = false"><b>Close history</b></button>
+          <mat-card-actions class="btn-close">
+            <button mat-stroked-button color="accent" style="border: none; font-size: medium;"
+              (click)="history = false"><b>Close history</b></button>
           </mat-card-actions>
           <br>
         </mat-card>
@@ -103,65 +114,4 @@
   <ng-template #noContent>
     No patients for today
   </ng-template>
-
-
-  <!-- <div class="inner2" [hidden]="viewSidebar">
-    <mat-drawer-container class="example-container" autosize>
-      <mat-drawer #drawer class="example-sidenav" mode="side">
-        <br>
-        <mat-card>
-          <mat-card-content>
-            <div class="appointment-card">
-              <mat-icon class="assignment-icon">assignment</mat-icon>
-              <h2 style="color: rgb(237, 97, 97);"><b>Appointment requests</b></h2>
-            </div>
-          </mat-card-content>
-        </mat-card>
-        <br>
-        <mat-accordion class="patient-container patient-container-2" multi="false">
-          <mat-expansion-panel *ngFor="let appointment of appointments" hideToggle class="expansions">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="gender-icon-gap">
-                <div [ngSwitch]="appointment.gender">
-                  <mat-icon *ngSwitchCase="'male'">male</mat-icon>
-                  <mat-icon *ngSwitchCase="'female'">female</mat-icon>
-                  <mat-icon *ngSwitchDefault>account_circle</mat-icon>
-                </div>
-                <button #x [value]="appointment.id" style="display: none;"></button>
-                {{x.value}} - {{appointment.name}}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{appointment.date}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="example-button-row">
-              <br>
-              <p></p>
-              <button class="btn-bottom-border first-btn" extended mat-button color="accent" style="color: green;"
-                disabled="true">
-                Booked appointment for <br>{{appointment.date}}
-              </button>
-              <span class="example-spacer2"></span>
-              <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;"
-                matTooltip="accept request">
-                <mat-icon>done</mat-icon>Accept
-              </button>
-              <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;"
-                matTooltip="reject request">
-                <mat-icon>clear</mat-icon>Reject
-              </button>
-              <br>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <br>
-
-      </mat-drawer>
-    </mat-drawer-container>
-
-
-
-  </div> -->
 </div>
-
