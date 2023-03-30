@@ -39,7 +39,7 @@ export class UpdateinfoComponent implements OnInit {
   ngOnInit(): void {
     this.updateform = this.fb.group({
       patient_Id: "p67435",
-      nurse_Id: "n34765",
+      nurse_Id: window.localStorage.getItem('Nurse'),
       appointment_Id: "app15",
       date_Time: this.date,
       bp: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{1,2}\\/[1-9][0-9]{1,2}$')]],

@@ -29,10 +29,10 @@ export class UpdatebasicrecordService {
 
   constructor(private http:HttpClient) {}
   saveUser(data:details){
-    return this.http.post<details>('https://localhost:7203/api/PBRecord/AddPBRecords',data)
+    return this.http.post<details>('http://localhost:5103/apigateway/AddPatientRecord',data)
   }
   savealergy(data:allergyex){
-    return this.http.post<allergyex>('https://localhost:7203/api/PatientAllergy/AddAllergyRecords',data)
+    return this.http.post<allergyex>('http://localhost:5103/apigateway/AddPatientAllergy',data)
   }
 
   // public updatePost(postData: details) {

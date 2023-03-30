@@ -3,9 +3,13 @@ import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
-import { AppointmentDoctor } from 'src/app/models/appointmentServiceModel';
+import { AppointmentDoctor, AppointmentDoctorOne } from 'src/app/models/appointmentServiceModel';
 import { Guid } from 'guid-typescript';
 import { localStorageToken } from '../../../patient/show-doctors/localstorage.token';
+import { PatientInfo } from 'src/app/components/login.service';
+import { PatientInfoService } from 'src/app/services/patient-info.service';
+import { LOCALE_ID } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-appointments',
@@ -14,7 +18,8 @@ import { localStorageToken } from '../../../patient/show-doctors/localstorage.to
 })
 export class AppointmentsComponent implements OnInit {
   constructor(private router: Router, private auth:AuthService, private appointmentService : AppointmentServiceService,
-    @Inject(localStorageToken) private localStorage : any){}
+    @Inject(localStorageToken) private localStorage : any, private patientInfoService: PatientInfoService,
+    @Inject(LOCALE_ID) private locale: string){}
   today = new Date()
   longText='string'
   step = 0;
@@ -23,6 +28,9 @@ export class AppointmentsComponent implements OnInit {
    
   ];
 
+  nursePatientAppointments : NursePatientAppointments[] = []
+
+  todayDate: string = formatDate(new Date(), 'dd-MMM-yyyy', this.locale);
   
 
   getAppointmentId(app_id : Guid|undefined){
@@ -38,6 +46,22 @@ export class AppointmentsComponent implements OnInit {
       this.nurseName = data?.email?.split("@")[0]
     });
 
+    this.appointmentService.getAppointmentsByStatus(3).subscribe((appointmentsBy3) => {
+      this.patientInfoService.getAllPatientInfos().subscribe((patients) => {
+        appointmentsBy3.forEach(appo => {
+          patients.forEach(pat => {
+            if(appo.nurseId == window.localStorage.getItem('Nurse') && appo.patientId == pat.patId.toString() && appo.date == this.todayDate){
+              this.nursePatientAppointments.push({
+                appointment : appo,
+                patient : pat
+              })
+            }
+          })
+        })
+      })
+    })
+    console.log(this.nursePatientAppointments)
+    
     this.appointmentService.getAppointmentsByStatus(3).subscribe((data) => {
       this.appointmentsByNursePatient = data
     })
@@ -54,7 +78,9 @@ export class AppointmentsComponent implements OnInit {
 
 
     });
+
   }
+
   nurseName !: string | undefined
 
   setStep(index: number) {
@@ -90,4 +116,9 @@ export class AppointmentsComponent implements OnInit {
 export interface appointmentdetails{
   name : string,
   details : string
+}
+
+export interface NursePatientAppointments{
+  appointment : AppointmentDoctorOne
+  patient : PatientInfo
 }

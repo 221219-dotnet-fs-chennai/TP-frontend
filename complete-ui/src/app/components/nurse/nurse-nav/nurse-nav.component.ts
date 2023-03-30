@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 
 @Component({
   selector: 'app-nurse-nav',
@@ -10,7 +11,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class NurseNavComponent implements OnInit{
   constructor(public auth : AuthService, @Inject(DOCUMENT) private doc: Document,
-  private router : Router){}
+  private router : Router, private appointmentService : AppointmentServiceService){}
 
 
   ngOnInit(): void {
@@ -18,8 +19,12 @@ export class NurseNavComponent implements OnInit{
       this.nurseName = data?.email?.split("@")[0]
       this.nurseEmail = data?.email
     })
+
+    this.appointmentService.getAppointmentsByStatusOne().subscribe((data) => {
+      this.notificationBadge = data.length
+    });
   }
-  notificationBadge !: number
+  notificationBadge : number = 0
   nurseName !: string | undefined
   nurseEmail !: string | undefined
   nname = 'Robin'
