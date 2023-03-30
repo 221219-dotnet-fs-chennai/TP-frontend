@@ -1,0 +1,8 @@
+button {
+    margin-right: 8px;
+  }
+
+  .ok-btn{
+    display: flex;
+    justify-content: flex-end;
+  }

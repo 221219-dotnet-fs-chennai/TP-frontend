@@ -10,6 +10,13 @@
       <mat-expansion-panel style="margin-bottom: 1rem;" *ngFor="let app of nursePatientAppointments">
         <mat-expansion-panel-header>
           <mat-panel-title>
+            <div [ngSwitch]="app.patient.gender" class="icon-gap">
+              <mat-icon *ngSwitchCase="'male'">male</mat-icon>
+              <mat-icon *ngSwitchCase="'Male'">male</mat-icon>
+              <mat-icon *ngSwitchCase="'female'">female</mat-icon>
+              <mat-icon *ngSwitchCase="'Female'">female</mat-icon>
+              <mat-icon *ngSwitchDefault>account_circle</mat-icon>
+          </div>
             {{app.patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
@@ -28,7 +35,7 @@
             <mat-icon>visibility</mat-icon>Health history
           </button>
           <button  class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's basic health details"
-          (click)="navigateToUpdate(app.appointment.patientId, app.appointment.appointmentId)">
+          (click)="navigateToUpdate(app.appointment.patientId, app.appointment.appointmentId?.toString())">
             <mat-icon>add</mat-icon>Add basic health
           </button>
         </div>

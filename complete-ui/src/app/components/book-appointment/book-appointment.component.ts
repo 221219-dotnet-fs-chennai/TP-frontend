@@ -47,7 +47,8 @@ export class BookAppointmentComponent implements OnInit {
       this.show = false
 
     this.dates = []
-    for (this.i = 0; this.i <= 6; this.i++) {
+    this.dates.push(this.ipdate)
+    for (this.i = 0; this.i <= 5; this.i++) {
       this.ipdate = new Date(this.ipdate.getTime() + 86400000)
       this.dates.push(this.ipdate);
     }
