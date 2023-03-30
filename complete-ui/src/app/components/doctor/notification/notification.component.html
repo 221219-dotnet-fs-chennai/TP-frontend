@@ -35,8 +35,8 @@
         class="expansions">
         <mat-expansion-panel-header (click)="hideAll()">
           <mat-panel-title>
-            <button #x [value]="patient.patient.fullname" tyle="display: none;"></button>
-            {{patient.patient.fullname}}
+            <button #x [value]="patient.patient.fullname"style="display: none;" ></button>
+           {{patient.patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
             {{patient.patient.gender}}
@@ -58,8 +58,7 @@
             matTooltip="View patient's health history" (click)="navToViewHistory(patient.patient.patId)">
             <mat-icon>visibility</mat-icon>Health history
           </button>
-          <button (click)="navToAddRecord(patient.patient.patId,patient.appointment[0].appointmentId)"
-            class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
+          <button (click)="navToAddRecord(patient.patient.patId)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
             <mat-icon>add</mat-icon>Add record
           </button>
         </div>
