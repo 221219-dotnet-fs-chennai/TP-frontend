@@ -50,7 +50,7 @@ export class AppointmentsComponent implements OnInit {
       this.patientInfoService.getAllPatientInfos().subscribe((patients) => {
         appointmentsBy3.forEach(appo => {
           patients.forEach(pat => {
-            if(appo.nurseId == window.localStorage.getItem('Nurse') && appo.patientId == pat.patId.toString() && appo.date == this.todayDate){
+            if(appo.nurseId == window.localStorage.getItem('Nurse') && appo.patientId == pat.patId.toString() && appo.date == this.todayDate && appo.status == 3){
               this.nursePatientAppointments.push({
                 appointment : appo,
                 patient : pat

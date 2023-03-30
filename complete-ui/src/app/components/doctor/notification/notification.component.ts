@@ -113,7 +113,8 @@ export class NotificationComponent implements OnInit {
           AppByDocId.forEach(app =>{
             patients.forEach(pat=>{
               this.appointments = []
-              if( app.patientId?.toString() == pat.patId.toString() && app.status == 3 && app.date == this.todayDate){
+
+              if( app.patientId?.toString() == pat.patId.toString() && (app.status == 3 || app.status == 4) && app.date == this.todayDate){
                 AppByDocId.forEach(appo => {
                   if(appo.patientId?.toString() == pat.patId.toString())
                   this.appointments.push(appo)

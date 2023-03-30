@@ -78,7 +78,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { FirstScheduleComponent } from './components/admin/add-doctor/first-schedule/first-schedule.component';
 import { InfoComponent } from './components/admin/update-schedule/info/info.component';
 import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component';
-import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component'; 
+import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
+import { DialogComponent } from './components/nurse/dialog/dialog.component'; 
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-app
     FirstScheduleComponent,
     InfoComponent,
     DoctorHistoryViewComponent,
-    PickAppointmentsComponent
+    PickAppointmentsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
