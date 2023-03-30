@@ -54,3 +54,8 @@ a:link {
     margin: 10px;
     border-bottom: 2px solid red;
   }
+
+  .icon-gap{
+    position: relative;
+    margin-right: 20px;
+  }

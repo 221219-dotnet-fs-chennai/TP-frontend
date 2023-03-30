@@ -10,112 +10,125 @@
 </div>
 
 <div>
-    <h1 style="text-align: center;">Add basic Health Record for patient</h1>
+  <h1 style="text-align: center;">Add basic Health Record for patient</h1>
 </div>
-<form class="updateform" [formGroup]="updateform" (ngSubmit)="update()">
-  <!-- <form class="updateform" [formGroup]="allergyform" (ngSubmit)="update()"> -->
-  <div>
-    <mat-form-field  appearance="outline" class="example-full-width">
-      <mat-label>Blood Pressure</mat-label>
-      <input type="text" matInput formControlName="bp" placeholder="Ex. 120/80">
-      <mat-error *ngIf="bp && bp.invalid && (bp.dirty || bp.touched)" style="white-space: nowrap;">
-        <span *ngIf="bp.errors?.['required']">Blood Pressure is required. </span>
-        <span *ngIf="bp.errors?.['pattern']">Blood Pressure should be in the format of '120/80'.</span>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>Heart Rate</mat-label>
-      <input type="number" matInput formControlName="heart_Rate" placeholder="60 - 120">
-      <mat-error *ngIf="heart_Rate &&heart_Rate.invalid && (heart_Rate.dirty || heart_Rate.touched)" style="white-space: nowrap;">
-        <span *ngIf="heart_Rate.errors?.['required']">Heart Rate is required. </span>
-        <span *ngIf="heart_Rate.errors?.['pattern']">Heart Rate should be between 60 and 120.</span>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>SpO2</mat-label>
-      <input matInput formControlName="spO2" placeholder="90% - 100%">
-      <mat-error *ngIf="spO2 && spO2.invalid && (spO2.dirty || spO2.touched)" style="white-space: nowrap;">
-        <span *ngIf="spO2.errors?.['required']">SpO2 is required. </span>
-        <span *ngIf="spO2.errors?.['pattern']">SpO2 should be between 90% and 100%.</span>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Allergies</mat-label>
-      <mat-select disableRipple formControlName="allergy">
-        <mat-option value="Eyes">eye</mat-option>
-        <mat-option value="Nose">nose</mat-option>
-        <mat-option value="Ear">Ear</mat-option>
-        <mat-option value="Hand">Hand</mat-option>
-        <mat-option value="Skin">skin</mat-option>
-        <mat-option value="Leg">leg</mat-option>
-        <mat-option value="Head">Head</mat-option>
-        <mat-option value="Mouth">Mouth</mat-option>
-      </mat-select>
-
-      <!-- <mat-select [formControl]="toppings" multiple="" >
-        <mat-select-trigger >
-          {{toppings.value?.[0] || ''}}
-          <span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-            (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-          </span>
-        </mat-select-trigger>
-        <mat-option *ngFor="let topping of toppingList" [value]="topping" >{{topping}}</mat-option>
-      </mat-select> -->
-    </mat-form-field>
-  </div>
+<form [formGroup]="updateform" (ngSubmit)="update()">
+  <div class="updateform">
     <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>Height</mat-label>
-      <input matInput formControlName="height" placeholder="in cm">
-      <mat-error *ngIf="height && height.invalid && (height.dirty || height.touched)" style="white-space: nowrap;">
-        <span *ngIf="height.errors?.['required']">Height is required. </span>
-        <span *ngIf="height.errors?.['pattern']">Height should be in cms.</span>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Blood Pressure</mat-label>
+        <input type="text" matInput formControlName="bp" placeholder="Ex. 120/80">
+        <mat-error *ngIf="bp && bp.invalid && (bp.dirty || bp.touched)" style="white-space: nowrap;">
+          <span *ngIf="bp.errors?.['required']">Blood Pressure is required. </span>
+          <span *ngIf="bp.errors?.['pattern']">Blood Pressure should be in the format of '120/80'.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Heart Rate</mat-label>
+        <input type="number" matInput formControlName="heart_Rate" placeholder="60 - 120">
+        <mat-error *ngIf="heart_Rate &&heart_Rate.invalid && (heart_Rate.dirty || heart_Rate.touched)"
+          style="white-space: nowrap;">
+          <span *ngIf="heart_Rate.errors?.['required']">Heart Rate is required. </span>
+          <span *ngIf="heart_Rate.errors?.['pattern']">Heart Rate should be between 60 and 120.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>SpO2</mat-label>
+        <input matInput formControlName="spO2" placeholder="90% - 100%">
+        <mat-error *ngIf="spO2 && spO2.invalid && (spO2.dirty || spO2.touched)" style="white-space: nowrap;">
+          <span *ngIf="spO2.errors?.['required']">SpO2 is required. </span>
+          <span *ngIf="spO2.errors?.['pattern']">SpO2 should be between 90% and 100%.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Height</mat-label>
+        <input matInput formControlName="height" placeholder="in cm">
+        <mat-error *ngIf="height && height.invalid && (height.dirty || height.touched)" style="white-space: nowrap;">
+          <span *ngIf="height.errors?.['required']">Height is required. </span>
+          <span *ngIf="height.errors?.['pattern']">Height should be in cms.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Weight</mat-label>
+        <input matInput formControlName="weight" placeholder="in kgs">
+        <mat-error *ngIf="weight && weight.invalid && (weight.dirty || weight.touched)" style="white-space: nowrap;">
+          <span *ngIf="weight.errors?.['required']">weight is required. </span>
+          <span *ngIf="weight.errors?.['pattern']">weight should be in kgs.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Body Temperature</mat-label>
+        <input matInput formControlName="temperature" placeholder="in °C">
+        <mat-error *ngIf="temperature && temperature.invalid && (temperature.dirty || temperature.touched)"
+          style="white-space: nowrap;">
+          <span *ngIf="temperature.errors?.['required']">Body Temperature is required. </span>
+          <span *ngIf="temperature.errors?.['pattern']">Blood Group should be in the format like 37.1.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Blood Group</mat-label>
+        <mat-select disableRipple formControlName="bloodGroup">
+          <mat-option value="o+">O+</mat-option>
+          <mat-option value="o-">O-</mat-option>
+          <mat-option value="A+">A+</mat-option>
+          <mat-option value="A-">A-</mat-option>
+          <mat-option value="B+">B+</mat-option>
+          <mat-option value="B-">B-</mat-option>
+          <mat-option value="AB+">AB+</mat-option>
+          <mat-option value="AB-">AB-</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" id="but" [disabled]="!updateform.valid">submit</button>
+    </div>
+    <div class="updateformallergy">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Allergies</mat-label>
+          <mat-select [formControl]="allergies" multiple>
+            <mat-select-trigger>
+              {{allergies.value?.[0] || ''}}
+              <span *ngIf="(allergies.value?.length || 0) > 1" class="example-additional-selection">
+                (+{{(allergies.value?.length || 0) - 1}} {{allergies.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" id="but" [disabled]="disbleAllergy" type="button" (click)="updateAllergy()">Add
+        </button>
+      </div>
+    </div>
   </div>
-  <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>Weight</mat-label>
-      <input matInput formControlName="weight" placeholder="in kgs">
-      <mat-error *ngIf="weight && weight.invalid && (weight.dirty || weight.touched)" style="white-space: nowrap;">
-        <span *ngIf="weight.errors?.['required']">weight is required. </span>
-        <span *ngIf="weight.errors?.['pattern']">weight should be in kgs.</span>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>Body Temperature</mat-label>
-      <input matInput formControlName="temperature" placeholder="in °C">
-      <mat-error *ngIf="temperature && temperature.invalid && (temperature.dirty || temperature.touched)" style="white-space: nowrap;">
-        <span *ngIf="temperature.errors?.['required']">Body Temperature is required. </span>
-        <span *ngIf="temperature.errors?.['pattern']">Blood Group should be in the format like 37.1.</span>
-      </mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>Blood Group</mat-label>
-      <mat-select disableRipple formControlName="bloodGroup">
-        <mat-option value="o+">O+</mat-option>
-        <mat-option value="o-">O-</mat-option>
-        <mat-option value="A+">A+</mat-option>
-        <mat-option value="A-">A-</mat-option>
-        <mat-option value="B+">B+</mat-option>
-        <mat-option value="B-">B-</mat-option>
-        <mat-option value="AB+">AB+</mat-option>
-        <mat-option value="AB-">AB-</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <button mat-raised-button color="primary" id="but">submit</button>
-  </div>
-  
 </form>
+  
+
+<!-- <mat-form-field appearance="fill">
+  <mat-label>Toppings</mat-label>
+  <mat-select [formControl]="allergies" multiple>
+    <mat-select-trigger>
+      {{allergies.value?.[0] || ''}}
+      <span *ngIf="(allergies.value?.length || 0) > 1" class="example-additional-selection">
+        (+{{(allergies.value?.length || 0) - 1}} {{allergies.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button (click)="display()">add</button> -->

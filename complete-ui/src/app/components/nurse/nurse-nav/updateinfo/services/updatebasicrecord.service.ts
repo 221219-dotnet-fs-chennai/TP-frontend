@@ -19,7 +19,7 @@ export interface details{
 export interface allergyex{
   health_Id: string,
   appointment_Id: string,
-  allergy: string
+  allergy: string | undefined
 }
 
 @Injectable({
