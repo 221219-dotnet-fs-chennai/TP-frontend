@@ -47,6 +47,8 @@ export class NotificationComponent implements OnInit {
   }
 
   logout() {
+    window.localStorage.removeItem("Doctor")
+    window.localStorage.removeItem("DocName")
     this.auth.logout({
       logoutParams: {
         returnTo: this.doc.location.origin,
@@ -58,7 +60,19 @@ export class NotificationComponent implements OnInit {
   doctorEmail!: string | undefined;
 
   navToViewHistory(id: Guid | undefined) {
-    this.route.navigate(['patient-history-doctor-view', id]);
+    let AID : Guid = Guid.create()
+    let name : string = ''
+    this.patientByAppointments.forEach(pba => {
+      if(pba.patient.patId == id) {
+        name = pba.patient.fullname
+        pba.appointment.forEach(appo => {
+          if(appo.date == this.todayDate) {
+            AID = appo.appointmentId
+          }
+        })
+      }
+    })
+    this.route.navigate(['patient-history-doctor-view', id, AID]);
   }
 
   navToAddRecord(PID: Guid) {
@@ -88,6 +102,7 @@ export class NotificationComponent implements OnInit {
   appointments : AppointmentDoctor[] = []
   appId !: string
 
+
   ngOnInit() {
     this.appointmentService
       .getAppointmentsByStatus(0)
@@ -100,9 +115,10 @@ export class NotificationComponent implements OnInit {
         })
         console.log(this.notificationBadge)
       });
-    this.auth.user$.subscribe((data) => {
-      this.doctorName = data?.email?.split('@')[0];
-      this.doctorEmail = data?.email;
+      // this.doctorName  = String(window.localStorage.getItem("DocName"))
+      this.auth.user$.subscribe((data) => {
+        this.doctorName = data?.email?.split('@')[0];
+        this.doctorEmail = data?.email
     });
     
     this.appointmentService.getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
@@ -123,11 +139,13 @@ export class NotificationComponent implements OnInit {
                   patient : pat
                 })
             this.totalPatients = this.patientByAppointments.length;
+            console.log(this.totalPatients);
               }
             })
           })
         })
       })
+      
       console.log(this.patientByAppointments);
       console.log(this.newAppPat);
       

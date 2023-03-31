@@ -7,7 +7,8 @@
     <li style="font-size: 1rem;">Patient history</li>
   </mat-toolbar>
 </p> -->
-
+<mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<!-- <h2 style="text-align: center; margin-top: 10rem; color: tomato;" *ngIf="basics.length <= 0">No appointments found 🙁</h2>
 <div class="container">
   <div class="card-main-section" *ngFor="let basic of basics let i = index">
     <div>
@@ -21,9 +22,9 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
             </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
       
-          <mat-accordion>
+          <!-- <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -31,7 +32,9 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
       
-                <div class="basic-section">
+                <div style="display: flex; justify-content: center;">
+                  <div class="basic-section">
+                    <h2 style="text-align: center; margin-top: 10rem; color: tomato;" *ngIf="basics.length <= 0">No data found 🙁</h2>
                     <li>BP</li>
                     <p>{{basic.bp}}</p>
                     <li>SpO2</li>
@@ -46,49 +49,124 @@
                     <p>{{basic.temperature}}</p>
                     <li>Blood Group</li>
                     <p>{{basic.bloodGroup}}</p>
+                  </div>
                 </div>
             </mat-expansion-panel>
-          </mat-accordion>  
+          </mat-accordion>   -->
           
-          <mat-accordion>
+          <!-- <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Test details
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <div *ngFor="let health of healths">
-                <div class="tests-section">
-                    <li>Blood Test</li>
-                    <p>{{health.test}}</p>
-                    <li>Result</li>
-                    <p>{{health.result}}</p>
-                  </div>
-                  <mat-divider></mat-divider>
+              <div *ngFor="let health of test">
+                <h2 style="text-align: center; margin-top: 10rem; color: tomato;" *ngIf="test.length <= 0">No data found 🙁</h2>
+                <div style="width: fit-content; margin: auto;">
+                <div class="drugs-section" style="display: grid; grid-template-columns: repeat(2,1fr);">
+                  <li>{{health.test}}</li>
+                  <p>{{health.result}}</p>
                 </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-      
-      
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Drugs details
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div *ngFor="let health of healths">
-              <div class="drugs-section">
-                <li>{{health.drugs}}</li>
               </div>
+                <mat-divider></mat-divider>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+            <!-- <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Drugs details
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let health of drug">
+                  <div style="width: fit-content; margin: auto;">
+                  <div class="drugs-section" style="display: grid; grid-template-columns: repeat(2,1fr);">
+                    <li>{{health.drug}}</li>
+                    <p>{{health.quantity}}</p>
+                  </div>
+                </div>
+                  <mat-divider></mat-divider>
               </div>
             </mat-expansion-panel>
-          </mat-accordion>
-        </mat-accordion>
-        
+          </mat-accordion> -->
+        <!-- </mat-accordion>
       </mat-card>
     </div>
   </div>
+</div> -->
+
+<div style="width: 800px; margin: auto;">
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Basic details
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <div style="display: flex; justify-content: center;" *ngFor="let basic of basics let j = index" >
+          <p>Appointment {{j+1}}</p> 
+        <div class="basic-section">
+          <h2 style="text-align: center; margin-top: 10rem; color: tomato;" *ngIf="basics.length <= 0">No data found 🙁</h2>
+          <li>BP</li>
+          <p>{{basic.bp}}</p>
+          <li>SpO2</li>
+          <p>{{basic.spO2}}</p>
+          <li>Heart Rate</li>
+          <p>{{basic.heart_Rate}}</p>
+          <li>Height</li>
+          <p>{{basic.height}}</p>
+          <li>Weight</li>
+          <p>{{basic.weight}}</p>
+          <li>Temperature</li>
+          <p>{{basic.temperature}}</p>
+          <li>Blood Group</li>
+          <p>{{basic.bloodGroup}}</p>
+        </div>
+      </div>
+  </mat-expansion-panel>
+</mat-accordion>  
+
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Drugs details
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let health of drug; let i = index">
+      <div style="width: fit-content; margin: auto;">
+      <div class="drugs-section" style="display: grid; grid-template-columns: repeat(2,1fr);">
+        <li>{{health.drug}}</li>
+        <p>{{health.quantity}}</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+  </div>
+</mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Test details
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let health of test; let i = index">
+      <h2 style="text-align: center; margin-top: 10rem; color: tomato;" *ngIf="test.length <= 0">No data found 🙁</h2>
+      <div style="width: fit-content; margin: auto;">
+      <div class="drugs-section" style="display: grid; grid-template-columns: repeat(2,1fr);">
+        <li>{{health.test}}</li>
+        <p>{{health.result}}</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+  </div>
+</mat-expansion-panel>
+</mat-accordion>
 </div>
 
 <!-- <body class="body-container">

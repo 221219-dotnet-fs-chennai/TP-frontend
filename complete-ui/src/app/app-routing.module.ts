@@ -92,7 +92,7 @@ const routes: Routes = [
     path: 'show-doctors/:day', component:ShowDoctorsComponent,
   },
   {
-    path: 'patient-history-doctor-view/:id', component:DoctorHistoryViewComponent,
+    path: 'patient-history-doctor-view/:id/:AID', component:DoctorHistoryViewComponent,
   },
   {
     path: 'patient-history-nurse-view/:id',component: PatientHistoryComponent

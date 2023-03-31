@@ -51,7 +51,7 @@ export class AppointmentRequestsComponent implements OnInit {
             }
           })
         })
-      });
+      })
       console.log(this.patientAppointmentInfo)
       console.log(data);
     });

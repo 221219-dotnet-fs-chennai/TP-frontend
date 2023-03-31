@@ -5,7 +5,7 @@ import { AvailabilityService, DoctorSchedule } from '../availability.service';
 import { localStorageToken } from './localstorage.token';
 import { BookingAlertComponent } from '../booking-alert/booking-alert.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-doctors',
@@ -15,14 +15,16 @@ import { ActivatedRoute } from '@angular/router';
 export class ShowDoctorsComponent implements OnInit {
 
   constructor(private schedule: AvailabilityService, @Inject(localStorageToken) private localStorage : any,
-   public dialog: MatDialog, private activatedRoute: ActivatedRoute) {}
+   public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router : Router) {}
   schedules : Schedule[] = [] 
+  isLoading = false  
   getDoctorIds(event : Schedule[]) {
     event.forEach(ele => this.schedules.push(ele));
   }
 
   doctorSchedule : DoctorSchedule[] = [] 
   ngOnInit(): void {
+    this.isLoading = true
     let day
     this.activatedRoute.params.subscribe((data) => day = data['day'])
     this.schedule.GetDaySchedule(window.localStorage.getItem('selectedDay')).subscribe((data) => {
@@ -37,11 +39,16 @@ export class ShowDoctorsComponent implements OnInit {
                 Doctor : doc,
                 schedule : sch 
               })
+              this.isLoading = false
             }
           });
         })
       })
     })
+  }
+
+  goBack(){
+    this.router.navigate(['patient-dashboard'])
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string, doctor_Id : string | undefined): void {

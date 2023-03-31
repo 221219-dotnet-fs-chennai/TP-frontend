@@ -38,11 +38,17 @@
                             <div class="card-content">
                                 <mat-card-content>Appointment date : {{capp.appointment.date}}</mat-card-content>
                             </div>
+                            <div style="display: flex; justify-content: flex-end; margin-right: 7.5rem;">
+                                
+                                <div class="card-content">
+                                    <button mat-stroked-button color="accent" class="pick-btn" (click)="pickAppointment(capp.appointment.appointmentId)">Pick</button>
+                                </div>
+                                
+                            </div>
                         </div>
+                        
                     </div>
-                    <div >
-                        <button mat-stroked-button color="accent" class="pick-btn" (click)="pickAppointment(capp.appointment.appointmentId)">Pick</button>
-                    </div>
+                   
                 </mat-card>
             </div>
         </div>

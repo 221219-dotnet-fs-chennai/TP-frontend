@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit{
           window.alert("Email and Password doesnt match, tryagain")
           this.isLoading = false
         }
-        else if(data == 1){
+        else{
           //window.alert("Account with this email already exists, please Login!")
           window.localStorage.setItem("pEmail", this.loginForm.getRawValue().email.toString())
           window.localStorage.setItem("pPassword", this.loginForm.getRawValue().password.toString())
