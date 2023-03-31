@@ -35,7 +35,7 @@
                     </div>
                     <button #x [value]="pa.appointment.appointmentId" style="display: none;"></button>
                     <!-- {{x.value}} - {{appointment.name}} -->
-                    {{pa.patient.fullname}}    {{pa.appointment.status}}
+                    {{pa.patient.fullname}} 
                 </mat-panel-title>
                 <mat-panel-description>
                     {{pa.appointment.date}}
@@ -51,11 +51,11 @@
                 </button>
                 <span class="example-spacer2"></span>
                 <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,1)"
-                    matTooltip="accept request" (click)="pa.appointment.status=1">
+                    matTooltip="accept request" (click)="pa.appointment.status=1" (click)="Approve(pa.patient.fullname)">
                     <mat-icon>done</mat-icon>Accept
                 </button>
                 <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,2)"
-                    matTooltip="reject request" (click)="pa.appointment.status=2" >
+                    matTooltip="reject request" (click)="pa.appointment.status=2" (click)="Decline(pa.patient.fullname)">
                     <mat-icon>clear</mat-icon>Reject
                 </button>
                 <br>

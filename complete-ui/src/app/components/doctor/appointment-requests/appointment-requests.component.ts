@@ -8,6 +8,7 @@ import { PatientInfoService } from 'src/app/services/patient-info.service';
 import { PatientInfo } from '../../login.service';
 import { PatientAppointmentInfo } from 'src/app/services/patient-info.service';
 import { elementAt } from 'rxjs';
+import * as emailjs from 'emailjs-com';
 
 @Component({
   selector: 'app-appointment-requests',
@@ -29,6 +30,8 @@ export class AppointmentRequestsComponent implements OnInit {
   patientInfos !: PatientInfo[]
 
   patientAppointmentInfo : PatientAppointmentInfo[] = []
+
+  patientEmail : string = String(window.localStorage.getItem('pEmail'))
 
 
   ngOnInit(): void {
@@ -81,5 +84,40 @@ export class AppointmentRequestsComponent implements OnInit {
 
   navToDashboard(){
     this,this.router.navigate(['doctor-dashboard'])
+  }
+
+
+  Approve(patientName : string): void {
+    emailjs.send('service_mhx68zj', 'template_nh6fw5n', {
+      to_email: this.patientEmail,
+      message: 'Your Doctor Appointment is Accepted',
+      reply_to: 'bhanu',
+      from_name:'Perseverance Hospital',
+      to_name: patientName
+    },'RgiBYLCzXYUk7ASBx').then(
+      (response: emailjs.EmailJSResponseStatus) => {
+        console.log('SUCCESS!', response.status, response.text);
+      },
+      (error) => {
+        console.log('FAILED...', error);
+      }
+    );
+  }
+
+  Decline(patientName : string): void {
+    emailjs.send('service_mhx68zj', 'template_nh6fw5n', {
+      to_email: this.patientEmail,
+      message: 'Your Doctor Appointment is Declined',
+      reply_to: 'bhanu',
+      from_name:'Perseverance Hospital',
+      to_name: patientName
+    },'RgiBYLCzXYUk7ASBx').then(      
+      (response: emailjs.EmailJSResponseStatus) => {
+        console.log('SUCCESS!', response.status, response.text);
+      },
+      (error) => {
+        console.log('FAILED...', error);
+      }
+      );
   }
 }

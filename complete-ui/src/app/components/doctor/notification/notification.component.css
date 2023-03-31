@@ -133,6 +133,27 @@
   right: 5%;
 }
 
+.no-patients{
+  position: relative;
+  width : 60%;
+  display: flex;
+  justify-content: center;
+  font-size: large;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  color : tomato;
+  text-align: center;
+  margin: auto;
+}
+
+.icon-gap{
+  position: relative;
+  margin-right: 20px;
+}
+
+
+
+
 /* .patient-container{
   position : relative;
   width : 50%;
