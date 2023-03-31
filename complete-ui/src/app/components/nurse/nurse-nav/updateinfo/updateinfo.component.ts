@@ -42,6 +42,10 @@ export class UpdateinfoComponent implements OnInit {
       this.patId = data['pid']
       this.appId = data['aid']
       this.appointmentId = data['aid']
+      console.log(this.patId);
+      console.log(this.appId);
+      
+      
     })
 
     this.updateform = this.fb.group({

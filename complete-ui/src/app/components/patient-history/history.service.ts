@@ -1,0 +1,76 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, of } from 'rxjs';
+import { Guid } from 'guid-typescript';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HistoryService {
+
+  constructor(private http : HttpClient) { }
+
+  getHR(id : string | undefined):Observable<HealthR[]>{
+    return this.http.get<HealthR[]>(`http://localhost:5103/apigateway/GetHR/${id}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+  getBR(id : string | undefined): Observable<BasicR[]>{
+    return this.http.get<BasicR[]>(`http://localhost:5103/apigateway/GetBR/${id}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+  getTR(id : string | undefined , AID:string| undefined):Observable<TestR[]>{
+    return this.http.get<TestR[]>(`http://localhost:5103/apigateway/GetTRByAID/${id}/${AID}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+  getMR(id : string | undefined, AID : string | undefined){
+    return this.http.get(`http://localhost:5103/apigateway/GetMR/${id}/${AID}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+  getAR(id : string | undefined, AID : string | undefined){
+   return this.http.get(`http://localhost:5103/apigateway/GetHR/${id}/${AID}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+}
+
+export interface HealthR{
+  id : Guid
+  dateTime : string
+  patientId : string
+  doctorId : string
+  appointmentId : string
+  conclusion : string
+}
+
+export interface BasicR{
+  id : Guid
+  dateTime : string
+  nurseId : string
+  appointmentId : string
+  patientId : string
+  bp : string
+  spO2: string
+  weight : string
+  height: string
+  bloodGroup : string
+  temperature : string
+}
+
+export interface TestR{
+  id : Guid
+  healthId : string
+  appointmentId : string
+  test : string
+  result  : string
+}
+
+export interface AllR{
+  healthR : HealthR[]
+  basicR : BasicR
+}
+// {
+//   "id": "0385b46a-1073-4855-a1cc-0694831a9734",
+//   "healthId": "4979f825-324a-4351-b0da-21732eeb3732",
+//   "appointmentId": "85cc289a-8c27-4a1d-998f-c65282cfc6b7",
+//   "test": "Hemoglobin count",
+//   "result": "14 g/dL"
+// },

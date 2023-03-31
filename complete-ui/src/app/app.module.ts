@@ -80,6 +80,7 @@ import { InfoComponent } from './components/admin/update-schedule/info/info.comp
 import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component';
 import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
 import { DialogComponent } from './components/nurse/dialog/dialog.component'; 
+import { PatientHistoryComponentNew } from './components/patient-history/patient-history.component';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { DialogComponent } from './components/nurse/dialog/dialog.component';
     InfoComponent,
     DoctorHistoryViewComponent,
     PickAppointmentsComponent,
-    DialogComponent
+    DialogComponent,
+    PatientHistoryComponentNew
   ],
   imports: [
     BrowserModule,
