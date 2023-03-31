@@ -17,6 +17,7 @@
     <br>
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Tests
@@ -51,6 +52,7 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Add medications
@@ -59,7 +61,7 @@
             Enter all prescribed medications
           </mat-panel-description>
         </mat-expansion-panel-header>
-
+        
         <br>
         <mat-hint style="color:rgb(231, 75, 75)"><b>Note : submit the medication to add new one </b></mat-hint>
         <br><br><br>
@@ -71,7 +73,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Quantity</mat-label>
-            <input matInput formControlName="Quantity" placeholder="Enter the medicine quantity">
+            <input matInput formControlName="Quantity" placeholder="Eg. 1-1-0/day for 2Days">
             <mat-icon matSuffix>assignment</mat-icon>
           </mat-form-field>
           <div class="test-btn">

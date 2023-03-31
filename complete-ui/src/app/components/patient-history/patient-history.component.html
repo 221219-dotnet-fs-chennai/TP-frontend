@@ -1,0 +1,19 @@
+<p>patient-history works!</p>
+<ol *ngFor="let i of mainArr">
+  <ol *ngFor="let j of i.healthR">
+    <h2>App. {{j.appointmentId}}</h2>
+    <ol>
+      <h3>Conclusion</h3>
+      <li>{{j.conclusion}}</li><br>
+    </ol>
+    <ol>  
+      <h3>Basic health history</h3>
+      <li>{{i.basicR.bloodGroup}}</li>
+      <li>{{i.basicR.bp}}</li>
+      <li>{{i.basicR.height}}</li>
+      <li>{{i.basicR.weight}}</li>
+      <li>{{i.basicR.spO2}}</li>
+      <li>{{i.basicR.temperature}}</li>
+    </ol>
+  </ol>
+</ol>
