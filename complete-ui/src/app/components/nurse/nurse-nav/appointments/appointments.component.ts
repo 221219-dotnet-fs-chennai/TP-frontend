@@ -43,7 +43,8 @@ export class AppointmentsComponent implements OnInit {
   isLoading = true;
   ngOnInit(): void {
     this.auth.user$.subscribe((data) => {
-      this.nurseName = data?.email?.split("@")[0]
+      window.localStorage.setItem('NurseName', String(data?.email?.split("@")[0]))
+      this.nurseName = window.localStorage.getItem('NurseName')
     });
 
     this.appointmentService.getAppointmentsByStatus(3).subscribe((appointmentsBy3) => {
@@ -81,7 +82,7 @@ export class AppointmentsComponent implements OnInit {
 
   }
 
-  nurseName !: string | undefined
+  nurseName !: string | null
 
   setStep(index: number) {
     this.step = index;

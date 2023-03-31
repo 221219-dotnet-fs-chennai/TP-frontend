@@ -89,7 +89,6 @@ export class NotificationComponent implements OnInit {
   appId !: string
 
   ngOnInit() {
-    this.totalPatients = this.patients.length;
     this.appointmentService
       .getAppointmentsByStatus(0)
       .subscribe((data) => {
@@ -116,13 +115,14 @@ export class NotificationComponent implements OnInit {
 
               if( app.patientId?.toString() == pat.patId.toString() && (app.status == 3 || app.status == 4) && app.date == this.todayDate){
                 AppByDocId.forEach(appo => {
-                  if(appo.patientId?.toString() == pat.patId.toString())
+                  if((appo.patientId?.toString() == pat.patId.toString()) && (appo.status == 3 || appo.status == 4))
                   this.appointments.push(appo)
                 })
                 this.patientByAppointments.push({
                   appointment : this.appointments,
                   patient : pat
                 })
+            this.totalPatients = this.patientByAppointments.length;
               }
             })
           })
