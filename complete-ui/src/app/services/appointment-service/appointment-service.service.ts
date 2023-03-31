@@ -57,6 +57,6 @@ export class AppointmentServiceService {
 }
 
 export interface AppointmentPatient{
-  appointment : AppointmentDoctor[]
+  appointment : AppointmentDoctor
   patient : PatientInfo
 }
