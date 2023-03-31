@@ -10,7 +10,7 @@
     <mat-menu #notification="matMenu">
       <div mat-dialog-content *ngIf="notificationBadge <= 0">
         <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
-          <h3 style="margin-bottom: -0.5rem;">Zero appointment requests</h3>
+          <h4 style="margin-bottom: -0.5rem;">Zero appointment requests</h4>
         </div>
       </div>
     </mat-menu>
@@ -28,7 +28,7 @@
   <div class="inner1" *ngIf="totalPatients > 0; else noContent">
     <h1>Hello {{doctorName}}!</h1>
     <h2>Patients for today - {{date | date : 'EEEE'}}</h2>
-    <h3 id="total-patients">Total : {{totalPatients}}</h3>
+    <h4 id="total-patients">Total : {{totalPatients}}</h4>
     <br>
     <mat-accordion class="patient-container" multi="false">
       <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientByAppointments"

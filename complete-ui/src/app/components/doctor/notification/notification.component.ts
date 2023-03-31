@@ -93,6 +93,7 @@ export class NotificationComponent implements OnInit {
 
 
   ngOnInit() {
+    this.notificationBadge = 0
     this.appointmentService
       .getAppointmentsByStatus(0)
       .subscribe((data) => {
