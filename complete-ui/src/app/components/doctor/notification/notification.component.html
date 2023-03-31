@@ -10,7 +10,7 @@
     <mat-menu #notification="matMenu">
       <div mat-dialog-content *ngIf="notificationBadge <= 0">
         <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
-          <h3 style="margin-bottom: -0.5rem;">Zero appointment requests</h3>
+          <h4 style="margin-bottom: -0.5rem;">Zero appointment requests</h4>
         </div>
       </div>
     </mat-menu>
@@ -28,7 +28,7 @@
   <div class="inner1" *ngIf="totalPatients > 0; else noContent">
     <h1>Hello {{doctorName}}!</h1>
     <h2>Patients for today - {{date | date : 'EEEE'}}</h2>
-    <h3 id="total-patients">Total : {{totalPatients}}</h3>
+    <h4 id="total-patients">Total : {{totalPatients}}</h4>
     <br>
     <mat-accordion class="patient-container" multi="false">
       <mat-expansion-panel style="margin-bottom: 0.1rem;" *ngFor="let patient of patientByAppointments"
@@ -42,14 +42,14 @@
               <mat-icon *ngSwitchCase="'female'">female</mat-icon>
               <mat-icon *ngSwitchCase="'Female'">female</mat-icon>
               <mat-icon *ngSwitchDefault>account_circle</mat-icon>
-          </div>
+            </div>
             {{patient.patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
             Age : {{patient.patient.age}}
           </mat-panel-description>
-          <mat-panel-description >
-            <mat-icon *ngIf="patient.appointment[0].status == 4" style="color:tomato">thumb_up</mat-icon>
+          <mat-panel-description>
+            <mat-icon *ngIf="patient.appointment.status == 4" style="color:tomato">thumb_up</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -58,14 +58,15 @@
 
         <div class="example-button-row">
           <button class="btn-bottom-border" extended mat-button color="accent" matTooltip="View basic health details"
-            (click)="toggleBasicDetails()">
+            (click)="toggleBasicDetails(patient.patient.patId, patient.appointment.appointmentId)">
             <mat-icon>visibility</mat-icon>Basic details
           </button>
           <button class="btn-bottom-border" extended mat-button color="accent"
             matTooltip="View patient's health history" (click)="navToViewHistory(patient.patient.patId)">
             <mat-icon>visibility</mat-icon>Health history
           </button>
-          <button (click)="navToAddRecord(patient.patient.patId)" class="btn-bottom-border" extended mat-button color="warn" matTooltip="Add patient's health record">
+          <button (click)="navToAddRecord(patient.patient.patId)" class="btn-bottom-border" extended mat-button
+            color="warn" matTooltip="Add patient's health record">
             <mat-icon>add</mat-icon>Add record
           </button>
         </div>
@@ -78,7 +79,70 @@
           <br>
           <h2 style="text-align: center; color: green;"> {{patient.patient.fullname}}'s basic health record</h2>
           <div class="card-container">
-            <app-basic-details></app-basic-details>
+            <div *ngIf="patientBasicDetails != null; then showCard else dontShow"></div>
+            <!-- <app-basic-details></app-basic-details> -->
+            <ng-template #showCard>
+            <mat-card class="example-card" >
+              <mat-card-header>
+                <div class="card-head">
+                  <!-- <div mat-card-avatar class="example-header-image"></div> -->
+                  <!-- <mat-card-title>Appointment 1</mat-card-title>
+                  <mat-card-subtitle>13-MAR-2023</mat-card-subtitle> -->
+                </div>
+              </mat-card-header>
+              <mat-divider></mat-divider>
+              <mat-card-content class="card">
+                <h3>Basic Details</h3>
+                <div class="card-desp">
+                  <span>Blood pressure</span>
+                  <p>{{patientBasicDetails.bp}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>SpO2</span>
+                  <p>{{patientBasicDetails.spO2}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>Heart Rate</span>
+                  <p>{{patientBasicDetails.heartRate}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>Height</span>
+                  <p>{{patientBasicDetails.height}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>Weight</span>
+                  <p>{{patientBasicDetails.weight}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>Body Temparature</span>
+                  <p>{{patientBasicDetails.temperature}}</p>
+                </div>
+                <div class="card-desp">
+                  <span>Blood group</span>
+                  <p>{{patientBasicDetails.bloodGroup}}</p>
+                </div>
+                <h3 *ngIf="allregyLen > 0; then allergies else noAllergies">Patient allergies
+                </h3>
+                <ng-template #allergies>
+                  <div *ngFor="let allergy of patientBasicDetails?.allergy">
+                    <div class="card-desp">
+                      <span>{{allergy}}</span>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #noAllergies>
+                  <div class="card-desp">
+                    <span>Free of allergies</span>
+                  </div>
+                </ng-template>
+              </mat-card-content>
+            </mat-card>
+          </ng-template>
+          <ng-template #dontShow>
+            <mat-card >
+              <mat-card-title>Not added</mat-card-title>
+            </mat-card>
+          </ng-template>
           </div>
           <br>
           <br>
@@ -120,8 +184,8 @@
   </div>
   <ng-template #noContent>
     <div class="no-patients">
-    Hello {{doctorName}} <br>
-    Looks like here are no patients for today 
-  </div>
+      Hello {{doctorName}} <br>
+      Looks like here are no patients for today
+    </div>
   </ng-template>
 </div>

@@ -27,8 +27,8 @@ export class HistoryService {
     return this.http.get<Drugs[]>(`http://localhost:5103/apigateway/GetMRByAID/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
-  getAR(id : string | undefined, AID : string | undefined){
-   return this.http.get(`http://localhost:5103/apigateway/GetHR/${id}/${AID}`)
+  getAR(id : string | undefined, AID : string | undefined) : Observable<AllergyR[]>{
+   return this.http.get<AllergyR[]>(`http://localhost:5103/apigateway/GetARByAID/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
 }
@@ -47,6 +47,7 @@ heart_Rate: any;
   id : Guid
   dateTime : string
   nurseId : string
+  heartRate : number
   appointmentId : string
   patientId : string
   bp : string
@@ -80,6 +81,14 @@ export interface Drugs{
 //   "drug": "Fersamal ",
 //   "quantity": "1-1-1/day for 3Days"
 // },
+
+export interface AllergyR{
+  id: string,
+  healthId : string,
+  appointmentId : string,
+  allergy : string,
+  appointment : string | null
+}
 
 export interface AllR{
   healthR : HealthR
