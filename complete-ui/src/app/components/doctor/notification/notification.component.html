@@ -10,7 +10,7 @@
     <mat-menu #notification="matMenu">
       <div mat-dialog-content *ngIf="notificationBadge <= 0">
         <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
-          <h3 style="margin-bottom: -0.5rem;">Zero appointment requests 😍</h3>
+          <h3 style="margin-bottom: -0.5rem;">Zero appointment requests</h3>
         </div>
       </div>
     </mat-menu>
@@ -35,14 +35,21 @@
         class="expansions">
         <mat-expansion-panel-header (click)="hideAll()">
           <mat-panel-title>
-            <button #x [value]="patient.patient.fullname" tyle="display: none;"></button>
+            <button #x [value]="patient.patient.fullname" style="display: none;"></button>
+            <div [ngSwitch]="patient.patient.gender" class="icon-gap">
+              <mat-icon *ngSwitchCase="'male'">male</mat-icon>
+              <mat-icon *ngSwitchCase="'Male'">male</mat-icon>
+              <mat-icon *ngSwitchCase="'female'">female</mat-icon>
+              <mat-icon *ngSwitchCase="'Female'">female</mat-icon>
+              <mat-icon *ngSwitchDefault>account_circle</mat-icon>
+          </div>
             {{patient.patient.fullname}}
           </mat-panel-title>
           <mat-panel-description>
-            {{patient.patient.gender}}
+            Age : {{patient.patient.age}}
           </mat-panel-description>
-          <mat-panel-description>
-            {{patient.patient.age}}
+          <mat-panel-description >
+            <mat-icon *ngIf="patient.appointment[0].status == 4" style="color:tomato">thumb_up</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -113,6 +120,9 @@
     </mat-accordion>
   </div>
   <ng-template #noContent>
-    No patients for today
+    <div class="no-patients">
+    Hello {{doctorName}} <br>
+    Looks like here are no patients for today 
+  </div>
   </ng-template>
 </div>

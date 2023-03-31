@@ -39,9 +39,9 @@ export class UpdateinfoComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.params.subscribe((data) => {
-      this.patId = data['pid']
-      this.appId = data['aid']
-      this.appointmentId = data['aid']
+      this.patId = data['id']
+      this.appId = data['AID']
+      this.appointmentId = data['AID']
     })
 
     this.updateform = this.fb.group({
