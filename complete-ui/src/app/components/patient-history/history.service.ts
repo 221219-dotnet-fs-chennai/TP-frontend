@@ -26,8 +26,8 @@ export class HistoryService {
     return this.http.get(`http://localhost:5103/apigateway/GetMR/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
-  getAR(id : string | undefined, AID : string | undefined){
-   return this.http.get(`http://localhost:5103/apigateway/GetHR/${id}/${AID}`)
+  getAR(id : string | undefined, AID : string | undefined) : Observable<AllergyR[]>{
+   return this.http.get<AllergyR[]>(`http://localhost:5103/apigateway/GetARByAID/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
 }
@@ -45,6 +45,7 @@ export interface BasicR{
   id : Guid
   dateTime : string
   nurseId : string
+  heartRate : number
   appointmentId : string
   patientId : string
   bp : string
@@ -61,6 +62,14 @@ export interface TestR{
   appointmentId : string
   test : string
   result  : string
+}
+
+export interface AllergyR{
+  id: string,
+  healthId : string,
+  appointmentId : string,
+  allergy : string,
+  appointment : string | null
 }
 
 export interface AllR{

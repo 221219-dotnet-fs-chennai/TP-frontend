@@ -9,6 +9,9 @@ import { DatePipe, formatDate } from '@angular/common';
 import { PatientInfoService } from 'src/app/services/patient-info.service';
 import { patientinfo } from 'src/app/models/patientinfomodel';
 import { Guid } from 'guid-typescript';
+import { BasicDetails } from '../basic-details/basic-details.component';
+import { HistoryService } from '../../patient-history/history.service';
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -23,12 +26,13 @@ export class NotificationComponent implements OnInit {
     private datePipe: DatePipe,
     @Inject(LOCALE_ID) private locale: string,
     private appointmentService: AppointmentServiceService,
-    private patientinfo: PatientInfoService
-  ) {}
+    private patientinfo: PatientInfoService,
+    private historyService: HistoryService
+  ) { }
 
   title = 'Notification component';
   hidden = false;
-  notificationBadge : number = 0
+  notificationBadge: number = 0
   panelOpenState = false;
   showFiller = false;
   viewSidebar = true;
@@ -62,38 +66,38 @@ export class NotificationComponent implements OnInit {
   }
 
   navToAddRecord(PID: Guid) {
-    let AID : Guid = Guid.create()
-    let name : string = ''
+    let AID: Guid = Guid.create()
+    let name: string = ''
     this.patientByAppointments.forEach(pba => {
-      if(pba.patient.patId == PID) {
+      if (pba.patient.patId == PID) {
         name = pba.patient.fullname
-        pba.appointment.forEach(appo => {
-          if(appo.date == this.todayDate) {
-            AID = appo.appointmentId
-          }
-        })
+        AID = pba.appointment.appointmentId
       }
     })
-    this.route.navigate(['add-patient-health',name, PID, AID]);
+    this.route.navigate(['add-patient-health', name, PID, AID]);
   }
 
   appointmentdoctor: AppointmentDoctor[] = [];
   todayAppointment: AppointmentDoctor[] = [];
   appointmentpatient!: string[] | undefined[];
 
-  patientByAppointments : AppointmentPatient[] = []
-  newAppPat : any[] = []
-  doctorApp : any[] = []
+  patientByAppointments: AppointmentPatient[] = []
+  newAppPat: any[] = []
+  doctorApp: any[] = []
   patientsInfo: patientinfo[] = [];
-  appointments : AppointmentDoctor[] = []
+  appointments: AppointmentDoctor[] = []
   appId !: string
+  patientBasicDetails !: BasicDetails 
+  allregyLen : number = 0
+  allbasicDetails : AllBasicDetails[] = []
+
 
   ngOnInit() {
     this.appointmentService
       .getAppointmentsByStatus(0)
       .subscribe((data) => {
         data.forEach(element => {
-          if(element.doctorId == window.localStorage.getItem('Doctor')){
+          if (element.doctorId == window.localStorage.getItem('Doctor')) {
             console.log("Badge increased");
             this.notificationBadge += 1;
           }
@@ -104,33 +108,44 @@ export class NotificationComponent implements OnInit {
       this.doctorName = data?.email?.split('@')[0];
       this.doctorEmail = data?.email;
     });
-    
+
     this.appointmentService.getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
       .subscribe((AppByDocId) => {
-        this.doctorApp.push({AppByDocId})
-        this.patientinfo.getAllPatientInfos().subscribe((patients)=>{
-          AppByDocId.forEach(app =>{
-            patients.forEach(pat=>{
+        this.doctorApp.push({ AppByDocId })
+        this.patientinfo.getAllPatientInfos().subscribe((patients) => {
+          let pushedPatients : string[] = []
+          AppByDocId.forEach(app => {
+            patients.forEach(pat => {
               this.appointments = []
-
-              if( app.patientId?.toString() == pat.patId.toString() && (app.status == 3 || app.status == 4) && app.date == this.todayDate){
+              let notExists : boolean = true;
+              pushedPatients.forEach(ele => {
+                if(ele == pat.patId.toString()){
+                  notExists = false
+                }
+              })
+              if (app.patientId?.toString() == pat.patId.toString() && (app.status == 3 || app.status == 4) && app.date == this.todayDate && notExists) {
                 AppByDocId.forEach(appo => {
-                  if((appo.patientId?.toString() == pat.patId.toString()) && (appo.status == 3 || appo.status == 4))
-                  this.appointments.push(appo)
+                  if ((appo.patientId?.toString() == pat.patId.toString()) && (appo.status == 3 || appo.status == 4))
+                    this.appointments.push(appo)
                 })
+                this.appointments.forEach(patAppo => {
                 this.patientByAppointments.push({
-                  appointment : this.appointments,
-                  patient : pat
+                  appointment: patAppo,
+                  patient: pat
                 })
-            this.totalPatients = this.patientByAppointments.length;
+                console.log(this.patientByAppointments)
+              })
+                pushedPatients.push(pat.patId.toString());
+                console.log(pushedPatients)
+                this.totalPatients = this.patientByAppointments.length;
               }
             })
           })
         })
       })
-      console.log(this.patientByAppointments);
-      console.log(this.newAppPat);
-      
+    console.log(this.patientByAppointments);
+    console.log(this.newAppPat);
+
   }
 
   toggleBadgeVisibility() {
@@ -138,7 +153,7 @@ export class NotificationComponent implements OnInit {
   }
 
   enableSidebar() {
-    if(this.notificationBadge > 0)
+    if (this.notificationBadge > 0)
       this.route.navigate(['appointment-requests']);
   }
 
@@ -156,30 +171,46 @@ export class NotificationComponent implements OnInit {
     this.basicDetails = false;
   }
 
-  toggleBasicDetails() {
+  toggleBasicDetails(pid: Guid, aid: Guid) {
+    console.log("pid : ", pid )
+    console.log("aid : ", aid )
+    // this.patientBasicDetails = null
+    this.allregyLen = 0
+    this.historyService.getBR(pid.toString()).subscribe((data) => {
+      console.log("basic details")
+      console.log(data)
+      data.forEach(pbr => {
+        if (pbr.appointmentId == aid.toString()) {
+          console.log(pbr)
+          this.patientBasicDetails = {
+            bp: pbr.bp,
+            heartRate: pbr.heartRate,
+            spO2: pbr.spO2,
+            height: pbr.height,
+            weight: pbr.weight,
+            temperature: pbr.temperature,
+            bloodGroup: pbr.bloodGroup,
+            health_Id: pbr.patientId,
+            allergy: []
+          }
+          this.historyService.getAR( pbr.patientId, pbr.appointmentId).subscribe((response) => {
+            console.log(response)
+            if(response)
+            response.forEach(element => {
+              this.patientBasicDetails?.allergy.push(element.allergy)
+              this.allregyLen = 2
+            })
+          })
+        }
+        console.log(this.patientBasicDetails)
+      })
+    })
+    console.log(this.patientBasicDetails)
     if (this.basicDetails == false) this.basicDetails = true;
     else this.basicDetails = false;
     this.history = false;
     this.healthRecord = false;
   }
-
-  patients: Patient[] = [
-    {
-      id: '1',
-      name: 'Patient 1',
-      gender: 'Male',
-    },
-    {
-      id: '2',
-      name: 'Patient 2',
-      gender: 'Male',
-    },
-    {
-      id: '3',
-      name: 'Patient 3',
-      gender: 'Male',
-    },
-  ];
 }
 
 export interface Patient {
@@ -197,4 +228,10 @@ export interface Appointment {
 
 export interface PatientId {
   patientId?: string;
+}
+
+
+export interface AllBasicDetails{
+  appoId : string
+  basicHealth : BasicDetails
 }
