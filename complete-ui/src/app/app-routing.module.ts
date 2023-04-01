@@ -65,7 +65,7 @@ const routes: Routes = [
     path: 'add-nurse-details', component: AddNurseComponent
   },
   {
-    path: 'doctor-dashboard', component: NotificationComponent,
+    path: 'doctor-dashboard/:name/:docId', component: NotificationComponent,
   },
   {
     path: 'appointment-requests', component:AppointmentRequestsComponent,

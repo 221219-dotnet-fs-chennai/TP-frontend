@@ -41,8 +41,11 @@ export class AppointmentRequestsComponent implements OnInit {
         console.log(response)
         data.forEach(appo => {
           response.forEach(pati => {
-            console.log(pati.patId)
+            console.log(pati.patId.toString())
+            console.log(appo.patientId)
+            console.log(appo.patientId == pati.patId.toString() , "    " ,appo.doctorId == window.localStorage.getItem('Doctor'))
             if(appo.patientId == pati.patId.toString() && appo.doctorId == window.localStorage.getItem('Doctor')) {
+              console.log("inside if")
               this.patientAppointmentInfo.push({
                 appointment : appo,
                 patient : pati
@@ -83,14 +86,14 @@ export class AppointmentRequestsComponent implements OnInit {
   }
 
   navToDashboard(){
-    this,this.router.navigate(['doctor-dashboard'])
+    this,this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
   }
 
 
-  Approve(patientName : string): void {
+  Approve(patientName : string, email : string , date : string | undefined): void {
     emailjs.send('service_mhx68zj', 'template_nh6fw5n', {
-      to_email: this.patientEmail,
-      message: 'Your Doctor Appointment is Accepted',
+      to_email: email,
+      message: `Your Doctor appointment for ${date} is accepted`,
       reply_to: 'bhanu',
       from_name:'Perseverance Hospital',
       to_name: patientName
@@ -104,10 +107,10 @@ export class AppointmentRequestsComponent implements OnInit {
     );
   }
 
-  Decline(patientName : string): void {
+  Decline(patientName : string, email : string , date : string | undefined): void {
     emailjs.send('service_mhx68zj', 'template_nh6fw5n', {
-      to_email: this.patientEmail,
-      message: 'Your Doctor Appointment is Declined',
+      to_email: email,
+      message: `Your Doctor appointment for ${date} is rejected`,
       reply_to: 'bhanu',
       from_name:'Perseverance Hospital',
       to_name: patientName

@@ -2,6 +2,19 @@
   <mat-toolbar color="primary" class="nav-bar">
     <span>Doctor Dashboard</span>
     <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" matTooltip="view notifications" [matMenuTriggerFor]="info"
+      aria-label="Example icon-button with share icon">
+      <mat-icon matBadgeColor="warn">info</mat-icon>
+    </button>
+    <mat-menu #info="matMenu">
+      <div class="icon-info">
+        <ul>
+          <li><mat-icon style="color:tomato; size: 0.5rem;">thumb_up</mat-icon>: basic health details added </li>
+          <!-- <li><mat-icon style="color:tomato">male</mat-icon>: Male patient</li>
+        <li><mat-icon style="color:tomato">female</mat-icon>: Female patient</li> -->
+        </ul>
+      </div>
+    </mat-menu>
     <button mat-icon-button class="example-icon" matTooltip="view notifications" [matMenuTriggerFor]="notification"
       (click)="notificationBadge > 0 && enableSidebar()" aria-label="Example icon-button with share icon">
       <mat-icon [matBadge]="notificationBadge > 0? notificationBadge : null"
@@ -23,10 +36,11 @@
   </mat-toolbar>
 </p>
 
-<br><br><br>
+<br>
+<br><br>
 <div class="outer">
   <div class="inner1" *ngIf="totalPatients > 0; else noContent">
-    <h1>Hello {{doctorName}}!</h1>
+    <h1>Hello {{docName}}</h1>
     <h2>Patients for today - {{date | date : 'EEEE'}}</h2>
     <h4 id="total-patients">Total : {{totalPatients}}</h4>
     <br>
@@ -77,74 +91,78 @@
         <mat-card class="class-container" *ngIf="basicDetails">
 
           <br>
-          <h2 style="text-align: center; color: green;"> {{patient.patient.fullname}}'s basic health record</h2>
+          <!-- <h2 style="text-align: center; color: green;"> {{patient.patient.fullname}}'s basic health record</h2> -->
           <div class="card-container">
             <div *ngIf="patientBasicDetails != null; then showCard else dontShow"></div>
             <!-- <app-basic-details></app-basic-details> -->
             <ng-template #showCard>
-            <mat-card class="example-card" >
-              <mat-card-header>
-                <div class="card-head">
-                  <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                  <!-- <mat-card-title>Appointment 1</mat-card-title>
-                  <mat-card-subtitle>13-MAR-2023</mat-card-subtitle> -->
-                </div>
-              </mat-card-header>
-              <mat-divider></mat-divider>
-              <mat-card-content class="card">
-                <h3>Basic Details</h3>
-                <div class="card-desp">
-                  <span>Blood pressure</span>
-                  <p>{{patientBasicDetails.bp}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>SpO2</span>
-                  <p>{{patientBasicDetails.spO2}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>Heart Rate</span>
-                  <p>{{patientBasicDetails.heartRate}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>Height</span>
-                  <p>{{patientBasicDetails.height}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>Weight</span>
-                  <p>{{patientBasicDetails.weight}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>Body Temparature</span>
-                  <p>{{patientBasicDetails.temperature}}</p>
-                </div>
-                <div class="card-desp">
-                  <span>Blood group</span>
-                  <p>{{patientBasicDetails.bloodGroup}}</p>
-                </div>
-                <h3 *ngIf="allregyLen > 0; then allergies else noAllergies">Patient allergies
-                </h3>
-                <ng-template #allergies>
-                  <div *ngFor="let allergy of patientBasicDetails?.allergy">
-                    <div class="card-desp">
-                      <span>{{allergy}}</span>
-                    </div>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div class="card-head">
+                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+                    <h3>{{patient.patient.fullname}}'s basic health record</h3>.
+                    <mat-icon color="warn">assignment</mat-icon>
+                    <!-- <mat-card-subtitle>13-MAR-2023</mat-card-subtitle> -->
                   </div>
-                </ng-template>
-                <ng-template #noAllergies>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="card">
+                  <!-- <h3>Basic Details</h3> -->
                   <div class="card-desp">
-                    <span>Free of allergies</span>
+                    <span>Blood pressure</span>
+                    <p>{{patientBasicDetails?.bp}}</p>
                   </div>
-                </ng-template>
-              </mat-card-content>
-            </mat-card>
-          </ng-template>
-          <ng-template #dontShow>
-            <mat-card >
-              <mat-card-title>Not added</mat-card-title>
-            </mat-card>
-          </ng-template>
+                  <div class="card-desp">
+                    <span>SpO2</span>
+                    <p>{{patientBasicDetails?.spO2}}</p>
+                  </div>
+                  <div class="card-desp">
+                    <span>Heart Rate</span>
+                    <p>{{patientBasicDetails?.heartRate}}</p>
+                  </div>
+                  <div class="card-desp">
+                    <span>Height</span>
+                    <p>{{patientBasicDetails?.height}}</p>
+                  </div>
+                  <div class="card-desp">
+                    <span>Weight</span>
+                    <p>{{patientBasicDetails?.weight}}</p>
+                  </div>
+                  <div class="card-desp">
+                    <span>Body Temparature</span>
+                    <p>{{patientBasicDetails?.temperature}}</p>
+                  </div>
+                  <div class="card-desp">
+                    <span>Blood group</span>
+                    <p>{{patientBasicDetails?.bloodGroup}}</p>
+                  </div>
+                  <h3 *ngIf="allregyLen > 0; then allergies else noAllergies">Patient allergies
+                  </h3>
+                  <!-- <div class="card-desp"> -->
+                  <ng-template #allergies>
+                    <div class="card-desp" *ngFor="let allergyObj of patientBasicDetails?.allergies; index as i">
+                      <span>Allergy-{{i+1}}</span>
+                      <!-- <div > -->
+                        <p>{{allergyObj.allergy}}</p>
+                      <!-- </div> -->
+                    </div>
+                  </ng-template>
+                  <ng-template #noAllergies>
+                    <div class="card-desp">
+                      <span>Allergies</span>
+                      <p>Free of allergies</p>
+                    </div>
+                  </ng-template>
+                  <!-- </div> -->
+                </mat-card-content>
+              </mat-card>
+            </ng-template>
+            <ng-template #dontShow>
+              <div>
+                <mat-card-title style="color : red; font-size : o.8rem">Basic details are not added</mat-card-title>
+              </div>
+            </ng-template>
           </div>
-          <br>
           <br>
         </mat-card>
 
@@ -184,8 +202,8 @@
   </div>
   <ng-template #noContent>
     <div class="no-patients">
-      Hello {{doctorName}} <br>
-      Looks like here are no patients for today
+      Hello {{docName}} 👍<br><br>
+      Looks like there are no patients for today 
     </div>
   </ng-template>
 </div>

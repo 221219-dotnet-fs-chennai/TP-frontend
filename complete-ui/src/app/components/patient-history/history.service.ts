@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Guid } from 'guid-typescript';
+import { BasicDetails } from '../doctor/basic-details/basic-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class HistoryService {
   }
   getAR(id : string | undefined, AID : string | undefined) : Observable<AllergyR[]>{
    return this.http.get<AllergyR[]>(`http://localhost:5103/apigateway/GetARByAID/${id}/${AID}`)
+    .pipe(catchError(err =>of("err", err)))
+  }
+
+  getPatientBasicRecord(id : string | undefined, AID : string | undefined): Observable<BasicDetails[]>{
+    return this.http.get<BasicDetails[]>(`http://localhost:5103/apigateway/GetBasic/ByPatientId/ByAppointmentId/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
 }

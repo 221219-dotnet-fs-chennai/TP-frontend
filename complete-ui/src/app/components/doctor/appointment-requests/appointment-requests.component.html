@@ -51,11 +51,11 @@
                 </button>
                 <span class="example-spacer2"></span>
                 <button class="btn-bottom-border" extended mat-button color="accent" style="color: green;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,1)"
-                    matTooltip="accept request" (click)="pa.appointment.status=1" (click)="Approve(pa.patient.fullname)">
+                    matTooltip="accept request" (click)="pa.appointment.status=1" (click)="Approve(pa.patient.fullname, pa.patient.email, pa.appointment.date)">
                     <mat-icon>done</mat-icon>Accept
                 </button>
                 <button class="btn-bottom-border" extended mat-button color="accent" style="color: red;" (click)="updateStatusByDoctor(pa.appointment.appointmentId,2)"
-                    matTooltip="reject request" (click)="pa.appointment.status=2" (click)="Decline(pa.patient.fullname)">
+                    matTooltip="reject request" (click)="pa.appointment.status=2" (click)="Decline(pa.patient.fullname, pa.patient.email, pa.appointment.date)">
                     <mat-icon>clear</mat-icon>Reject
                 </button>
                 <br>
