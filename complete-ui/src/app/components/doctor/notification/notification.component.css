@@ -138,7 +138,7 @@
   width : 60%;
   display: flex;
   justify-content: center;
-  font-size: large;
+  font-size: 1.5rem;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
   color : tomato;
@@ -151,7 +151,9 @@
   margin-right: 20px;
 }
 
-
+.icon-info{
+  padding : 10px;
+}
 
 
 /* .patient-container{
@@ -194,7 +196,8 @@
 .example-card {
   margin-left: 2rem;
   margin-top: 2rem;
-  max-width: 400px;
+  position : relative;
+  width: 90%;
   border-radius: 15px;
   padding: 2rem;
   margin-bottom: 1rem;
@@ -214,29 +217,34 @@ mat-card-title{
 }
 
 p{
-  font-size: 0.675rem;
+  font-size: 0.775rem;
   font-weight: 500;
   color: hsl(215, 51%, 70%);
 }
 
 span, ol{
-  font-size: 0.775rem;
+  font-size: 0.850rem;
   font-weight: 500;
   letter-spacing: 3;
   color: white;
 }
 
 h3{
-  font-size: 0.785rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 3;
   color:hsl(178, 100%, 50%);
+  position : relative;
+  top : 8px;
 }
 
 
 .card-head{
   display: flex;
-  gap: 7.9rem;
+  flex-direction: row;
+  margin : auto;
+  justify-content: center;
+  gap: 0.4rem;
   align-items: center;
   margin-bottom: 1rem;
 }
