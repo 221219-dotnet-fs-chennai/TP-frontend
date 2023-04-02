@@ -49,8 +49,8 @@ export class NavBarComponent {
               let jjson = JSON.parse(json)
               // console.log(jjson);
               window.localStorage.setItem("Nurse", jjson[0].id)
+              this.router.navigate(['/nurse-dashboard', jjson[0].name, jjson[0].id])
             })
-            this.router.navigate(['/nurse-dashboard']);
           }
           break;
         default:

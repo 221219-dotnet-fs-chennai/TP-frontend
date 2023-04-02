@@ -1,10 +1,11 @@
 .example-card {
-    max-width: 300px;
+    width: 350px;
     border-radius: 15px;
     margin-top: 6%;
+    padding: 2rem;
   }
-
-.card-container{
+  
+  .card-container{
     display : flex;
     flex-direction: row;
     gap: 7%;
@@ -16,10 +17,10 @@ h3{
     text-align: center;
 }
   
-  .example-header-image {
+  /* .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
-  }
+  } */
 
   .doctor-image{
     position: relative;
@@ -31,8 +32,10 @@ h3{
   .book-btn{
     display: flex;
     position: inherit;
-    right : 20px;
-    justify-content: flex-end;
+    justify-content: center;
+    margin-bottom: 1rem;
+    width: fit-content;
+    margin: auto;
   }
 
   button{

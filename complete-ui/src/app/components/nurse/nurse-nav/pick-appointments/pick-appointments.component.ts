@@ -27,9 +27,10 @@ export class PickAppointmentsComponent {
 
     pat !: PatientInfo
     doc !: Doctor
-
+    isLoading = false
   ngOnInit() {
     this.appointmentService.getAppointmentsByStatus(1).subscribe((appointments) => {
+      this.isLoading = true
       console.log(appointments);
         this.patientInfoService.getAllPatientInfos().subscribe((patients) => {
           console.log(patients);
@@ -51,6 +52,7 @@ export class PickAppointmentsComponent {
                 patient : this.pat,
                 doctor : this.doc
               })
+              this.isLoading  = false
             })
           })
         })
@@ -58,7 +60,7 @@ export class PickAppointmentsComponent {
   }
 
   navToNurseDashBoard(){
-    this.router.navigate(['nurse-dashboard']);
+    this.router.navigate(['nurse-dashboard', window.localStorage.getItem('NurseName'), window.localStorage.getItem('Nurse') ]);
   }
 
   pickAppointment(appointmentId : Guid | undefined) {
@@ -67,6 +69,16 @@ export class PickAppointmentsComponent {
       if(data != null) {
         this.openSnackBar()
       }
+      this.completeAppointments.forEach(element => {
+        if(element.appointment.appointmentId == appointmentId){
+          this.completeAppointments.findIndex(e=>{
+            if(e.appointment.appointmentId == appointmentId){
+              const idx = this.completeAppointments.indexOf(e)
+              // this.completeAppointments.slice(idx,1)
+            }
+          })
+        }        
+      });
     })
     // window.location.reload()
     console.log("reloaded")

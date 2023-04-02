@@ -16,18 +16,13 @@
             </div>
           </div>
         </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <div mat-dialog-content>
-          <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
-            <h3 style="margin-bottom: -0.5rem;">Profile</h3>
-            <mat-divider style="margin-top: 1rem;"></mat-divider>
-            <p style="font-weight: 200;">Name: <span style="font-weight: 500;">{{nurseName}}</span>
-              <mat-divider style="margin-top: 1rem;"></mat-divider>
-              <span style="font-weight: 200;">Email: <span style="font-weight: 500;">{{nurseEmail}}</span></span>
-            </p>
+        <button matTooltip="Info" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>info</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div mat-dialog-content>
+            <div style="padding: 0.5rem; margin-left: 1rem; margin-right: 1rem;">
+              <h3 style="margin-bottom: -0.5rem;">Click on the "🔔" to pick appointments</h3>
           </div>
         </div>
       </mat-menu>

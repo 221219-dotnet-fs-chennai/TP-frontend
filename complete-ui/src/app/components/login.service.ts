@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Doctor } from './admin/add-doctor/doctor';
 import { Nurse } from './admin/add-nurse/nurse';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class LoginService {
     return this.isLoggedIn
   }
 
-  getPatientByEmail(email : string | null) {
+  getPatientByEmail(email : string | null):Observable<PatientInfo[]> {
     return this.http.get<PatientInfo[]>(`http://localhost:5103/apigateway/PatientByEmail/${email}`)
   }
   getDoctorByEmail(email:string){

@@ -1,9 +1,17 @@
-
-<mat-card>
-    <mat-card-content>
-        <div class="appointment-card">
-            <h2 style="color: rgb(237, 97, 97);"><b>Available doctors</b></h2>
-        </div>
+<p >
+    <mat-toolbar color="primary">
+      <button mat-icon-button matTooltip="go back" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    <span class="example-spacer" style="flex: 1 1 auto;"></span>
+    <span style="font-size: 1rem;">Book Appointments</span>
+</mat-toolbar>
+<mat-progress-bar color="accent" mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  </p>
+  
+<mat-card style="height: 60px; margin-top: 2rem;">
+    <mat-card-content style="text-align: center;">
+        <h1 style="color: rgb(237, 97, 97);"><b>Available doctors</b></h1>
     </mat-card-content>
 </mat-card>
 
@@ -11,14 +19,15 @@
 <mat-card class="example-card" *ngFor="let schedule of doctorSchedule">
     <!-- <mat-card class="doctor-image"> -->
         <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Doctor image" class="doctor-image"> -->
-        <img mat-card-image src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Doctor image" class="doctor-image">
-    <!-- </mat-card> -->
+        <!-- </mat-card> -->
+        <div style="width: fit-content; margin: auto;">
+            <img mat-card-image src={{schedule.Doctor.imgUrl}} alt="Doctor image" class="doctor-image" width="100px" height="100px" style="object-fit: cover;">
+        </div>
     <br>
-    <h3><b>{{schedule.Doctor.name}}</b></h3>
     <mat-card-content >
+        <h3 style="margin-bottom: -0.375rem;"><b>{{schedule.Doctor.name}} </b><span style="color: gray; font-size: 0.875rem;">({{schedule.Doctor.specialization}})</span></h3>
         <!-- <h3><label>Doctor name : </label> {{schedule.doctorId}} </h3> -->
-        <h3>{{schedule.Doctor.specialization}} </h3>
-        <h3>{{schedule.Doctor.experience}} </h3>
+        <h3>{{schedule.Doctor.experience}}<span style="color: gray; font-size: 0.875rem;"> Yrs of Experience </span></h3>
         <!-- <p>{{schedule.schedule.doctorId}}</p> -->
     </mat-card-content>
     <br>
