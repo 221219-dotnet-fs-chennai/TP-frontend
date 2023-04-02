@@ -47,12 +47,13 @@ export class AppointmentRequestsComponent implements OnInit {
                 appointment : appo,
                 patient : pati
               })
+              console.log(this.appointmentdoctor);
+              console.log(this.patientAppointmentInfo)
               console.log("pushed");
             }
           })
         })
       })
-      console.log(this.patientAppointmentInfo)
       console.log(data);
     });
   }

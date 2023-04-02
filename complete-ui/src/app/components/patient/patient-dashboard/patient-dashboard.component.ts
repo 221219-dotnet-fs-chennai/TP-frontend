@@ -1,79 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { BookAppointmentComponent } from '../../book-appointment/book-appointment.component';
 import { PatientInfo } from '../../login.service';
 import { LoginService } from '../../login.service';
-import {
-  BasicR,
-  Drugs,
-  HistoryService,
-  TestR,
-} from '../../patient-history/history.service';
+import { CompleteInfoService } from '../complete-history/complete-info.service';
 
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
   styleUrls: ['./patient-dashboard.component.css'],
 })
-export class PatientDashboardComponent implements OnInit {
+export class PatientDashboardComponent implements OnInit, AfterViewInit {
   panelOpenState = false;
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private patService: LoginService,
-    private history: HistoryService
   ) {}
-  // openPopup(){
-  //   // this.dialog.open(BookappointmentComponent)
-  // }
-  patientInfo!: PatientInfo;
 
-  P_name!: string | undefined;
-  basics: BasicR[] = [];
-  test: TestR[] = [];
-  drug: Drugs[] = [];
-  isLoading = false;
-
+  ngAfterViewInit(): void {
+  }
+  
+  
+  patientInfo!: PatientInfo[]
+  P_name!: string | undefined
+  p_id !: Guid | undefined
+  isLoading = false
+  
   ngOnInit(): void {
     this.P_name = window.localStorage.getItem('pEmail')?.split('@')[0];
     let email = window.localStorage.getItem('pEmail');
     this.patService.getPatientByEmail(email).subscribe((data) => {
+      this.patientInfo = data
+      this.p_id = (data[0].patId)
+      // console.log(this.p_id)
       window.localStorage.setItem('patientId', data[0].email);
-      console.log(data[0].email)
-
-      this.history.getBR(data[0].email).subscribe((data1) => {
-        this.isLoading = true;
-        data1.forEach((b) => {
-          this.history
-            .getMR(data[0].email, b.appointmentId)
-            .subscribe((mData) => {
-              this.isLoading = true;
-              mData.forEach((m) => {
-                if (m.appointmentId == b.appointmentId) {
-                  this.drug = mData;
-                  this.isLoading = false;
-                }
-              });
-            });
-          this.history
-            .getTR(data[0].email, b.appointmentId)
-            .subscribe((tData) => {
-              this.isLoading = true;
-              tData.forEach((t) => {
-                if (t.appointmentId == b.appointmentId) {
-                  this.test = tData;
-                  this.isLoading = false;
-                }
-              });
-            });
-        });
-      });
-      // this.basics.forEach(b => {this.appoId = b.appointmentId})
-      // console.log(this.appoId);
-      // console.log(this.patientId);
-    });
+    })
   }
 
   show = false;
@@ -81,6 +45,9 @@ export class PatientDashboardComponent implements OnInit {
     this.show = !this.show;
   }
 
+  NavToPatHistory(p_id : Guid){
+    this.router.navigate(['patient/view/complete/history/', String(p_id)])
+  }
   // navToBookApp(){
   //   this.router.navigate(['book-appointment'])
   // }
@@ -91,14 +58,6 @@ export class PatientDashboardComponent implements OnInit {
   logout() {
     this.router.navigate(['']);
   }
-  viewMoreDetails() {
-    this.router.navigate(['/view-complete-history']);
-  }
-  appointments: appointmentdetails[] = [
-    { appointmentNo: 1, doctorName: 'Mike', date: new Date() },
-    { appointmentNo: 2, doctorName: 'Jack', date: new Date() },
-    { appointmentNo: 3, doctorName: 'John', date: new Date() },
-  ];
 
   openDialog(
     enterAnimationDuration: string,
@@ -110,10 +69,4 @@ export class PatientDashboardComponent implements OnInit {
       exitAnimationDuration,
     });
   }
-}
-
-export interface appointmentdetails {
-  appointmentNo: number;
-  doctorName: string;
-  date: Date;
 }
