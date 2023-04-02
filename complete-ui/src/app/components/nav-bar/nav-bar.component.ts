@@ -37,10 +37,8 @@ export class NavBarComponent {
               let json = JSON.stringify(data)
               let jjson = JSON.parse(json)
               window.localStorage.setItem("Doctor", jjson.id)
-              
-              window.localStorage.setItem("DocName", String(data?.email?.split('@')[0]))
+              this.router.navigate(['/doctor-dashboard', jjson.name, jjson.id]);
             })
-            this.router.navigate(['/doctor-dashboard']);
           }
           break;
         case 'nurse.com':

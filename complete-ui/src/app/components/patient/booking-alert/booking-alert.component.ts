@@ -28,6 +28,7 @@ export class BookingAlertComponent {
 
     addAppointmentByPatient(){
       // console.log(this.addAppointment)
+      console.log( window.localStorage.getItem('patientId'))
       this.appointmentService.addAppointmentByPatient(
         {
           doctorId : window.localStorage.getItem('doctorId'),
