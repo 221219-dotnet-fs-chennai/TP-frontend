@@ -42,7 +42,7 @@ const routes: Routes = [
     path: 'admin-dashboard', component:DashboardComponent
   },
   {
-    path: 'nurse-dashboard', component: AppointmentsComponent
+    path: 'nurse-dashboard/:name/:nurId', component: AppointmentsComponent
   },
   // {
   //   path: 'view-patient-history', component: PatientHistoryComponent
@@ -90,7 +90,7 @@ const routes: Routes = [
     path: 'show-doctors/:day', component:ShowDoctorsComponent,
   },
   {
-    path: 'patient-history-doctor-view/:id/:AID', component:DoctorHistoryViewComponent,
+    path: 'patient-history-doctor-view/:id/:name', component:DoctorHistoryViewComponent,
   },
   {
     path: 'patient-history-nurse-view/:id',component: PatientHistoryComponent

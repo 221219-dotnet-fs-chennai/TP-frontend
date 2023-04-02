@@ -2,35 +2,30 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { patientHistory,HistoryService } from './service/history.service';
 import { PatientCompleteHistoryDocComponent } from 'src/app/components/doctor/patient-complete-history/patient-complete-history.component';
+import { CompleteHistoryComponent } from 'src/app/components/patient/complete-history/complete-history.component';
 
 @Component({
   selector: 'app-patient-history',
   templateUrl: './patient-history.component.html',
   styleUrls: ['./patient-history.component.css']
 })
-export class PatientHistoryComponent implements AfterViewInit{
+export class PatientHistoryComponent implements OnInit, AfterViewInit{
   patienthistory!:patientHistory[];
 
   constructor(private route : ActivatedRoute,private router : Router,private hist:HistoryService) {}
 
-  @ViewChild(PatientCompleteHistoryDocComponent) patientHistoryNurse !:PatientCompleteHistoryDocComponent
+  @ViewChild(CompleteHistoryComponent) patientHistoryNurse !:CompleteHistoryComponent
   goBack(){ 
-    this.router.navigate(['nurse-dashboard'])
+    this.router.navigate(['nurse-dashboard', window.localStorage.getItem('NurseName'), window.localStorage.getItem('Nurse')])
   }
-
+  isLoading = false
   ngAfterViewInit(): void {
-    let id : string
-    this.route.params.subscribe((data) => {
-      id = data['id']
-      console.log(id)
-      this.patientHistoryNurse.patientId = id
-      this.patientHistoryNurse.ngOnInit()
-    })
+    this.isLoading = false
   }
 
-  // ngOnInit(): void {
-  //   this.fetchdata(); 
-  // }
+  ngOnInit(): void {
+    this.isLoading = true; 
+  }
   // phistory!: any[];
   // ptest!: any[];
   // fetchdata(){

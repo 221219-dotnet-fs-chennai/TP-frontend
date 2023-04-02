@@ -15,8 +15,10 @@
   </button>
   <span style="font-size: 1rem;">Patients details</span>
 </mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 
-<app-patient-complete-history-doc></app-patient-complete-history-doc>
+<app-complete-history>
+</app-complete-history>
 
 <!-- 
 <li *ngFor="let i of phistory">

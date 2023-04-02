@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCompleteHistoryDocComponent } from '../patient-complete-history/patient-complete-history.component';
 
@@ -7,20 +7,26 @@ import { PatientCompleteHistoryDocComponent } from '../patient-complete-history/
   templateUrl: './doctor-history-view.component.html',
   styleUrls: ['./doctor-history-view.component.css']
 })
-export class DoctorHistoryViewComponent implements AfterViewInit {
+export class DoctorHistoryViewComponent implements AfterViewInit, OnInit {
   constructor(private router : Router, private route : ActivatedRoute){}
-  ngAfterViewInit(): void {
-    let id : string
-    console.log(this.patientHistory)
-    this.route.params.subscribe((data) => {
-      id = data['id']
-      this.patientHistory.patientId = id
-      this.patientHistory.ngOnInit()
-    })
+  patName !: string
+  ngOnInit(): void {
+    this.route.params.subscribe((data)=>{
+      this.patName = data['name']
+    })  
   }
-  @ViewChild(PatientCompleteHistoryDocComponent) patientHistory !: PatientCompleteHistoryDocComponent
-
+  ngAfterViewInit(): void {
+    // let id : string
+    // console.log(this.patientHistory)
+    // this.route.params.subscribe((data) => {
+    //   id = data['id']
+    //   this.patientHistory.patientId = id
+    //   this.patientHistory.ngOnInit()
+    // })
+  }
+  // @ViewChild(PatientCompleteHistoryDocComponent) patientHistory !: PatientCompleteHistoryDocComponent
+  
   goBack(){
-    this.router.navigate(['doctor-dashboard'])
+    this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
   }
 }

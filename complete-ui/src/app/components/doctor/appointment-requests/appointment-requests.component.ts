@@ -52,7 +52,7 @@ export class AppointmentRequestsComponent implements OnInit {
               })
               console.log(this.appointmentdoctor);
               console.log(this.patientAppointmentInfo)
-              console.log("pushed");
+              console.log("pushed")
             }
           })
         })
@@ -87,7 +87,7 @@ export class AppointmentRequestsComponent implements OnInit {
   }
 
   navToDashboard(){
-    this,this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
+    this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
   }
 
 

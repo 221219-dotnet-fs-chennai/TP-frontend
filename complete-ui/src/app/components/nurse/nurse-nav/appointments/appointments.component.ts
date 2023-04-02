@@ -1,6 +1,6 @@
 import { Component, ViewChild,OnInit,Inject } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { AppointmentServiceService } from 'src/app/services/appointment-service/appointment-service.service';
 import { AppointmentDoctor, AppointmentDoctorOne } from 'src/app/models/appointmentServiceModel';
@@ -19,7 +19,7 @@ import { formatDate } from '@angular/common';
 export class AppointmentsComponent implements OnInit {
   constructor(private router: Router, private auth:AuthService, private appointmentService : AppointmentServiceService,
     @Inject(localStorageToken) private localStorage : any, private patientInfoService: PatientInfoService,
-    @Inject(LOCALE_ID) private locale: string){}
+    @Inject(LOCALE_ID) private locale: string, private route : ActivatedRoute){}
   today = new Date()
   longText='string'
   step = 0;
@@ -44,8 +44,11 @@ export class AppointmentsComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe((data) => {
       window.localStorage.setItem('NurseName', String(data?.email?.split("@")[0]))
-      this.nurseName = window.localStorage.getItem('NurseName')
-    });
+      // this.nurseName = window.localStorage.getItem('NurseName')
+    })
+    this.route.params.subscribe(data=>{
+      this.nurseName = data['name']
+    })
 
     this.appointmentService.getAppointmentsByStatus(3).subscribe((appointmentsBy3) => {
       this.patientInfoService.getAllPatientInfos().subscribe((patients) => {

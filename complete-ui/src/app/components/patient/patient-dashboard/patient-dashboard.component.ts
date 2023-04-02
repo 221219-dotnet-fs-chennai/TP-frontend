@@ -36,7 +36,7 @@ export class PatientDashboardComponent implements OnInit, AfterViewInit {
       this.patientInfo = data
       this.p_id = (data[0].patId)
       // console.log(this.p_id)
-      window.localStorage.setItem('patientId', data[0].email);
+      window.localStorage.setItem('patientId', String(data[0].patId));
     })
   }
 

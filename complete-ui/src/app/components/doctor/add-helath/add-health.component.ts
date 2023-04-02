@@ -112,7 +112,7 @@ export class AddHealthComponent {
   }
 
   navToDashboard(){
-    this.router.navigate(['doctor-dashboard'])
+    this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
   }
   step = 0;
 

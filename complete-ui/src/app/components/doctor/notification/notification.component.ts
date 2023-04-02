@@ -33,7 +33,8 @@ export class NotificationComponent implements OnInit {
     private doctorService : DoctorService,
     private activatedRoute : ActivatedRoute
   ) { }
-
+  
+  isLoading = false
   title = 'Notification component';
   hidden = false;
   notificationBadge: number = 0
@@ -84,7 +85,7 @@ export class NotificationComponent implements OnInit {
         // })
       }
     })
-    this.route.navigate(['patient-history-doctor-view', id, AID]);
+    this.route.navigate(['patient-history-doctor-view', id, name]);
   }
 
   navToAddRecord(PID: Guid) {
@@ -160,6 +161,7 @@ export class NotificationComponent implements OnInit {
 
     this.appointmentService.getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
       .subscribe((AppByDocId) => {
+        this.isLoading = true
         console.log("Inside appointments")
         console.log(AppByDocId)
         this.doctorApp.push({ AppByDocId })
@@ -191,6 +193,7 @@ export class NotificationComponent implements OnInit {
                   appointment: patAppo,
                   patient: pat
                 })
+                this.isLoading = false
                 console.log(this.patientByAppointments)
                 this.totalPatients = this.patientByAppointments.length;
               })
