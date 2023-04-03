@@ -82,6 +82,7 @@ import { DialogComponent } from './components/nurse/dialog/dialog.component';
 import { PatientHistoryComponentNew } from './components/patient-history/patient-history.component';
 import { CompleteHistoryComponent } from './components/patient/complete-history/complete-history.component';
 import { HistoryPatientViewComponent } from './components/patient/history-patient-view/history-patient-view.component';
+import { UpdateHealthComponent } from './components/doctor/update-health/update-health.component';
 
 
 @NgModule({
@@ -124,6 +125,7 @@ import { HistoryPatientViewComponent } from './components/patient/history-patien
     PatientHistoryComponentNew,
     CompleteHistoryComponent,
     HistoryPatientViewComponent,
+    UpdateHealthComponent,
   ],
   imports: [
     BrowserModule,
