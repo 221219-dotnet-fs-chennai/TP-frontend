@@ -1,10 +1,24 @@
-<p>
-  <mat-toolbar color="primary" style="gap: 2rem; display: flex; justify-content: space-between;">
+<div >
+  <mat-toolbar color="primary">
     <button mat-icon-button matTooltip="go back" (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <li class="example-spacer"></li>
-    <li style="font-size: 1rem;">Patient history</li>
+  <span class="example-spacer"></span>
+  <span style="font-size: 1rem;">Patient history</span>
   </mat-toolbar>
-</p>
-<app-patient-complete-history-doc></app-patient-complete-history-doc>
+  <mat-card>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: row; gap: 0.5rem; padding: 1rem;">
+      <div>
+        <span style="font-size: 1.3rem; font-weight: 500;">
+          Patient Name:
+        </span>  
+      </div>
+      <div>
+        <span style="color: gray; font-size: 1.1rem; font-weight: 500;"> {{patName}}</span>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<app-complete-history>
+</app-complete-history>

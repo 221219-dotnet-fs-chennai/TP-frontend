@@ -50,12 +50,13 @@ export class AppointmentRequestsComponent implements OnInit {
                 appointment : appo,
                 patient : pati
               })
-              console.log("pushed");
+              console.log(this.appointmentdoctor);
+              console.log(this.patientAppointmentInfo)
+              console.log("pushed")
             }
           })
         })
-      });
-      console.log(this.patientAppointmentInfo)
+      })
       console.log(data);
     });
   }
@@ -86,7 +87,7 @@ export class AppointmentRequestsComponent implements OnInit {
   }
 
   navToDashboard(){
-    this,this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
+    this.router.navigate(['doctor-dashboard', window.localStorage.getItem('DoctorName'), window.localStorage.getItem('Doctor')])
   }
 
 

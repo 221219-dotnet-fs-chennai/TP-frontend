@@ -9,7 +9,6 @@ import { AppointmentsComponent } from './components/nurse/nurse-nav/appointments
 import { PatientHistoryComponent } from './components/nurse/nurse-nav/patient-history/patient-history.component';
 import { UpdateinfoComponent } from './components/nurse/nurse-nav/updateinfo/updateinfo.component';
 import { PatientDashboardComponent } from './components/patient/patient-dashboard/patient-dashboard.component';
-import { PatientCompleteHistoryComponent } from './components/patient/patient-complete-history/patient-complete-history.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { ViewPatientsComponent } from './components/admin/view-patients/view-patients.component';
 import { AddDoctorComponent } from './components/admin/add-doctor/add-doctor.component';
@@ -22,6 +21,8 @@ import { PatientProfileComponent } from './components/patient/patient-profile/pa
 import { ShowDoctorsComponent } from './components/patient/show-doctors/show-doctors.component';
 import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-view/doctor-history-view.component';
 import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
+import { CompleteHistoryComponent } from './components/patient/complete-history/complete-history.component';
+import { HistoryPatientViewComponent } from './components/patient/history-patient-view/history-patient-view.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ const routes: Routes = [
     path: 'admin-dashboard', component:DashboardComponent
   },
   {
-    path: 'nurse-dashboard', component: AppointmentsComponent
+    path: 'nurse-dashboard/:name/:nurId', component: AppointmentsComponent
   },
   // {
   //   path: 'view-patient-history', component: PatientHistoryComponent
@@ -51,9 +52,6 @@ const routes: Routes = [
   },
   {
     path: 'patient-dashboard', component: PatientDashboardComponent
-  },
-  {
-    path: 'view-complete-history', component: PatientCompleteHistoryComponent,
   },
   {
     path: 'view-patient-basic-info', component: ViewPatientsComponent,
@@ -92,13 +90,19 @@ const routes: Routes = [
     path: 'show-doctors/:day', component:ShowDoctorsComponent,
   },
   {
-    path: 'patient-history-doctor-view/:id', component:DoctorHistoryViewComponent,
+    path: 'patient-history-doctor-view/:id/:name', component:DoctorHistoryViewComponent,
   },
   {
     path: 'patient-history-nurse-view/:id',component: PatientHistoryComponent
   },
   {
     path: 'nurse/pick-appointments', component : PickAppointmentsComponent
+  },
+  {
+    path: 'view/complete/history/:id', component : CompleteHistoryComponent
+  },
+  {
+    path: 'patient/view/complete/history/:id', component:HistoryPatientViewComponent
   }
 ];
 

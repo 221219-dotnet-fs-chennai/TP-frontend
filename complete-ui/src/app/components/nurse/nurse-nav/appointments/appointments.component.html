@@ -1,8 +1,9 @@
 <body class="container">
     <app-nurse-nav></app-nurse-nav><br><br><br>
-    <div style="width: fit-content; margin: auto;">
-      <h1>Hi {{nurseName}}! <br> Appointments for today</h1>
-      <p style="text-align: center; font-weight: 500; color:#0288d1;">{{today | date :'d-MMM-y'}}</p>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <h1>Hello {{nurseName}}</h1>
+      <h3>Patients for today - {{today | date : 'EEEE'}}</h3>
+      <h3>Patients for today - {{nursePatientAppointments.length}}</h3>
     </div>
     <h3 *ngIf="nursePatientAppointments.length <= 0" style="color: red; text-align: center;">No appointments for today</h3>
     <mat-accordion class="example-headers-align" multi=false>

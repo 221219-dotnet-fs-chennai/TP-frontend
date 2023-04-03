@@ -1,0 +1,220 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap" rel="stylesheet">
+</head>
+<mat-progress-bar class="progress-bar" mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<div *ngIf="noData==true" class="not-found">
+  <span>No previous appointments found 🙁</span>
+</div>
+
+<div *ngFor="let outter of completeHistory; let i = index" class="main-container">
+  <div>
+    <h2>Appointment {{i+1}}</h2>
+  </div>
+  <div class="container">
+    <div class="info-card-grp">
+      <div *ngFor="let info of outter.moreInfo">
+        <mat-card matTooltip="Doctor information" class="info-card">
+          <div class="info-card-content">
+            <div class="doctor-section">
+              <div class="doc-img">
+                <img class="doc-img" src={{doctor_imgs[i]}} alt="Doctor icon">
+              </div>
+              <div>
+                <span class="doctor-name">{{doctor_names[i]}}</span>
+                <span class="inner-card-title">{{info.date_Time | date : "dd-MMM-YYYY"}}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="card-grp">
+      <div *ngFor="let basic of outter.basic" class="basic-info-section">
+        <mat-card class="basic-info-card">
+          <div class="card-title">
+            <mat-card-title class="basic-title">Basic health information</mat-card-title>
+          </div>
+          <div *ngIf="outter.basic.length <=0 " class="not-found-section">
+            <span>No basic information found 🙁</span>
+          </div>
+          <div class="basic-content-container">
+            <mat-card-content style="margin-top: -1rem;" class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/3389/3389235.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Blood Pressure</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.bp}}<span class="card-suffix">mmHq</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/5508/5508928.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Heart Rate</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.heart_Rate}}<span class="card-suffix">bpm</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/892/892149.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Temperature</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.temperature}}<span class="card-suffix">C</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/3127/3127109.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Blood Group</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.bloodGroup[0]}}<span class="card-suffix">+</span></span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/3476/3476044.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Oxygen Saturation</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.spO2}}<span class="card-suffix">%</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/2928/2928934.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">weight</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.weight}}<span class="card-suffix">Kgs</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/3209/3209157.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">Height</span>
+                    </div>
+                    <span class="inner-card-value">{{basic.height}} <span class="card-suffix">cms</span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <mat-card class="test-card-section">
+      <div class="test-title">
+        <mat-card-title class="basic-title">Test information</mat-card-title>
+      </div>
+      <div *ngIf="outter.tests.length <=0 " class="not-found-section">
+        <span>No test information found 🙁</span>
+      </div>
+      <div class="test-main-container">
+        <div *ngFor="let test of outter.tests" class="basic-info-section">
+          <div class="basic-content-container">
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                  <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/3974/3974900.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">{{test.test}}</span>
+                    </div>
+                    <span class="inner-card-value">{{test.result}}<span class="card-suffix"></span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="test-card-section">
+      <div class="test-title">
+        <mat-card-title class="basic-title">Drug information</mat-card-title>
+      </div>
+      <div *ngIf="outter.drugs.length <=0 " class="not-found-section">
+        <span>No drug information found 🙁</span>
+      </div>
+      <div class="test-main-container">
+        <div *ngFor="let drug of outter.drugs" class="basic-info-section">
+          <div class="basic-content-container">
+            <mat-card-content class="basic-card-content">
+              <mat-card class="bp-section">
+                <mat-card-content class="card-content-section">
+                  <div class="inner-card-content">
+                    <div class="inner-card-title">
+                      <span>
+                        <img class="card-image" mat-card-image
+                          src="https://cdn-icons-png.flaticon.com/512/1685/1685844.png" alt="Blood pressure icon">
+                      </span>
+                      <span class="inner-card-title">{{drug.drugs}}</span>
+                    </div>
+                    <span class="drug-card-value">{{drug.quantity}}<span class="card-suffix"></span> </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-card-content>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

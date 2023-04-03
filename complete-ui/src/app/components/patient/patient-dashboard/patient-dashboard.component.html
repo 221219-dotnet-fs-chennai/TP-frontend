@@ -23,31 +23,7 @@
   </button>
 </div>
 
-
-<div style="width: fit-content; margin: auto;">
-  <span style="padding: 2rem; text-align: center;">Previous appointments</span>
+<div *ngFor="let p of patientInfo">
+      <button mat-stroked-button (click)="NavToPatHistory(p.patId)">View your history</button>  
 </div>
-<div class="container">
-  <mat-accordion class="example-headers-align" multi="false">
-    <mat-expansion-panel style="margin-bottom: 1rem;" *ngFor="let app of appointments">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Appointment {{app.appointmentNo}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div style="display: flex; justify-content: space-between;">
-        <span style="color: gray; font-weight: 500; ">Doctor Name </span>
-        <p style="font-weight: 500;">{{app.doctorName}}</p>
-      </div>
-      <div style="display: flex; justify-content: space-between;">
-        <span style="color: gray; font-weight: 500;">Visit data </span>
-        <p style="font-weight: 500;">{{app.date | date : 'dd-MMM-yy'}}</p>
-      </div>
-      <div style="display: flex; justify-content: flex-end;">
-        <button (click)="viewMoreDetails()" matTooltip="view more details about the appointment" mat-stroked-button>View more</button>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
-
-<!-- <app-show-doctors *ngIf="show"></app-show-doctors> -->
+<!-- <app-mini-history-table></app-mini-history-table> -->

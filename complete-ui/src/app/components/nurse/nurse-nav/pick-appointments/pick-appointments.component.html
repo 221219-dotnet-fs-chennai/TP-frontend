@@ -6,6 +6,7 @@
         <span class="example-spacer"></span>
         <span>All the accepted requests </span>
     </mat-toolbar>
+    <mat-progress-bar class="progress-bar" mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
 </p>
 
 <div class="inner2">
@@ -13,16 +14,67 @@
     <div class="request-container">
         <mat-card style="margin-bottom: 1rem;">
             <mat-card-content>
-                <div class="appointment-card" style="display: flex; justify-content: center; align-items: center;">
-                    <mat-icon class="assignment-icon">assignment</mat-icon>
+                <div class="appointment-card" style="display: flex; justify-content: center; align-items: center; gap: 5px;">
+                    <img style="width: 50px; height: 50px; object-fit: cover;" src="https://cdn-icons-png.flaticon.com/512/9865/9865076.png" alt="appointment icon"/>
                     <span
                         style="font-size: 1rem; font-weight: 500; color: rgb(237, 97, 97); text-align: center;">Accepted
                         requests</span>
                 </div>
             </mat-card-content>
         </mat-card>
-
-        <div class="cards-container" *ngFor="let capp of completeAppointments">
+        <div class="container">
+            <div *ngFor="let capp of completeAppointments">
+                <mat-card class="app-card-grp">
+                    <div>
+                        <mat-card class="app-card">
+                            <div class="card-top-section">
+                                <div class="app">
+                                    Appointment request
+                                </div>
+                                <div class="date-section">
+                                    <span>
+                                        <img class="icon-class" src="https://cdn-icons-png.flaticon.com/512/591/591607.png" alt="date icon">
+                                    </span>
+                                    <span class="app-value">
+                                        {{capp.appointment.date}}
+                                    </span>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <div class="content-section">
+                             <div class="pat-section">
+                                <div class="inner-pat-section">
+                                <div>
+                                    <span>
+                                        <img class="icon-class" src="https://cdn-icons-png.flaticon.com/512/2869/2869791.png" alt="patient name">
+                                    </span>
+                                    <span class="value">
+                                        {{capp.patient.fullname}}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>
+                                        <img class="icon-class" src="https://cdn-icons-png.flaticon.com/512/2785/2785544.png" alt="doctor name">
+                                    </span>
+                                    <span>
+                                        <span class="value">
+                                            {{capp.doctor.name}}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                             </div>   
+                             <div>
+                            </div>
+                        </div>
+                        <div class="btn-section">
+                            <button mat-button class="btn" (click)="pickAppointment(capp.appointment.appointmentId)">Pick</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <!-- <div class="cards-container" *ngFor="let capp of completeAppointments">
             <div class="simple-card">
                 <mat-card class="main-card">
                     <div class="card">
@@ -38,14 +90,20 @@
                             <div class="card-content">
                                 <mat-card-content>Appointment date : {{capp.appointment.date}}</mat-card-content>
                             </div>
+                            <div style="display: flex; justify-content: flex-end; margin-right: 7.5rem;">
+                                
+                                <div class="card-content">
+                                    <button mat-stroked-button color="accent" class="pick-btn" (click)="pickAppointment(capp.appointment.appointmentId)">Pick</button>
+                                </div>
+                                
+                            </div>
                         </div>
+                        
                     </div>
-                    <div >
-                        <button mat-stroked-button color="accent" class="pick-btn" (click)="pickAppointment(capp.appointment.appointmentId)">Pick</button>
-                    </div>
+                   
                 </mat-card>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div *ngFor="let pa of patientAppointmentInfo">
       <mat-accordion class="patient-container patient-container-2" multi="false">

@@ -19,12 +19,13 @@ export class HistoryService {
     return this.http.get<BasicR[]>(`http://localhost:5103/apigateway/GetBR/${id}`)
     .pipe(catchError(err =>of("err", err)))
   }
+  
   getTR(id : string | undefined , AID:string| undefined):Observable<TestR[]>{
     return this.http.get<TestR[]>(`http://localhost:5103/apigateway/GetTRByAID/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
-  getMR(id : string | undefined, AID : string | undefined){
-    return this.http.get(`http://localhost:5103/apigateway/GetMR/${id}/${AID}`)
+  getMR(id : string | undefined, AID : string | undefined): Observable<Drugs[]>{
+    return this.http.get<Drugs[]>(`http://localhost:5103/apigateway/GetMRByAID/${id}/${AID}`)
     .pipe(catchError(err =>of("err", err)))
   }
   getAR(id : string | undefined, AID : string | undefined) : Observable<AllergyR[]>{
@@ -48,6 +49,7 @@ export interface HealthR{
 }
 
 export interface BasicR{
+heart_Rate: any;
   id : Guid
   dateTime : string
   nurseId : string
@@ -70,6 +72,22 @@ export interface TestR{
   result  : string
 }
 
+export interface Drugs{
+  id:Guid
+  healthId : string
+  appointmentId : string
+  drug : string
+  quantity : string
+}
+
+// {
+//   "id": "5be283b2-5b68-4f9c-aa55-a5a4fe6ef439",
+//   "healthId": "4979f825-324a-4351-b0da-21732eeb3732",
+//   "appointmentId": "85cc289a-8c27-4a1d-998f-c65282cfc6b7",
+//   "drug": "Fersamal ",
+//   "quantity": "1-1-1/day for 3Days"
+// },
+
 export interface AllergyR{
   id: string,
   healthId : string,
@@ -79,7 +97,7 @@ export interface AllergyR{
 }
 
 export interface AllR{
-  healthR : HealthR[]
+  healthR : HealthR
   basicR : BasicR
 }
 // {

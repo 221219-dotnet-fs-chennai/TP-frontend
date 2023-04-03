@@ -41,7 +41,6 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AppointmentsComponent } from './components/nurse/nurse-nav/appointments/appointments.component';
 import { PatientHistoryComponent } from './components/nurse/nurse-nav/patient-history/patient-history.component';
 import { UpdateinfoComponent } from './components/nurse/nurse-nav/updateinfo/updateinfo.component';
-import { PatientCompleteHistoryComponent } from './components/patient/patient-complete-history/patient-complete-history.component';
 import { PatientDashboardComponent } from './components/patient/patient-dashboard/patient-dashboard.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { ViewPatientsComponent } from './components/admin/view-patients/view-patients.component';
@@ -81,6 +80,8 @@ import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-v
 import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
 import { DialogComponent } from './components/nurse/dialog/dialog.component'; 
 import { PatientHistoryComponentNew } from './components/patient-history/patient-history.component';
+import { CompleteHistoryComponent } from './components/patient/complete-history/complete-history.component';
+import { HistoryPatientViewComponent } from './components/patient/history-patient-view/history-patient-view.component';
 
 
 @NgModule({
@@ -94,7 +95,6 @@ import { PatientHistoryComponentNew } from './components/patient-history/patient
     AppointmentsComponent,
     PatientHistoryComponent,
     UpdateinfoComponent,
-    PatientCompleteHistoryComponent,
     PatientDashboardComponent,
     DashboardComponent,
     ViewPatientsComponent,
@@ -121,7 +121,9 @@ import { PatientHistoryComponentNew } from './components/patient-history/patient
     DoctorHistoryViewComponent,
     PickAppointmentsComponent,
     DialogComponent,
-    PatientHistoryComponentNew
+    PatientHistoryComponentNew,
+    CompleteHistoryComponent,
+    HistoryPatientViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,8 @@ export class NotificationComponent implements OnInit {
     private doctorService : DoctorService,
     private activatedRoute : ActivatedRoute
   ) { }
-
+  
+  isLoading = false
   title = 'Notification component';
   hidden = false;
   notificationBadge: number = 0
@@ -58,6 +59,8 @@ export class NotificationComponent implements OnInit {
   }
 
   logout() {
+    window.localStorage.removeItem("Doctor")
+    window.localStorage.removeItem("DocName")
     this.auth.logout({
       logoutParams: {
         returnTo: this.doc.location.origin,
@@ -69,7 +72,20 @@ export class NotificationComponent implements OnInit {
   // doctorEmail!: string | undefined;
 
   navToViewHistory(id: Guid | undefined) {
-    this.route.navigate(['patient-history-doctor-view', id]);
+    let AID : Guid = Guid.create()
+    let name : string = ''
+    this.patientByAppointments.forEach(pba => {
+      if(pba.patient.patId == id) {
+        name = pba.patient.fullname
+        AID = pba.appointment.appointmentId
+        // pba.appointment.forEach(appo => {
+        //   if(appo.date == this.todayDate) {
+        //     AID = appo.appointmentId
+        //   }
+        // })
+      }
+    })
+    this.route.navigate(['patient-history-doctor-view', id, name]);
   }
 
   navToAddRecord(PID: Guid) {
@@ -102,6 +118,7 @@ export class NotificationComponent implements OnInit {
   allbasicDetails : AllBasicDetails[] = []
 
   // doctorInfo !: Doctor
+
 
 
   ngOnInit() {
@@ -144,6 +161,7 @@ export class NotificationComponent implements OnInit {
 
     this.appointmentService.getAppointmentsByDoctorId(window.localStorage.getItem("Doctor"))
       .subscribe((AppByDocId) => {
+        this.isLoading = true
         console.log("Inside appointments")
         console.log(AppByDocId)
         this.doctorApp.push({ AppByDocId })
@@ -175,11 +193,12 @@ export class NotificationComponent implements OnInit {
                   appointment: patAppo,
                   patient: pat
                 })
+                this.isLoading = false
                 console.log(this.patientByAppointments)
+                this.totalPatients = this.patientByAppointments.length;
               })
                 pushedPatients.push(pat.patId.toString());
                 console.log(pushedPatients)
-                this.totalPatients = this.patientByAppointments.length;
               }
             })
           })

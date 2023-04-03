@@ -146,7 +146,7 @@ export class UpdateinfoComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['nurse-dashboard'])
+    this.router.navigate(['nurse-dashboard', window.localStorage.getItem('NurseName'), window.localStorage.getItem('Nurse') ]);
   }
 
   get bp() {
