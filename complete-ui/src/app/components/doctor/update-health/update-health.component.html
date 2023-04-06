@@ -1,0 +1,125 @@
+<!-- <p>update-health works!</p> -->
+
+
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button matTooltip="go back" (click)="navToDashboard()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <span style="font-size: 15px;">Update patient's diagnostic report</span>
+    </mat-toolbar>
+  </p>
+
+
+<div class="stepper-box">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <div class="form-fields">
+                <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>Medications</ng-template>
+                    <div class="inside-fields">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Prescribed medicine</mat-label>
+                            <mat-select formControlName="drug">
+                                <div *ngFor="let medicine of currentHealth.drugs">
+                                    <mat-option [value]="medicine.drugs">{{medicine.drugs}}</mat-option>
+                                </div>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dosage</mat-label>
+                            <input matInput required formControlName="quantity" placeholder="Enter new dosage">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button matStepperNext (click)="updateMedicine(currentHealth.moreInfo[0].appointment_Id)">Next</button>
+                    </div>
+                </form>
+                <mat-card class="drug-card">
+                    <mat-card-header class="test-title">
+                        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                        <mat-card-title>Prescribed medicines</mat-card-title>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <br>
+                        <div *ngFor="let medicine of currentHealth.drugs" class="test-content">
+                            <div class="test-test">
+                                <p>{{ medicine.drugs }}</p>
+                            </div>
+                            <div class="test-result">
+                                <p>{{medicine.quantity}}</p>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <div class="form-fields">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Tests</ng-template>
+                    <div class="inside-fields">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Conducted tests</mat-label>
+                            <mat-select formControlName="test">
+                                <div  *ngFor="let medicine of currentHealth.tests">
+                                    <mat-option [value]="medicine.test">{{medicine.test}}</mat-option>
+                                </div>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Result</mat-label>
+                            <input matInput required formControlName="result" placeholder="Enter new result">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+                <mat-card class="test-card">
+                    <mat-card-header class="test-title">
+                        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+                        <mat-card-title>Conducted tests</mat-card-title>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content>
+                        <br>
+                        <div *ngFor="let medicine of currentHealth.tests" class="test-content">
+                            <div class="test-test">
+                                <p>{{ medicine.test }}</p>
+                            </div>
+                            <div class="test-result">
+                                <p>{{medicine.result}}</p>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-step>
+        <mat-step>
+            <form [formGroup]="thirdFormGroup">
+                <div class="conclusion-fields">
+                    <ng-template matStepLabel>Suggestion</ng-template>
+                    <div class="inside-fields">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Given suggestion</mat-label>
+                            <input matInput required formControlName="suggestion" [value]="currentHealth.moreInfo[0].conclusion">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
+</div>
+
+
+<div class="json-data">
+    {{ currentHealth | json}}
+</div>

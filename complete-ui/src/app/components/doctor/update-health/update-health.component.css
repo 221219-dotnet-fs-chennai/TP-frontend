@@ -1,0 +1,64 @@
+.form-fields{
+    position : relative;
+    margin : 2.5rem;
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap : 15rem;
+}
+
+.conclusion-fields{
+    position : relative;
+    margin : 2.5rem;
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap : 2rem;
+}
+
+.inside-fields{
+    display : flex;
+    flex-direction: row;
+    gap : 1rem;
+}
+
+.drug-card{
+    position : relative;
+    width : 35%;
+}
+
+.test-card{
+    position : relative;
+    width : 25%;
+}
+
+.test-content{
+    display : flex;
+    flex-direction: row;
+    gap : 6rem;
+}
+
+.test-result{
+    display : flex;
+    justify-content: flex-end;
+    position : relative;
+    right : 10px;
+}
+
+.test-title{
+    display: relative;
+    justify-content: center;
+    margin-bottom: 0.9rem;
+}
+
+.stepper-box{
+    position : relative;
+    width : 80%;
+    margin : auto;
+    top : 5%;
+}
+
+.json-data{
+    position : relative;
+    margin-top: 6rem;
+}

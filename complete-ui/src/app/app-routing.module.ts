@@ -23,6 +23,7 @@ import { DoctorHistoryViewComponent } from './components/doctor/doctor-history-v
 import { PickAppointmentsComponent } from './components/nurse/nurse-nav/pick-appointments/pick-appointments.component';
 import { CompleteHistoryComponent } from './components/patient/complete-history/complete-history.component';
 import { HistoryPatientViewComponent } from './components/patient/history-patient-view/history-patient-view.component';
+import { UpdateHealthComponent } from './components/doctor/update-health/update-health.component';
 
 
 const routes: Routes = [
@@ -103,6 +104,9 @@ const routes: Routes = [
   },
   {
     path: 'patient/view/complete/history/:id', component:HistoryPatientViewComponent
+  },
+  {
+    path: 'update-health/:pid/:aid', component: UpdateHealthComponent
   }
 ];
 
